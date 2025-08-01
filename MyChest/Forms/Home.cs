@@ -12,8 +12,7 @@ namespace MyChest
 
         private void btnProd_Click(object sender, EventArgs e)
         {
-            count++;
-            listBoxWarning.Items.Add($"Botão Produtos clicado {count} vezes");
+            DataGridProductLoad();
         }
 
         private void txtBoxSearch_Enter(object sender, EventArgs e)
@@ -65,5 +64,14 @@ namespace MyChest
             DataGridProductLoad();
         }
 
+        private void btnUser_Click(object sender, EventArgs e)
+        {
+            DataGridUserLoad();
+        }
+
+        private void btnAddress_Click(object sender, EventArgs e)
+        {
+            DataGridAddressLoad();
+        }
     }
 }

@@ -3,28 +3,44 @@
   "WorkspaceRootPath": "D:\\MyChestCode\\MyChest\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\data\\dao\\productdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:data\\dao\\productdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\forms\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:forms\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\forms\\home.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:forms\\home.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\models\\addrres.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:models\\addrres.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\forms\\home.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:forms\\home.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\data\\dbconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:data\\dbconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\data\\dao\\userdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:data\\dao\\userdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\data\\dao\\productdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:data\\dao\\productdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\data\\dao\\addrressdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:data\\dao\\addrressdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\forms\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:forms\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|D:\\MyChestCode\\MyChest\\forms\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:forms\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,66 +58,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Product.cs",
-              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Models\\Product.cs",
-              "RelativeDocumentMoniker": "Models\\Product.cs",
-              "ToolTip": "D:\\MyChestCode\\MyChest\\Models\\Product.cs",
-              "RelativeToolTip": "Models\\Product.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAxwBkAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-01T19:44:49.011Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ProductDAO.cs",
-              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Data\\DAO\\ProductDAO.cs",
-              "RelativeDocumentMoniker": "Data\\DAO\\ProductDAO.cs",
-              "ToolTip": "D:\\MyChestCode\\MyChest\\Data\\DAO\\ProductDAO.cs",
-              "RelativeToolTip": "Data\\DAO\\ProductDAO.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAWwCAAAABOAAAAAAAAAA==",
+              "Title": "User.cs",
+              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Models\\User.cs",
+              "RelativeDocumentMoniker": "Models\\User.cs",
+              "ToolTip": "D:\\MyChestCode\\MyChest\\Models\\User.cs",
+              "RelativeToolTip": "Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-01T19:44:01.802Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Home.Designer.cs",
-              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Forms\\Home.Designer.cs",
-              "RelativeDocumentMoniker": "Forms\\Home.Designer.cs",
-              "ToolTip": "D:\\MyChestCode\\MyChest\\Forms\\Home.Designer.cs",
-              "RelativeToolTip": "Forms\\Home.Designer.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAjwCUAAAB8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-01T19:36:45.61Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Home.cs [Projeto]",
-              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Forms\\Home.cs",
-              "RelativeDocumentMoniker": "Forms\\Home.cs",
-              "ToolTip": "D:\\MyChestCode\\MyChest\\Forms\\Home.cs [Projeto]",
-              "RelativeToolTip": "Forms\\Home.cs [Projeto]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-01T19:36:50.769Z",
-              "EditorCaption": " [Projeto]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Home.cs",
-              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Forms\\Home.cs",
-              "RelativeDocumentMoniker": "Forms\\Home.cs",
-              "ToolTip": "D:\\MyChestCode\\MyChest\\Forms\\Home.cs",
-              "RelativeToolTip": "Forms\\Home.cs",
-              "ViewState": "AgIAADUAAAAAAAAAAAAswEIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-01T19:22:19.86Z",
+              "WhenOpened": "2025-08-01T23:41:20.344Z",
               "EditorCaption": ""
             },
             {
@@ -112,10 +77,113 @@
               "RelativeDocumentMoniker": "Data\\DbConnection.cs",
               "ToolTip": "D:\\MyChestCode\\MyChest\\Data\\DbConnection.cs",
               "RelativeToolTip": "Data\\DbConnection.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-01T01:08:37.869Z",
+              "WhenOpened": "2025-08-01T23:41:16.392Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UserDAO.cs",
+              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Data\\DAO\\UserDAO.cs",
+              "RelativeDocumentMoniker": "Data\\DAO\\UserDAO.cs",
+              "ToolTip": "D:\\MyChestCode\\MyChest\\Data\\DAO\\UserDAO.cs",
+              "RelativeToolTip": "Data\\DAO\\UserDAO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-01T23:41:15.52Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Addrres.cs",
+              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Models\\Addrres.cs",
+              "RelativeDocumentMoniker": "Models\\Addrres.cs",
+              "ToolTip": "D:\\MyChestCode\\MyChest\\Models\\Addrres.cs",
+              "RelativeToolTip": "Models\\Addrres.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-01T23:23:02.297Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AddrressDAO.cs",
+              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Data\\DAO\\AddrressDAO.cs",
+              "RelativeDocumentMoniker": "Data\\DAO\\AddrressDAO.cs",
+              "ToolTip": "D:\\MyChestCode\\MyChest\\Data\\DAO\\AddrressDAO.cs",
+              "RelativeToolTip": "Data\\DAO\\AddrressDAO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-01T23:16:49.957Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ProductDAO.cs",
+              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Data\\DAO\\ProductDAO.cs",
+              "RelativeDocumentMoniker": "Data\\DAO\\ProductDAO.cs",
+              "ToolTip": "D:\\MyChestCode\\MyChest\\Data\\DAO\\ProductDAO.cs",
+              "RelativeToolTip": "Data\\DAO\\ProductDAO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-01T23:17:26.096Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Home.Designer.cs",
+              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Forms\\Home.Designer.cs",
+              "RelativeDocumentMoniker": "Forms\\Home.Designer.cs",
+              "ToolTip": "D:\\MyChestCode\\MyChest\\Forms\\Home.Designer.cs",
+              "RelativeToolTip": "Forms\\Home.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADkAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-01T19:36:45.61Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Product.cs",
+              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "Models\\Product.cs",
+              "ToolTip": "D:\\MyChestCode\\MyChest\\Models\\Product.cs",
+              "RelativeToolTip": "Models\\Product.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-01T19:44:49.011Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Home.cs",
+              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Forms\\Home.cs",
+              "RelativeDocumentMoniker": "Forms\\Home.cs",
+              "ToolTip": "D:\\MyChestCode\\MyChest\\Forms\\Home.cs",
+              "RelativeToolTip": "Forms\\Home.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEkAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-01T19:22:19.86Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Home.cs [Projeto]",
+              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Forms\\Home.cs",
+              "RelativeDocumentMoniker": "Forms\\Home.cs",
+              "ToolTip": "D:\\MyChestCode\\MyChest\\Forms\\Home.cs [Projeto]",
+              "RelativeToolTip": "Forms\\Home.cs [Projeto]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-01T19:36:50.769Z",
+              "EditorCaption": " [Projeto]"
             }
           ]
         }

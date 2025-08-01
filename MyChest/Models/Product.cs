@@ -1,29 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyChest.Models
+﻿namespace MyChest.Models
 {
     internal class Product
     {
-        public int code { get; set; }
-        public string name { get; set; }
-        public string brand { get; set; }
-        public string description { get; set; }
-        public int amount { get; set; }
-        public string tagsId { get; set; }
-        public string measure { get; set; }
+        public int Code { get; set; }
+        public string Name { get; set; }
+        public string Brand { get; set; }
+        public string Description { get; set; }
+        public int Amount { get; set; }
+        public string TagsId { get; set; }
+        public string Measure { get; set; }
         public Product(int code, string name, string brand, string description, int amount, string tagsId, string measure)
         {
-            this.code = code;
-            this.name = name;
-            this.brand = brand;
-            this.description = description;
-            this.amount = amount;
-            this.tagsId = tagsId;
-            this.measure = measure;
+            this.Code = code;
+            this.Name = name;
+            this.Brand = brand;
+            this.Description = description;
+            this.Amount = amount;
+            this.TagsId = tagsId;
+            this.Measure = measure;
         }
     }
 }

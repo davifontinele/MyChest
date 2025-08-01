@@ -25,6 +25,7 @@ namespace MyChest
 
         private void DataGridProductLoad()
         {
+            dataGrid.Columns.Clear();
             dataGrid.Columns.Add("codeCollum", "Código");
             dataGrid.Columns.Add("nameCollum", "Nome");
             dataGrid.Columns.Add("brandCollum", "Marca");
@@ -33,9 +34,35 @@ namespace MyChest
             dataGrid.Columns.Add("tagsCollum", "Tags");
             dataGrid.Columns.Add("measureCollum", "Medida");
             ProductDAO prod = new ProductDAO();
-            foreach (var item in prod.Search())
+            foreach (var item in prod.GetAllData())
             {
-                dataGrid.Rows.Add(item.code, item.name, item.brand, item.description, item.amount, item.tagsId, item.measure);
+                dataGrid.Rows.Add(item.Code, item.Name, item.Brand, item.Description, item.Amount, item.TagsId, item.Measure);
+            }
+        }
+        private void DataGridUserLoad()
+        {
+            dataGrid.Columns.Clear();
+            dataGrid.Columns.Add("nameCollum", "Nome");
+            dataGrid.Columns.Add("passwordCollum", "Senha");
+            dataGrid.Columns.Add("roleCollum", "Cargo");
+            UserDAO user = new UserDAO();
+            foreach (var item in user.GetAllData())
+            {
+                dataGrid.Rows.Add(item.Name, item.Password, item.Role);
+            }
+        }
+        private void DataGridAddressLoad()
+        {
+            dataGrid.Columns.Clear();
+            dataGrid.Columns.Add("corriorCollum", "Corredor");
+            dataGrid.Columns.Add("columnCollum", "Coluna");
+            dataGrid.Columns.Add("levelCollum", "Nivel");
+            dataGrid.Columns.Add("hallCollum", "Lote");
+            dataGrid.Columns.Add("productCodeCollum", "Código do Produto");
+            AddressDAO address = new AddressDAO();
+            foreach (var item in address.GetAllData())
+            {
+                dataGrid.Rows.Add(item.Corridor, item.Column, item.Level, item.Hall, item.ProductCode);
             }
         }
 
@@ -122,6 +149,7 @@ namespace MyChest
             btnUser.Name = "btnUser";
             btnUser.Size = new Size(148, 36);
             btnUser.Text = "Usuários";
+            btnUser.Click += btnUser_Click;
             // 
             // btnAddress
             // 
@@ -131,6 +159,7 @@ namespace MyChest
             btnAddress.Name = "btnAddress";
             btnAddress.Size = new Size(148, 36);
             btnAddress.Text = "Endereços";
+            btnAddress.Click += btnAddress_Click;
             // 
             // toolStripButton4
             // 
@@ -190,12 +219,14 @@ namespace MyChest
             dataGrid.AllowUserToAddRows = false;
             dataGrid.AllowUserToDeleteRows = false;
             dataGrid.AllowUserToOrderColumns = true;
+            dataGrid.AllowUserToResizeRows = false;
             dataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGrid.Location = new Point(150, 31);
             dataGrid.Name = "dataGrid";
             dataGrid.ReadOnly = true;
+            dataGrid.RowHeadersVisible = false;
             dataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGrid.Size = new Size(1114, 446);
             dataGrid.TabIndex = 2;

@@ -1,15 +1,10 @@
 ﻿using MyChest.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyChest.Data.DAO
 {
     internal class ProductDAO
     {
-        public List<Product> Search()
+        public List<Product> GetAllData()
         {
             List<Product> products = new List<Product>();
             try
@@ -17,7 +12,13 @@ namespace MyChest.Data.DAO
                 using (var connection = DbConnection.GetConnection())
                 {
                     connection.Open();
-                    string query = "SELECT \r\n  p.code,\r\n  p.name,\r\n  p.brand,\r\n  p.description,\r\n  p.amount,\r\n  m.name AS nome_medida,\r\n  GROUP_CONCAT(t.name) AS nomes_tags\r\nFROM \r\n  products p\r\nLEFT JOIN \r\n  products_has_tags pt ON p.code = pt.Products_code\r\nLEFT JOIN \r\n  tags t ON pt.Tags_idTags = t.idTags\r\nLEFT JOIN \r\n  measures m ON p.Measures_idMeasures = m.idMeasures\r\nGROUP BY \r\n  p.code;\r\n";
+                    string query = "SELECT p.code, p.name, p.brand, p.description, p.amount, m.name AS nome_medida," +
+                        "GROUP_CONCAT(t.name) AS nomes_tags " +
+                        "FROM products p " +
+                        "LEFT JOIN products_has_tags pt ON p.code = pt.Products_code " +
+                        "LEFT JOIN tags t ON pt.Tags_idTags = t.idTags " +
+                        "LEFT JOIN measures m ON p.Measures_idMeasures = m.idMeasures " +
+                        "GROUP BY p.code;";
                     using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
                     {
                         using (var reader = command.ExecuteReader())
