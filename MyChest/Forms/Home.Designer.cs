@@ -1,4 +1,7 @@
-﻿namespace MyChest
+﻿using MyChest.Data.DAO;
+using MyChest.Models;
+
+namespace MyChest
 {
     partial class Home
     {
@@ -20,6 +23,22 @@
             base.Dispose(disposing);
         }
 
+        private void DataGridProductLoad()
+        {
+            dataGrid.Columns.Add("codeCollum", "Código");
+            dataGrid.Columns.Add("nameCollum", "Nome");
+            dataGrid.Columns.Add("brandCollum", "Marca");
+            dataGrid.Columns.Add("descriptionCollum", "Descrição");
+            dataGrid.Columns.Add("amountCollum", "Quantidade");
+            dataGrid.Columns.Add("tagsCollum", "Tags");
+            dataGrid.Columns.Add("measureCollum", "Medida");
+            ProductDAO prod = new ProductDAO();
+            foreach (var item in prod.Search())
+            {
+                dataGrid.Rows.Add(item.code, item.name, item.brand, item.description, item.amount, item.tagsId, item.measure);
+            }
+        }
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -36,26 +55,21 @@
             btnProd = new ToolStripButton();
             btnUser = new ToolStripButton();
             btnAddress = new ToolStripButton();
+            toolStripButton4 = new ToolStripButton();
             btnConfig = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
             btnUserInfo = new ToolStripButton();
             colorDialog1 = new ColorDialog();
             contextMenuStrip1 = new ContextMenuStrip(components);
             listBoxWarning = new ListBox();
-            dataGridView1 = new DataGridView();
+            dataGrid = new DataGridView();
             txtBoxSearch = new TextBox();
             panel1 = new Panel();
             picBoxSearcIcon = new PictureBox();
-            toolStripOptions = new ToolStrip();
-            toolStripButton1 = new ToolStripButton();
-            toolStripButton2 = new ToolStripButton();
-            toolStripButton3 = new ToolStripButton();
-            toolStripButton4 = new ToolStripButton();
             toolStripBtns.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGrid).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picBoxSearcIcon).BeginInit();
-            toolStripOptions.SuspendLayout();
             SuspendLayout();
             // 
             // toolStripBtns
@@ -118,6 +132,14 @@
             btnAddress.Size = new Size(148, 36);
             btnAddress.Text = "Endereços";
             // 
+            // toolStripButton4
+            // 
+            toolStripButton4.Image = (Image)resources.GetObject("toolStripButton4.Image");
+            toolStripButton4.ImageTransparentColor = Color.Magenta;
+            toolStripButton4.Name = "toolStripButton4";
+            toolStripButton4.Size = new Size(148, 20);
+            toolStripButton4.Text = "Recebimento";
+            // 
             // btnConfig
             // 
             btnConfig.Image = (Image)resources.GetObject("btnConfig.Image");
@@ -163,14 +185,20 @@
             listBoxWarning.TabIndex = 1;
             listBoxWarning.KeyDown += listBoxWarning_KeyDown;
             // 
-            // dataGridView1
+            // dataGrid
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(150, 0);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(1114, 477);
-            dataGridView1.TabIndex = 2;
+            dataGrid.AllowUserToAddRows = false;
+            dataGrid.AllowUserToDeleteRows = false;
+            dataGrid.AllowUserToOrderColumns = true;
+            dataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGrid.Location = new Point(150, 31);
+            dataGrid.Name = "dataGrid";
+            dataGrid.ReadOnly = true;
+            dataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGrid.Size = new Size(1114, 446);
+            dataGrid.TabIndex = 2;
             // 
             // txtBoxSearch
             // 
@@ -211,57 +239,14 @@
             picBoxSearcIcon.TabIndex = 0;
             picBoxSearcIcon.TabStop = false;
             // 
-            // toolStripOptions
-            // 
-            toolStripOptions.Dock = DockStyle.Right;
-            toolStripOptions.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripButton2, toolStripButton3 });
-            toolStripOptions.Location = new Point(1201, 28);
-            toolStripOptions.Name = "toolStripOptions";
-            toolStripOptions.Size = new Size(63, 449);
-            toolStripOptions.TabIndex = 5;
-            toolStripOptions.Text = "toolStrip1";
-            // 
-            // toolStripButton1
-            // 
-            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
-            toolStripButton1.ImageTransparentColor = Color.Magenta;
-            toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new Size(112, 20);
-            toolStripButton1.Text = "Editar";
-            // 
-            // toolStripButton2
-            // 
-            toolStripButton2.Image = (Image)resources.GetObject("toolStripButton2.Image");
-            toolStripButton2.ImageTransparentColor = Color.Magenta;
-            toolStripButton2.Name = "toolStripButton2";
-            toolStripButton2.Size = new Size(60, 20);
-            toolStripButton2.Text = "Excluir";
-            // 
-            // toolStripButton3
-            // 
-            toolStripButton3.Image = (Image)resources.GetObject("toolStripButton3.Image");
-            toolStripButton3.ImageTransparentColor = Color.Magenta;
-            toolStripButton3.Name = "toolStripButton3";
-            toolStripButton3.Size = new Size(60, 20);
-            toolStripButton3.Text = "Saída";
-            // 
-            // toolStripButton4
-            // 
-            toolStripButton4.Image = (Image)resources.GetObject("toolStripButton4.Image");
-            toolStripButton4.ImageTransparentColor = Color.Magenta;
-            toolStripButton4.Name = "toolStripButton4";
-            toolStripButton4.Size = new Size(148, 20);
-            toolStripButton4.Text = "Recebimento";
-            // 
             // Home
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonHighlight;
             ClientSize = new Size(1264, 681);
-            Controls.Add(toolStripOptions);
             Controls.Add(panel1);
-            Controls.Add(dataGridView1);
+            Controls.Add(dataGrid);
             Controls.Add(listBoxWarning);
             Controls.Add(toolStripBtns);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -270,14 +255,13 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "MyChest";
             WindowState = FormWindowState.Maximized;
+            Load += Home_Load;
             toolStripBtns.ResumeLayout(false);
             toolStripBtns.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGrid).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picBoxSearcIcon).EndInit();
-            toolStripOptions.ResumeLayout(false);
-            toolStripOptions.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -294,16 +278,12 @@
         private ToolStripSeparator toolStripSeparator2;
         private ContextMenuStrip contextMenuStrip1;
         private ListBox listBoxWarning;
-        private DataGridView dataGridView1;
+        private DataGridView dataGrid;
         private TextBox txtBoxSearch;
         private Panel panel1;
         private PictureBox picBoxSearcIcon;
         private ToolStripButton btnUserInfo;
         private ToolStripButton btnConfig;
-        private ToolStrip toolStripOptions;
-        private ToolStripButton toolStripButton1;
-        private ToolStripButton toolStripButton2;
         private ToolStripButton toolStripButton4;
-        private ToolStripButton toolStripButton3;
     }
 }

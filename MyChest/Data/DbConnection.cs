@@ -9,7 +9,7 @@ namespace MyChest.Data
             string dbConnection = $"Server=localhost;" +
             $"DataBase=mychestdb;" +
             $"User Id=root;" +
-            $"Password=teste;";
+            $"Password={null};";
             return new MySqlConnection(dbConnection);
         }
         public static MySqlConnection GetConnection(string server, string database, string userId, string password)

@@ -5342,11 +5342,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MyChestProject\\MyChest\\MyChestForms\\MyChest.csproj",
+      "projectUniqueName": "D:\\MyChestCode\\MyChest\\MyChest.csproj",
       "projectName": "MyChest",
-      "projectPath": "D:\\MyChestProject\\MyChest\\MyChestForms\\MyChest.csproj",
+      "projectPath": "D:\\MyChestCode\\MyChest\\MyChest.csproj",
       "packagesPath": "C:\\Users\\Davi Fontinele\\.nuget\\packages\\",
-      "outputPath": "D:\\MyChestProject\\MyChest\\MyChestForms\\obj\\",
+      "outputPath": "D:\\MyChestCode\\MyChest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

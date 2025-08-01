@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jqFE0l4sIqs=",
+  "dgSpecHash": "DsrKcSQ6ZQw=",
   "success": true,
-  "projectFilePath": "D:\\MyChestProject\\MyChest\\MyChestForms\\MyChest.csproj",
+  "projectFilePath": "D:\\MyChestCode\\MyChest\\MyChest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Davi Fontinele\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Davi Fontinele\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
