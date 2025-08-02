@@ -5,8 +5,8 @@ namespace MyChest
 {
     public partial class HomeForm : Form
     {
-        private UserLoged? _userLoged;
-        public HomeForm(UserLoged userLoged)
+        private User? _userLoged;
+        public HomeForm(User userLoged)
         {
             InitializeComponent();
             _userLoged = userLoged;
@@ -34,16 +34,16 @@ namespace MyChest
             userInfoForm.ShowDialog();
         }
 
-        // Evento chamado quando o usuário clica na tecla "Delete" na lista de avisos
+        // Evento chamado quando o usuário clica em alguma tecla na lista de avisos
         private void listBoxWarning_KeyDown(object sender, KeyEventArgs e)
         {
-            // Verifica se a tecla pressionada é a tecla Delete
+            // Verifica se a tecla pressionada é a tecla "Delete"
             if (e.KeyCode == Keys.Delete)
             {
-                //Verifica se hitens selecionados na lista de avisos
+                //Verifica se há itens selecionados na lista de avisos
                 if (listBoxWarning.SelectedItems.Count > 0)
                 {
-                    //Criando um 
+                    // Exibe uma caixa de diálogo de confirmação
                     DialogResult result = MessageBox.Show("Você tem certeza que deseja excluir os itens selecionados?", "Confirmação de Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (result == DialogResult.Yes)
                     {

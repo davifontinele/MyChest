@@ -23,9 +23,14 @@ namespace MyChest
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// Preence o DataGridView com os dados dos produtos
+        /// </summary>
         private void DataGridProductLoad()
         {
             dataGrid.Columns.Clear();
+
+            // Adiciona as colunas ao DataGridView com seu nome e texto visivel
             dataGrid.Columns.Add("codeCollum", "Código");
             dataGrid.Columns.Add("nameCollum", "Nome");
             dataGrid.Columns.Add("brandCollum", "Marca");
@@ -33,32 +38,50 @@ namespace MyChest
             dataGrid.Columns.Add("tagsCollum", "Tags");
             dataGrid.Columns.Add("measureCollum", "Medida");
             ProductDAO prod = new ProductDAO();
+
+            // Preenche o DataGridView com os dados dos produtos retornados pela DAO
             foreach (var item in prod.GetAllData())
             {
                 dataGrid.Rows.Add(item.Code, item.Name, item.Brand, item.Amount, item.TagsId, item.Measure);
             }
         }
+
+        /// <summary>
+        /// Preence o DataGridView com os dados dos usuários
+        /// </summary>
         private void DataGridUserLoad()
         {
             dataGrid.Columns.Clear();
+
+            // Adiciona as colunas ao DataGridView com seu nome e texto visivel
             dataGrid.Columns.Add("nameCollum", "Nome");
             dataGrid.Columns.Add("passwordCollum", "Senha");
             dataGrid.Columns.Add("roleCollum", "Cargo");
             UserDAO user = new UserDAO();
+
+            // Preenche o DataGridView com os dados dos usuários retornados pela DAO
             foreach (var item in user.GetAllData())
             {
                 dataGrid.Rows.Add(item.Name, item.Password, item.Role);
             }
         }
+
+        /// <summary>
+        /// Preence o DataGridView com os dados dos endereços
+        /// </summary>
         private void DataGridAddressLoad()
         {
             dataGrid.Columns.Clear();
+
+            // Adiciona as colunas ao DataGridView com seu nome e texto visivel
             dataGrid.Columns.Add("corriorCollum", "Corredor");
             dataGrid.Columns.Add("columnCollum", "Coluna");
             dataGrid.Columns.Add("levelCollum", "Nivel");
             dataGrid.Columns.Add("hallCollum", "Lote");
             dataGrid.Columns.Add("productCodeCollum", "Código do Produto");
             AddressDAO address = new AddressDAO();
+
+            // Preenche o DataGridView com os dados dos endereços retornados pela DAO
             foreach (var item in address.GetAllData())
             {
                 dataGrid.Rows.Add(item.Corridor, item.Column, item.Level, item.Hall, item.ProductCode);

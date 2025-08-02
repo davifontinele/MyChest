@@ -4,8 +4,8 @@ namespace MyChest.Forms
 {
     public partial class UserInfoForm : Form
     {
-        private UserLoged? _userLoged;
-        public UserInfoForm(UserLoged userLoged)
+        private User? _userLoged;
+        public UserInfoForm(User userLoged)
         {
             InitializeComponent();
             _userLoged = userLoged;

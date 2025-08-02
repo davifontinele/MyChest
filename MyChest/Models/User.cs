@@ -1,7 +1,11 @@
 ﻿namespace MyChest.Models
 {
-    internal class User
+    public class User
     {
+        /// <summary>
+        /// Representa um usuário no sistema.
+        /// Cada instância contém informações como nome, senha e cargo.
+        /// </summary>
         public string Name { get; set; }
         public string Password { get; set; }
         public string?  Role { get; set; }

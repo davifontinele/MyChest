@@ -4,13 +4,13 @@ namespace MyChest.Forms
 {
     public partial class LoginForm : Form
     {
+        /// <summary>
+        /// Além de representar um formulário de login, esta classe é responsável por verificar as credenciais do usuário.
+        /// </summary>
         public LoginForm()
         {
             InitializeComponent();
         }
-        public string userName { get; set; }
-        public string  userPassword { get; set; }
-        public string userRole { get; set; }
 
         private void BtnLogar_Click(object sender, EventArgs e)
         {

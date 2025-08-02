@@ -2,6 +2,10 @@
 {
     internal class Product
     {
+        /// <summary>
+        /// Representa um produto no sistema.
+        /// Cada instância contém informações como código, nome, marca, quantidade, tags e medida.
+        /// </summary>
         public int Code { get; set; }
         public string Name { get; set; }
         public string Brand { get; set; }
