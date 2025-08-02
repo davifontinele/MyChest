@@ -12,7 +12,7 @@ namespace MyChest.Data.DAO
                 using (var connection = DbConnection.GetConnection())
                 {
                     connection.Open();
-                    string query = "SELECT Users.Name, Users.Password, Roles.name " +
+                    string query = "SELECT Users.name, Users.password, Roles.title " +
                         "FROM Users " +
                         "INNER JOIN Roles ON Roles.IdRoles = Roles.IdRoles;";
                     using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
@@ -21,9 +21,9 @@ namespace MyChest.Data.DAO
                         {
                             while (reader.Read())
                             {
-                                string name = reader.GetString("Name");
-                                string password = reader.GetString("Password");
-                                string role = reader.GetString("name");
+                                string name = reader.GetString("name");
+                                string password = reader.GetString("password");
+                                string role = reader.GetString("title");
                                 User user = new User(name, password, role);
                                 users.Add(user);
                             }

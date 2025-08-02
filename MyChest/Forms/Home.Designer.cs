@@ -29,14 +29,13 @@ namespace MyChest
             dataGrid.Columns.Add("codeCollum", "Código");
             dataGrid.Columns.Add("nameCollum", "Nome");
             dataGrid.Columns.Add("brandCollum", "Marca");
-            dataGrid.Columns.Add("descriptionCollum", "Descrição");
             dataGrid.Columns.Add("amountCollum", "Quantidade");
             dataGrid.Columns.Add("tagsCollum", "Tags");
             dataGrid.Columns.Add("measureCollum", "Medida");
             ProductDAO prod = new ProductDAO();
             foreach (var item in prod.GetAllData())
             {
-                dataGrid.Rows.Add(item.Code, item.Name, item.Brand, item.Description, item.Amount, item.TagsId, item.Measure);
+                dataGrid.Rows.Add(item.Code, item.Name, item.Brand, item.Amount, item.TagsId, item.Measure);
             }
         }
         private void DataGridUserLoad()

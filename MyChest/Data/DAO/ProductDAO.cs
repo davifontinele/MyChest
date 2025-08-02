@@ -12,7 +12,7 @@ namespace MyChest.Data.DAO
                 using (var connection = DbConnection.GetConnection())
                 {
                     connection.Open();
-                    string query = "SELECT p.code, p.name, p.brand, p.description, p.amount, m.name AS nome_medida," +
+                    string query = "SELECT p.code, p.name, p.brand, p.amount, m.name AS nome_medida," +
                         "GROUP_CONCAT(t.name) AS nomes_tags " +
                         "FROM products p " +
                         "LEFT JOIN products_has_tags pt ON p.code = pt.Products_code " +
@@ -28,11 +28,10 @@ namespace MyChest.Data.DAO
                                 int code = reader.GetInt32("code");
                                 string name = reader.GetString("name");
                                 string brand = reader.GetString("brand");
-                                string description = reader.GetString("description");
                                 int amount = reader.GetInt32("amount");
                                 string tagsId = reader.GetString("nomes_tags");
                                 string measure = reader.GetString("nome_medida");
-                                Product product = new Product(code, name, brand, description, amount, tagsId, measure);
+                                Product product = new Product(code, name, brand, amount, tagsId, measure);
                                 products.Add(product);
                             }
                         }
