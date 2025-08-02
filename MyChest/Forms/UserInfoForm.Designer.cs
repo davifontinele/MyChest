@@ -1,6 +1,6 @@
 ﻿namespace MyChest.Forms
 {
-    partial class UserInfo
+    partial class UserInfoForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserInfo));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserInfoForm));
             pictureBox1 = new PictureBox();
             lbUserName = new Label();
-            lbUserRole = new Label();
             btnLogoff = new Button();
             button1 = new Button();
             lbPassword = new Label();
@@ -57,16 +56,6 @@
             lbUserName.Size = new Size(70, 17);
             lbUserName.TabIndex = 1;
             lbUserName.Text = "UserName";
-            // 
-            // lbUserRole
-            // 
-            lbUserRole.AutoSize = true;
-            lbUserRole.Font = new Font("Segoe UI", 9.75F);
-            lbUserRole.Location = new Point(66, 43);
-            lbUserRole.Name = "lbUserRole";
-            lbUserRole.Size = new Size(61, 17);
-            lbUserRole.TabIndex = 2;
-            lbUserRole.Text = "UserRole";
             // 
             // btnLogoff
             // 
@@ -99,7 +88,7 @@
             lbPassword.TabIndex = 5;
             lbPassword.Text = "UserPassword";
             // 
-            // UserInfo
+            // UserInfoForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -107,12 +96,11 @@
             Controls.Add(lbPassword);
             Controls.Add(button1);
             Controls.Add(btnLogoff);
-            Controls.Add(lbUserRole);
             Controls.Add(lbUserName);
             Controls.Add(pictureBox1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "UserInfo";
+            Name = "UserInfoForm";
             Text = "UserInfo";
             Load += UserInfo_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -124,7 +112,6 @@
 
         private PictureBox pictureBox1;
         private Label lbUserName;
-        private Label lbUserRole;
         private Button btnLogoff;
         private Button button1;
         private Label lbPassword;

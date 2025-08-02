@@ -1,13 +1,15 @@
 using MyChest.Forms;
+using MyChest.Models;
 
 namespace MyChest
 {
-    public partial class Home : Form
+    public partial class HomeForm : Form
     {
-        private int count = 0;
-        public Home()
+        private UserLoged? _userLoged;
+        public HomeForm(UserLoged userLoged)
         {
             InitializeComponent();
+            _userLoged = userLoged;
         }
 
         private void btnProd_Click(object sender, EventArgs e)
@@ -28,7 +30,7 @@ namespace MyChest
         private void btnUserInfo_Click(object sender, EventArgs e)
         {
             listBoxWarning.Items.Add("Abre uma janela simples onde mostrará as informações do usuário logado");
-            UserInfo userInfoForm = new UserInfo();
+            UserInfoForm userInfoForm = new UserInfoForm(_userLoged);
             userInfoForm.ShowDialog();
         }
 

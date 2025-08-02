@@ -321,8 +321,6 @@ D:\MyChestCode\MyChest\bin\Debug\net8.0-windows\runtimes\win-x64\native\krbcc64.
 D:\MyChestCode\MyChest\bin\Debug\net8.0-windows\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 D:\MyChestCode\MyChest\bin\Debug\net8.0-windows\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.csproj.AssemblyReference.cache
-D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Home.resources
-D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.UserInfo.resources
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Properties.Resources.resources
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.csproj.GenerateResource.cache
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.GeneratedMSBuildEditorConfig.editorconfig
@@ -336,3 +334,6 @@ D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\refint\MyChest.dll
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.pdb
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.genruntimeconfig.cache
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\ref\MyChest.dll
+D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.HomeForm.resources
+D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.LoginForm.resources
+D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.UserInfoForm.resources

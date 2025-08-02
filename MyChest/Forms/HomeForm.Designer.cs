@@ -3,7 +3,7 @@ using MyChest.Models;
 
 namespace MyChest
 {
-    partial class Home
+    partial class HomeForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -74,7 +74,7 @@ namespace MyChest
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeForm));
             toolStripBtns = new ToolStrip();
             lbLogoTeste = new ToolStripLabel();
             toolStripSeparator1 = new ToolStripSeparator();
