@@ -37,9 +37,8 @@ namespace MyChest.Forms
                 User userLoged = new User(txtBoxUser.Text,txtBoxPassword.Text);
 
                 // Fecha o formulário de login e abre o formulário HomeForm, passando o usuário logado como parâmetro.
-                this.Hide();
                 HomeForm newForm = new HomeForm(userLoged);
-                newForm.Closed += (s, args) => this.Close();
+                this.Hide();
                 newForm.Show();
             }
 
@@ -154,6 +153,7 @@ namespace MyChest.Forms
             Name = "LoginForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "MyChest";
+            FormClosed += LoginForm_FormClosed;
             ((System.ComponentModel.ISupportInitialize)picBoxLogo).EndInit();
             ResumeLayout(false);
             PerformLayout();

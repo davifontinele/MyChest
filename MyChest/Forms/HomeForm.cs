@@ -29,8 +29,8 @@ namespace MyChest
 
         private void btnUserInfo_Click(object sender, EventArgs e)
         {
-            listBoxWarning.Items.Add("Abre uma janela simples onde mostrará as informações do usuário logado");
-            UserInfoForm userInfoForm = new UserInfoForm(_userLoged);
+            // Cria uma nova instância do formulário UserInfoForm, passando o usuário logado e o formulário atual como parâmetros
+            UserInfoForm userInfoForm = new UserInfoForm(_userLoged, this);
             userInfoForm.ShowDialog();
         }
 
@@ -74,6 +74,11 @@ namespace MyChest
         private void btnAddress_Click(object sender, EventArgs e)
         {
             DataGridAddressLoad();
+        }
+
+        private void HomeForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

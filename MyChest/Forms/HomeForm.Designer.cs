@@ -292,7 +292,7 @@ namespace MyChest
             picBoxSearcIcon.TabIndex = 0;
             picBoxSearcIcon.TabStop = false;
             // 
-            // Home
+            // HomeForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -304,10 +304,11 @@ namespace MyChest
             Controls.Add(toolStripBtns);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(1280, 720);
-            Name = "Home";
+            Name = "HomeForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "MyChest";
             WindowState = FormWindowState.Maximized;
+            FormClosed += HomeForm_FormClosed;
             Load += Home_Load;
             toolStripBtns.ResumeLayout(false);
             toolStripBtns.PerformLayout();

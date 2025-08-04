@@ -16,5 +16,14 @@ namespace MyChest.Forms
         {
             VerifyLogin();
         }
+
+        private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // Isso garante que o programa seja fechado de qualquer maneira quando o formulário for fechado.
+            // Fiz isso pois não consegui fazer com que o programa se encerre quando uma nova formLogin instanciada
+            // em UserInfoForm.cs/btnLogoff_Click é fechada, antes o programa continuava rodando em segundo plano porque
+            // a form principal instanciada em Program.cs não era fechada.
+            Application.Exit();
+        }
     }
 }
