@@ -39,10 +39,11 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(12, 12);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(48, 48);
+            pictureBox1.Size = new Size(52, 52);
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -50,10 +51,11 @@
             // lbUserName
             // 
             lbUserName.AutoSize = true;
+            lbUserName.BorderStyle = BorderStyle.Fixed3D;
             lbUserName.Font = new Font("Segoe UI", 9.75F);
-            lbUserName.Location = new Point(66, 9);
+            lbUserName.Location = new Point(70, 12);
             lbUserName.Name = "lbUserName";
-            lbUserName.Size = new Size(70, 17);
+            lbUserName.Size = new Size(72, 19);
             lbUserName.TabIndex = 1;
             lbUserName.Text = "UserName";
             // 
@@ -81,10 +83,11 @@
             // lbPassword
             // 
             lbPassword.AutoSize = true;
+            lbPassword.BorderStyle = BorderStyle.Fixed3D;
             lbPassword.Font = new Font("Segoe UI", 9.75F);
-            lbPassword.Location = new Point(66, 26);
+            lbPassword.Location = new Point(70, 31);
             lbPassword.Name = "lbPassword";
-            lbPassword.Size = new Size(91, 17);
+            lbPassword.Size = new Size(93, 19);
             lbPassword.TabIndex = 5;
             lbPassword.Text = "UserPassword";
             // 
@@ -101,7 +104,7 @@
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "UserInfoForm";
-            Text = "UserInfo";
+            Text = "Usuário";
             Load += UserInfo_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);

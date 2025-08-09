@@ -97,27 +97,29 @@ namespace MyChest.Forms
             // lbUser
             // 
             lbUser.AutoSize = true;
+            lbUser.BorderStyle = BorderStyle.Fixed3D;
             lbUser.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lbUser.Location = new Point(163, 187);
             lbUser.Name = "lbUser";
-            lbUser.Size = new Size(59, 20);
+            lbUser.Size = new Size(61, 22);
             lbUser.TabIndex = 4;
             lbUser.Text = "Usuário";
             // 
             // lbPassword
             // 
             lbPassword.AutoSize = true;
+            lbPassword.BorderStyle = BorderStyle.Fixed3D;
             lbPassword.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lbPassword.Location = new Point(163, 238);
             lbPassword.Name = "lbPassword";
-            lbPassword.Size = new Size(49, 20);
+            lbPassword.Size = new Size(51, 22);
             lbPassword.TabIndex = 5;
             lbPassword.Text = "Senha";
             // 
             // picBoxLogo
             // 
             picBoxLogo.Image = (Image)resources.GetObject("picBoxLogo.Image");
-            picBoxLogo.Location = new Point(163, 30);
+            picBoxLogo.Location = new Point(163, 25);
             picBoxLogo.Name = "picBoxLogo";
             picBoxLogo.Size = new Size(128, 128);
             picBoxLogo.SizeMode = PictureBoxSizeMode.AutoSize;

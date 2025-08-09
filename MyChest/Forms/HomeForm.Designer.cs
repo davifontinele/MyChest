@@ -104,6 +104,7 @@ namespace MyChest
             btnProd = new ToolStripButton();
             btnUser = new ToolStripButton();
             btnAddress = new ToolStripButton();
+            btnMoveProd = new ToolStripButton();
             toolStripButton4 = new ToolStripButton();
             btnConfig = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
@@ -129,7 +130,7 @@ namespace MyChest
             toolStripBtns.CanOverflow = false;
             toolStripBtns.Dock = DockStyle.Left;
             toolStripBtns.GripStyle = ToolStripGripStyle.Hidden;
-            toolStripBtns.Items.AddRange(new ToolStripItem[] { lbLogoTeste, toolStripSeparator1, btnProd, btnUser, btnAddress, toolStripButton4, btnConfig, toolStripSeparator2, btnUserInfo });
+            toolStripBtns.Items.AddRange(new ToolStripItem[] { lbLogoTeste, toolStripSeparator1, btnProd, btnUser, btnAddress, btnMoveProd, toolStripButton4, btnConfig, toolStripSeparator2, btnUserInfo });
             toolStripBtns.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
             toolStripBtns.Location = new Point(0, 0);
             toolStripBtns.Name = "toolStripBtns";
@@ -182,6 +183,16 @@ namespace MyChest
             btnAddress.Size = new Size(148, 36);
             btnAddress.Text = "Endereços";
             btnAddress.Click += btnAddress_Click;
+            // 
+            // btnMoveProd
+            // 
+            btnMoveProd.Image = (Image)resources.GetObject("btnMoveProd.Image");
+            btnMoveProd.ImageScaling = ToolStripItemImageScaling.None;
+            btnMoveProd.ImageTransparentColor = Color.Magenta;
+            btnMoveProd.Name = "btnMoveProd";
+            btnMoveProd.Size = new Size(148, 36);
+            btnMoveProd.Text = "Movimentar";
+            btnMoveProd.Click += btnMoveProd_Click;
             // 
             // toolStripButton4
             // 
@@ -244,6 +255,8 @@ namespace MyChest
             dataGrid.AllowUserToResizeRows = false;
             dataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGrid.BorderStyle = BorderStyle.Fixed3D;
             dataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGrid.Location = new Point(150, 31);
             dataGrid.Name = "dataGrid";
@@ -252,23 +265,21 @@ namespace MyChest
             dataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGrid.Size = new Size(1114, 446);
             dataGrid.TabIndex = 2;
+            dataGrid.CellDoubleClick += dataGrid_CellDoubleClick;
             // 
             // txtBoxSearch
             // 
             txtBoxSearch.AcceptsTab = true;
             txtBoxSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtBoxSearch.BackColor = SystemColors.Info;
-            txtBoxSearch.BorderStyle = BorderStyle.FixedSingle;
             txtBoxSearch.Cursor = Cursors.IBeam;
             txtBoxSearch.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtBoxSearch.ForeColor = SystemColors.ButtonShadow;
             txtBoxSearch.Location = new Point(27, 0);
             txtBoxSearch.Name = "txtBoxSearch";
+            txtBoxSearch.PlaceholderText = "Pesquisar";
             txtBoxSearch.Size = new Size(1089, 25);
             txtBoxSearch.TabIndex = 3;
-            txtBoxSearch.Text = "Pesquisar";
-            txtBoxSearch.Enter += txtBoxSearch_Enter;
-            txtBoxSearch.Leave += txtBoxSearch_Leave;
             // 
             // panel1
             // 
@@ -284,6 +295,7 @@ namespace MyChest
             // 
             // picBoxSearcIcon
             // 
+            picBoxSearcIcon.BorderStyle = BorderStyle.Fixed3D;
             picBoxSearcIcon.Image = (Image)resources.GetObject("picBoxSearcIcon.Image");
             picBoxSearcIcon.Location = new Point(0, 0);
             picBoxSearcIcon.Name = "picBoxSearcIcon";
@@ -339,5 +351,6 @@ namespace MyChest
         private ToolStripButton btnUserInfo;
         private ToolStripButton btnConfig;
         private ToolStripButton toolStripButton4;
+        private ToolStripButton btnMoveProd;
     }
 }

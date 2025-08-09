@@ -9,8 +9,17 @@ namespace MyChest.Forms
         public UserInfoForm(User userLoged, Form homeForm)
         {
             InitializeComponent();
-            _userLoged = userLoged;
-            _formHome = homeForm;
+            if (userLoged == null)
+            {
+                _userLoged = new User("User", "Password");
+                _formHome = homeForm;
+            }
+            else
+            {
+                _userLoged = userLoged;
+                _formHome = homeForm;
+            }
+
         }
         private void UserInfo_Load(object sender, EventArgs e)
         {

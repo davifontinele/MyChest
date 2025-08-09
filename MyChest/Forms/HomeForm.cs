@@ -1,3 +1,4 @@
+using MyChest.Extensions;
 using MyChest.Forms;
 using MyChest.Models;
 
@@ -11,20 +12,13 @@ namespace MyChest
             InitializeComponent();
             _userLoged = userLoged;
         }
-
+        public HomeForm()
+        {
+            InitializeComponent();
+        }
         private void btnProd_Click(object sender, EventArgs e)
         {
             DataGridProductLoad();
-        }
-
-        private void txtBoxSearch_Enter(object sender, EventArgs e)
-        {
-            txtBoxSearch.Text = string.Empty;
-        }
-
-        private void txtBoxSearch_Leave(object sender, EventArgs e)
-        {
-            txtBoxSearch.Text = "Pesquisar";
         }
 
         private void btnUserInfo_Click(object sender, EventArgs e)
@@ -79,6 +73,25 @@ namespace MyChest
         private void HomeForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnMoveProd_Click(object sender, EventArgs e)
+        {
+            MoveProdForm moveProdForm = new MoveProdForm();
+            moveProdForm.ShowDialog();
+        }
+
+        private void dataGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Adiciona os valores da linha do DataGridView selecionado ao objeto Address
+            //address.Corridor = dataGrid.SelectedRows[0].Cells[0].Value.ToString().ConvertToInt32();
+            //address.Column = dataGrid.SelectedRows[0].Cells[1].Value.ToString().ConvertToInt32();
+            //address.Level = dataGrid.SelectedRows[0].Cells[2].Value.ToString().ConvertToInt32();
+            //address.Hall = dataGrid.SelectedRows[0].Cells[3].Value.ToString().ConvertToInt32();
+            if (dataGrid.SelectedRows.Count == 1)
+            {
+
+            }
         }
     }
 }
