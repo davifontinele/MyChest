@@ -287,9 +287,9 @@ namespace MyChest.Forms
             lbProdName.BorderStyle = BorderStyle.Fixed3D;
             lbProdName.Location = new Point(12, 108);
             lbProdName.Name = "lbProdName";
-            lbProdName.Size = new Size(42, 17);
+            lbProdName.Size = new Size(105, 17);
             lbProdName.TabIndex = 3;
-            lbProdName.Text = "Nome";
+            lbProdName.Text = "Nome do produto";
             // 
             // lbProdBrand
             // 

@@ -1,4 +1,3 @@
-using MyChest.Extensions;
 using MyChest.Forms;
 using MyChest.Models;
 
@@ -11,6 +10,7 @@ namespace MyChest
         {
             InitializeComponent();
             _userLoged = userLoged;
+            ValidadeRole();
         }
         public HomeForm()
         {
@@ -24,7 +24,7 @@ namespace MyChest
         private void btnUserInfo_Click(object sender, EventArgs e)
         {
             // Cria uma nova instância do formulário UserInfoForm, passando o usuário logado e o formulário atual como parâmetros
-            UserInfoForm userInfoForm = new UserInfoForm(_userLoged, this);
+            UserInfoForm userInfoForm = new UserInfoForm(_userLoged!, this);
             userInfoForm.ShowDialog();
         }
 

@@ -14,7 +14,7 @@ namespace MyChest.Forms
 
         private void BtnLogar_Click(object sender, EventArgs e)
         {
-            VerifyLogin();
+            ValidadeLogin();
         }
 
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)

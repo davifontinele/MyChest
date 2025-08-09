@@ -62,8 +62,9 @@ namespace MyChest.Data.DAO
         /// <param name="user">Nome de usuário a ser pesquisado</param>
         /// <param name="password">Senha do usuário a ser pesquisado</param>
         /// <returns></returns>
-        public bool VerifyLogin(string user, string password)
+        public User VerifyLogin(string user, string password)
         {
+            User _userLoged = new User(user, password);
             try
             {
                 // Abre uma conexão com o banco de dados de forma temporária e executa o bloco a seguir.
@@ -81,30 +82,25 @@ namespace MyChest.Data.DAO
                     // Executa a consulta SQL e lê os resultados
                     using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
                     {
-                        // Cria um leitor para ler os dados retornados pela consulta
                         using (var reader = command.ExecuteReader())
                         {
-                            // Verifica se o leitor retornou algum resultado
-                            // Se sim, retorna true; caso contrário, exibe uma mensagem de erro e retorna false
-                            if (reader.Read())
+                            // Enquanto houver dados a serem lidos, adiciona os produtos à lista
+                            while (reader.Read())
                             {
-                                return true;
-                            }
-                            else
-                            {
-                                MessageBox.Show("Usuário ou senha incorretos.", "Erro de Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return false;
+                                _userLoged.Name = reader.GetString("name");
+                                _userLoged.Password = reader.GetString("password");
+                                _userLoged.Role = reader.GetString("role_nome");
                             }
                         }
                     }
                 }
+                return _userLoged;
             }
-
             // Captura qualquer exceção que ocorra durante a execução do código
             catch (Exception ex)
             {
                 MessageBox.Show($"Erro ao verificar login: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                return new User("", "");
             }
         }
     }

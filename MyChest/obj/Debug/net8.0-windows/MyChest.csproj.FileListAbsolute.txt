@@ -338,3 +338,4 @@ D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.HomeForm.resources
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.LoginForm.resources
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.UserInfoForm.resources
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.MoveProdForm.resources
+D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.ProductInfo.resources

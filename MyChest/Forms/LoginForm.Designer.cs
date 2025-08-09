@@ -26,15 +26,15 @@ namespace MyChest.Forms
         /// <summary>
         /// Verifica as credenciais do usuário e, se forem válidas, abre o formulário HomeForm.
         /// </summary>
-        private void VerifyLogin()
+        private void ValidadeLogin()
         {
             UserDAO userDAO = new UserDAO();
 
             // Compara os dados inseridos pelo usuário com os dados armazenados no banco de dados.
-            if (userDAO.VerifyLogin(txtBoxUser.Text, txtBoxPassword.Text))
+            if (userDAO.VerifyLogin(txtBoxUser.Text, txtBoxPassword.Text) != null)
             {
                 // Se as credenciais forem válidas, cria um novo objeto User passando como parâmetro senha e user.
-                User userLoged = new User(txtBoxUser.Text,txtBoxPassword.Text);
+                User userLoged = new User(txtBoxUser.Text,txtBoxPassword.Text, userDAO.VerifyLogin(txtBoxUser.Text, txtBoxPassword.Text).Role);
 
                 // Fecha o formulário de login e abre o formulário HomeForm, passando o usuário logado como parâmetro.
                 HomeForm newForm = new HomeForm(userLoged);

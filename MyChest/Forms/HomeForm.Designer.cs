@@ -22,7 +22,19 @@ namespace MyChest
             }
             base.Dispose(disposing);
         }
-
+        /// <summary>
+        /// Desativa e esconde funcionalidades que o nivel de acesso do usuário nao permite acessar
+        /// </summary>
+        private void ValidadeRole()
+        {
+            switch (_userLoged.Role)
+            {
+                case "Suporte":
+                    btnUser.Enabled = false;
+                    btnUser.Visible = false;
+                    break;
+            }
+        }
         /// <summary>
         /// Preence o DataGridView com os dados dos produtos
         /// </summary>
