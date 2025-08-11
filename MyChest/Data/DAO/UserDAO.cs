@@ -23,9 +23,9 @@ namespace MyChest.Data.DAO
                     connection.Open();
 
                     // Define a consulta SQL em questão
-                    string query = "SELECT Users.name, Users.password, Roles.title " +
-                        "FROM Users " +
-                        "INNER JOIN Roles ON Roles.IdRoles = Roles.IdRoles;";
+                    string query = "SELECT users.name, users.password, roles.title " +
+                        "FROM users " +
+                        "INNER JOIN roles ON users.Roles_idRoles = roles.idRoles;";
 
                     // Executa a consulta SQL e lê os resultados
                     using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))

@@ -126,7 +126,7 @@ namespace MyChest.Data.DAO
                 {
                     connection.Open();
                     // Define a consulta SQL em questão
-                    string query = $"SELECT * FROM addresses WHERE Product_code = {productCode};";
+                    string query = $"SELECT * FROM addresses WHERE Products_code = {productCode};";
                     // Executa a consulta SQL e lê os resultados
                     using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
                     {
@@ -136,12 +136,12 @@ namespace MyChest.Data.DAO
                             // Enquanto houver dados a serem lidos, atribui os valores ao objeto endereço
                             while (reader.Read())
                             {
-                                address.Id = reader.GetInt32("id");
+                                address.Id = reader.GetInt32("idaddress");
                                 address.Corridor = reader.GetInt32("corridor");
                                 address.Column = reader.GetInt32("column");
                                 address.Level = reader.GetInt32("level");
                                 address.Hall = reader.GetInt32("hall");
-                                address.ProductCode = reader.IsDBNull(reader.GetOrdinal("Product_code")) ? null : reader.GetInt32("Product_code");
+                                address.ProductCode = reader.IsDBNull(reader.GetOrdinal("Products_code")) ? null : reader.GetInt32("Products_code");
                             }
                         }
                     }

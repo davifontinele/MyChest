@@ -83,14 +83,32 @@ namespace MyChest
 
         private void dataGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Adiciona os valores da linha do DataGridView selecionado ao objeto Address
-            //address.Corridor = dataGrid.SelectedRows[0].Cells[0].Value.ToString().ConvertToInt32();
-            //address.Column = dataGrid.SelectedRows[0].Cells[1].Value.ToString().ConvertToInt32();
-            //address.Level = dataGrid.SelectedRows[0].Cells[2].Value.ToString().ConvertToInt32();
-            //address.Hall = dataGrid.SelectedRows[0].Cells[3].Value.ToString().ConvertToInt32();
             if (dataGrid.SelectedRows.Count == 1)
             {
+                // Instancia um obj Product para passar como parâmetro a Form ProductInfoForm
+                Product selectedProd = new Product(
+                    // Code
+                    Convert.ToInt32(dataGrid.SelectedRows[0].Cells[0].Value),
 
+                    // Nome
+                    Convert.ToString(dataGrid.SelectedRows[0].Cells[1].Value)!,
+
+                    // Marca
+                    Convert.ToString(dataGrid.SelectedRows[0].Cells[2].Value)!,
+
+                    // Quantidade
+                    Convert.ToInt32(dataGrid.SelectedRows[0].Cells[3].Value),
+
+                    // Tags
+                    Convert.ToString(dataGrid.SelectedRows[0].Cells[4].Value)!,
+
+                    // Medida
+                    Convert.ToString(dataGrid.SelectedRows[0].Cells[5].Value)!
+                    );
+
+                // Instancia uma nova Form passando o obj criado a cima como parametro
+                ProductInfoForm newForm = new ProductInfoForm(selectedProd);
+                newForm.Show();
             }
         }
     }

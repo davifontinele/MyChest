@@ -263,7 +263,6 @@ namespace MyChest
             // 
             dataGrid.AllowUserToAddRows = false;
             dataGrid.AllowUserToDeleteRows = false;
-            dataGrid.AllowUserToOrderColumns = true;
             dataGrid.AllowUserToResizeRows = false;
             dataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
