@@ -1,6 +1,4 @@
-﻿using MyChest.Models;
-
-namespace MyChest.Data.DAO
+﻿namespace MyChest.Data.DAO
 {
     internal class UserDAO
     {
@@ -12,9 +10,10 @@ namespace MyChest.Data.DAO
         /// <summary>
         /// Busca todos os usuários e seus papéis no banco de dados.
         /// <summary>
-        public List<User> GetAllData()
+        /// <returns>Retorna uma lista de todos usuários encontrados</returns>
+        public List<Models.User> GetAllData()
         {
-            List<User> users = new List<User>();
+            List<Models.User> users = new List<Models.User>();
             try
             {
                 // Abre uma conexão com o banco de dados de forma temporária e executa o bloco a seguir.
@@ -39,7 +38,7 @@ namespace MyChest.Data.DAO
                                 string name = reader.GetString("name");
                                 string password = reader.GetString("password");
                                 string role = reader.GetString("title");
-                                User user = new User(name, password, role);
+                                Models.User user = new Models.User(name, password, role);
                                 users.Add(user);
                             }
                         }
@@ -61,10 +60,9 @@ namespace MyChest.Data.DAO
         /// </summary>
         /// <param name="user">Nome de usuário a ser pesquisado</param>
         /// <param name="password">Senha do usuário a ser pesquisado</param>
-        /// <returns></returns>
-        public User VerifyLogin(string user, string password)
+        /// <returns>Retorna true se o login existir e false caso contrário</returns>
+        public bool VerifyLogin(string user, string password)
         {
-            User _userLoged = new User(user, password);
             try
             {
                 // Abre uma conexão com o banco de dados de forma temporária e executa o bloco a seguir.
@@ -82,25 +80,62 @@ namespace MyChest.Data.DAO
                     // Executa a consulta SQL e lê os resultados
                     using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
                     {
-                        using (var reader = command.ExecuteReader())
                         {
-                            // Enquanto houver dados a serem lidos, adiciona os produtos à lista
-                            while (reader.Read())
-                            {
-                                _userLoged.Name = reader.GetString("name");
-                                _userLoged.Password = reader.GetString("password");
-                                _userLoged.Role = reader.GetString("role_nome");
-                            }
+                            return command.ExecuteScalar() != null;
                         }
                     }
                 }
-                return _userLoged;
             }
             // Captura qualquer exceção que ocorra durante a execução do código
             catch (Exception ex)
             {
                 MessageBox.Show($"Erro ao verificar login: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return new User("", "");
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Pesquisa um usuário pesquisando pelo nome passado
+        /// </summary>
+        /// <param name="userName">Nome utilziado como parâmetro para a pesquisa</param>
+        /// <returns>Retorna um obj User</returns>
+        public Models.User GetByUserName(string userName)
+        {
+            Models.User user = new Models.User();
+            try
+            {
+                // Abre uma conexão com o banco de dados de forma temporária e executa o bloco a seguir.
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+
+                    // Define a consulta SQL para verificar as credenciais do usuário
+                    string query = $"SELECT u.name, u.password, r.title AS role_nome " +
+                        $"FROM users u " +
+                        $"JOIN roles r ON u.Roles_idRoles = r.idRoles " +
+                        $"WHERE u.name = '{userName}';";
+
+                    // Executa a consulta SQL e lê os resultados
+                    using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                user.Name = reader.GetString("name");
+                                user.Password = reader.GetString("password");
+                                user.Role = reader.GetString("role_nome");
+                            }
+                        }
+                    }
+                }
+                return user;
+            }
+            // Captura qualquer exceção que ocorra durante a execução do código
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao verificar login: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return new Models.User();
             }
         }
     }

@@ -227,7 +227,6 @@ namespace MyChest.Forms
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "ProductInfoForm";
-            StartPosition = FormStartPosition.CenterScreen;
             Text = "Nome do produto";
             ((System.ComponentModel.ISupportInitialize)dataGridAddresses).EndInit();
             ResumeLayout(false);

@@ -24,17 +24,17 @@ namespace MyChest.Forms
         }
 
         /// <summary>
-        /// Verifica as credenciais do usuário e, se forem válidas, abre o formulário HomeForm.
+        /// Verifica as credenciais do usuário e, se forem válidas, abre o formulário HomeForm passando o obj do usuário logado.
         /// </summary>
         private void ValidadeLogin()
         {
             UserDAO userDAO = new UserDAO();
 
             // Compara os dados inseridos pelo usuário com os dados armazenados no banco de dados.
-            if (userDAO.VerifyLogin(txtBoxUser.Text, txtBoxPassword.Text) != null)
+            if (userDAO.VerifyLogin(txtBoxUser.Text, txtBoxPassword.Text))
             {
                 // Se as credenciais forem válidas, cria um novo objeto User passando como parâmetro senha e user.
-                User userLoged = new User(txtBoxUser.Text,txtBoxPassword.Text, userDAO.VerifyLogin(txtBoxUser.Text, txtBoxPassword.Text).Role);
+                User userLoged = new User(txtBoxUser.Text,txtBoxPassword.Text, userDAO.GetByUserName(txtBoxUser.Text).Role);
 
                 // Fecha o formulário de login e abre o formulário HomeForm, passando o usuário logado como parâmetro.
                 HomeForm newForm = new HomeForm(userLoged);
@@ -42,11 +42,13 @@ namespace MyChest.Forms
                 newForm.Show();
             }
 
-            // Se as credenciais forem inválidas, limpa os campos de texto.
+            // Se as credenciais forem inválidas, limpa os campos de texto e exibe uma mensagem de erro
             else
             {
+                MessageBox.Show("Usuário ou senha inválidos","Erro de login",MessageBoxButtons.OK,MessageBoxIcon.Warning);
                 txtBoxUser.Text = string.Empty;
                 txtBoxPassword.Text = string.Empty;
+                txtBoxUser.Focus();
             }
         }
 
@@ -97,7 +99,7 @@ namespace MyChest.Forms
             // lbUser
             // 
             lbUser.AutoSize = true;
-            lbUser.BorderStyle = BorderStyle.Fixed3D;
+            lbUser.BorderStyle = BorderStyle.FixedSingle;
             lbUser.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lbUser.Location = new Point(163, 187);
             lbUser.Name = "lbUser";
@@ -108,7 +110,7 @@ namespace MyChest.Forms
             // lbPassword
             // 
             lbPassword.AutoSize = true;
-            lbPassword.BorderStyle = BorderStyle.Fixed3D;
+            lbPassword.BorderStyle = BorderStyle.FixedSingle;
             lbPassword.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lbPassword.Location = new Point(163, 238);
             lbPassword.Name = "lbPassword";

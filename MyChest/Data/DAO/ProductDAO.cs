@@ -197,7 +197,7 @@ namespace MyChest.Data.DAO
         /// </summary>
         /// <param name="firstProdCode">Código do primeiro produto</param>
         /// <param name="secondProdCode">Código do segundo produto</param>
-        public void MoveProdForProd(int firstProdCode, int secondProdCode)
+        public void MoveProductForProduct(int firstProdCode, int secondProdCode)
         {
             try
             {
@@ -228,7 +228,6 @@ namespace MyChest.Data.DAO
             catch (Exception ex)
             {
                 MessageBox.Show($"Erro ao movimentar os produtos: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
         }
     }

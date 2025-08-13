@@ -24,7 +24,10 @@ namespace MyChest
         }
         /// <summary>
         /// Desativa e esconde funcionalidades que o nivel de acesso do usuário nao permite acessar
-        /// </summary>
+        /// </summary> 
+        // OBS: Mudar essa implementação. O sistema deve ter uma funcionalidade do usuário admin criar novas Roles
+        // Caso ele criar outra Role como que ela se aplicaria nesse metodo? Provavelmente teremos que mudar como essa
+        // funcionalidade funciona
         private void ValidadeRole()
         {
             switch (_userLoged.Role)

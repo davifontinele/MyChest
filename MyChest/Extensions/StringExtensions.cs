@@ -2,11 +2,11 @@
 {
     public static class StringExtensions
     {        /// <summary>
-             /// Representa a extensão de métodos para a classe string.
+             /// Representa extensões de métodos para a classe string.
              /// </summary>
              /// 
              /// <summary>
-             /// Converte uma string para um inteiro de 32 bits.
+             /// Converte uma string para um int32 bits.
              /// </summary>
              /// <param name="text">Parâmetro esperado para converter em int</param>
              /// <returns>Retorna o valor "text" convertido em int</returns>
@@ -18,6 +18,12 @@
             }
             return 0;
         }
+
+        /// <summary>
+        /// Verifica se a string passada pode ser convertida para int32 bits
+        /// </summary>
+        /// <param name="text">Valor string passado como parâmetro de verificação</param>
+        /// <returns>Retorna true caso a string puder ser convertida caso contrario retorna false</returns>
         public static bool TestConvertToInt32(this string text)
         {
             if (!string.IsNullOrWhiteSpace(text))

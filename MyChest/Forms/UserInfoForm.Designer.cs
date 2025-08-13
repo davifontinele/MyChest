@@ -29,94 +29,97 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserInfoForm));
-            pictureBox1 = new PictureBox();
-            lbUserName = new Label();
-            btnLogoff = new Button();
-            button1 = new Button();
-            lbPassword = new Label();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            lbUserLogin = new Label();
+            lbUserLoginInfo = new Label();
+            lbUserPassword = new Label();
+            lbUserPasswordInfo = new Label();
+            btnChangePassword = new Button();
+            btnChangeLogin = new Button();
             SuspendLayout();
             // 
-            // pictureBox1
+            // lbUserLogin
             // 
-            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(12, 12);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(52, 52);
-            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            lbUserLogin.AutoSize = true;
+            lbUserLogin.BorderStyle = BorderStyle.FixedSingle;
+            lbUserLogin.Location = new Point(12, 9);
+            lbUserLogin.Name = "lbUserLogin";
+            lbUserLogin.Size = new Size(39, 17);
+            lbUserLogin.TabIndex = 5;
+            lbUserLogin.Text = "Login";
             // 
-            // lbUserName
+            // lbUserLoginInfo
             // 
-            lbUserName.AutoSize = true;
-            lbUserName.BorderStyle = BorderStyle.Fixed3D;
-            lbUserName.Font = new Font("Segoe UI", 9.75F);
-            lbUserName.Location = new Point(70, 12);
-            lbUserName.Name = "lbUserName";
-            lbUserName.Size = new Size(72, 19);
-            lbUserName.TabIndex = 1;
-            lbUserName.Text = "UserName";
+            lbUserLoginInfo.AutoSize = true;
+            lbUserLoginInfo.BorderStyle = BorderStyle.Fixed3D;
+            lbUserLoginInfo.Location = new Point(57, 9);
+            lbUserLoginInfo.Name = "lbUserLoginInfo";
+            lbUserLoginInfo.Size = new Size(92, 17);
+            lbUserLoginInfo.TabIndex = 12;
+            lbUserLoginInfo.Text = "\"Login do User\"";
             // 
-            // btnLogoff
+            // lbUserPassword
             // 
-            btnLogoff.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnLogoff.Location = new Point(196, 166);
-            btnLogoff.Name = "btnLogoff";
-            btnLogoff.Size = new Size(75, 23);
-            btnLogoff.TabIndex = 3;
-            btnLogoff.Text = "Deslogar";
-            btnLogoff.UseVisualStyleBackColor = true;
-            btnLogoff.Click += btnLogoff_Click;
+            lbUserPassword.AutoSize = true;
+            lbUserPassword.BorderStyle = BorderStyle.FixedSingle;
+            lbUserPassword.Location = new Point(12, 43);
+            lbUserPassword.Name = "lbUserPassword";
+            lbUserPassword.Size = new Size(41, 17);
+            lbUserPassword.TabIndex = 14;
+            lbUserPassword.Text = "Senha";
             // 
-            // button1
+            // lbUserPasswordInfo
             // 
-            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            button1.Location = new Point(12, 166);
-            button1.Name = "button1";
-            button1.Size = new Size(92, 23);
-            button1.TabIndex = 4;
-            button1.Text = "Mudar Senha";
-            button1.UseVisualStyleBackColor = true;
+            lbUserPasswordInfo.AutoSize = true;
+            lbUserPasswordInfo.BorderStyle = BorderStyle.Fixed3D;
+            lbUserPasswordInfo.Location = new Point(59, 43);
+            lbUserPasswordInfo.Name = "lbUserPasswordInfo";
+            lbUserPasswordInfo.Size = new Size(92, 17);
+            lbUserPasswordInfo.TabIndex = 15;
+            lbUserPasswordInfo.Text = "\"Login do User\"";
             // 
-            // lbPassword
+            // btnChangePassword
             // 
-            lbPassword.AutoSize = true;
-            lbPassword.BorderStyle = BorderStyle.Fixed3D;
-            lbPassword.Font = new Font("Segoe UI", 9.75F);
-            lbPassword.Location = new Point(70, 31);
-            lbPassword.Name = "lbPassword";
-            lbPassword.Size = new Size(93, 19);
-            lbPassword.TabIndex = 5;
-            lbPassword.Text = "UserPassword";
+            btnChangePassword.Location = new Point(12, 151);
+            btnChangePassword.Name = "btnChangePassword";
+            btnChangePassword.Size = new Size(89, 23);
+            btnChangePassword.TabIndex = 16;
+            btnChangePassword.Text = "Mudar senha";
+            btnChangePassword.UseVisualStyleBackColor = true;
+            // 
+            // btnChangeLogin
+            // 
+            btnChangeLogin.Location = new Point(115, 151);
+            btnChangeLogin.Name = "btnChangeLogin";
+            btnChangeLogin.Size = new Size(82, 23);
+            btnChangeLogin.TabIndex = 17;
+            btnChangeLogin.Text = "Mudar login";
+            btnChangeLogin.UseVisualStyleBackColor = true;
             // 
             // UserInfoForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(284, 201);
-            Controls.Add(lbPassword);
-            Controls.Add(button1);
-            Controls.Add(btnLogoff);
-            Controls.Add(lbUserName);
-            Controls.Add(pictureBox1);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
+            ClientSize = new Size(209, 186);
+            Controls.Add(btnChangeLogin);
+            Controls.Add(btnChangePassword);
+            Controls.Add(lbUserPasswordInfo);
+            Controls.Add(lbUserPassword);
+            Controls.Add(lbUserLoginInfo);
+            Controls.Add(lbUserLogin);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "UserInfoForm";
-            Text = "Usuário";
-            Load += UserInfo_Load;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            Text = "Nome do usuário";
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private PictureBox pictureBox1;
-        private Label lbUserName;
-        private Button btnLogoff;
-        private Button button1;
-        private Label lbPassword;
+        private Label lbUserLogin;
+        private Label lbUserLoginInfo;
+        private Label lbUserPassword;
+        private Label lbUserPasswordInfo;
+        private Button btnChangePassword;
+        private Button btnChangeLogin;
     }
 }

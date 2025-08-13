@@ -23,6 +23,10 @@ namespace MyChest.Forms
             }
             base.Dispose(disposing);
         }
+
+        /// <summary>
+        /// Atualiza o dataGrid com o endereço especificado
+        /// </summary>
         private void GetAddressByNumber()
         {
             AddressDAO addressDAO = new AddressDAO();
@@ -38,6 +42,7 @@ namespace MyChest.Forms
                     )
                 );
         }
+
         /// <summary>
         /// Movimenta o produto selecionado para o endereço especificado.
         /// </summary>
@@ -62,26 +67,38 @@ namespace MyChest.Forms
                 MessageBox.Show("Produto não selecionado ou inválido.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        /// <summary>
+        /// Troca os enderços entre os produtos
+        /// Produto A - Endereço B
+        /// Produto C - Endereço D
+        /// Com a mudança fica:
+        /// Produto A - Endereço D
+        /// Produto C - Endereço B
+        /// </summary>
+        /// <param name="firstCodeProd">Código do primeiro produto</param>
+        /// <param name="secondCodeProd">Código do segundo produto</param>
         private void MoveProd(int firstCodeProd, int secondCodeProd)
         {
             try
             {
                 ProductDAO productDao = new ProductDAO();
-                productDao.MoveProdForProd(firstCodeProd, secondCodeProd);
+                productDao.MoveProductForProduct(firstCodeProd, secondCodeProd);
             }
             catch (ArgumentOutOfRangeException)
             {
                 MessageBox.Show("Produto não selecionado ou inválido.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
         /// <summary>
-        /// Busca o protudo com base no código especificado e atualiza as informações do produto nos campos de exibição.
+        /// Atualiza as informações dos campos de exibição com o produto pesquisado pelo codigo.
         /// </summary>
         /// <param name="code">Código usado como parâmetro de pesquisa</param>
         private void UpdateLeftProductInfo(int code)
         {
             ProductDAO productDao = new ProductDAO();
-            productDao.GetByCode(code);
+
             lbProdCode.Text = productDao.GetByCode(code).Code.ToString();
             lbProdName.Text = productDao.GetByCode(code).Name;
             lbProdBrand.Text = productDao.GetByCode(code).Brand;
@@ -90,13 +107,13 @@ namespace MyChest.Forms
         }
 
         /// <summary>
-        /// Busca o protudo com base no código especificado e atualiza as informações do produto nos campos de exibição.
+        /// Atualiza as informações dos campos de exibição com com o produto pesquisado pelo código.
         /// </summary>
         /// <param name="code">Código usado como parâmetro de pesquisa</param>
         private void UpdateRightProductInfo(int code)
         {
             ProductDAO productDao = new ProductDAO();
-            productDao.GetByCode(code);
+
             lbProdCode2.Text = productDao.GetByCode(code).Code.ToString();
             lbProdName2.Text = productDao.GetByCode(code).Name;
             lbProdBrand2.Text = productDao.GetByCode(code).Brand;
@@ -525,7 +542,6 @@ namespace MyChest.Forms
             MinimizeBox = false;
             Name = "MoveProdForm";
             Text = "Movimentar";
-            Load += MoveProdForm_Load;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picBoxArrows).EndInit();

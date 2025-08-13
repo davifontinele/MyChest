@@ -7,6 +7,9 @@ namespace MyChest.Forms
         public MoveProdForm()
         {
             InitializeComponent();
+
+            Size = new Size(550, 270);
+            HideAddressMoveComponents();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -16,6 +19,10 @@ namespace MyChest.Forms
             {
                 UpdateLeftProductInfo(txtBoxProd.Text.ConvertToInt32());
             }
+            else
+            {
+                // TODO: mensagem de erro, de preferência no textBox
+            }
         }
         private void txtBoxProd2_TextChanged(object sender, EventArgs e)
         {
@@ -24,13 +31,10 @@ namespace MyChest.Forms
             {
                 UpdateRightProductInfo(txtBoxProd2.Text.ConvertToInt32());
             }
-        }
-
-        private void MoveProdForm_Load(object sender, EventArgs e)
-        {
-            Size = new Size(550, 270);
-            ShowAddressMoveComponents();
-            HideAddressMoveComponents();
+            else
+            {
+                // TODO: mensagem de erro, de preferência no textBox
+            }
         }
 
         private void btnMovProdByProd_Click(object sender, EventArgs e)
@@ -45,6 +49,7 @@ namespace MyChest.Forms
             HideProductMoveComponents();
             Size = new Size(720, 270);
             ShowAddressMoveComponents();
+
             DataGridAddressStart();
         }
 
@@ -77,7 +82,7 @@ namespace MyChest.Forms
                 }
 
                 // Caso contrário o sistema entende que e uma movimentação por endereço
-                if (txtBoxProd2.Enabled == false)
+                if (txtBoxProd2.Enabled == false && dataGrid.Enabled == true)
                 {
                     MoveProd(txtBoxProd.Text.ConvertToInt32());
                 }

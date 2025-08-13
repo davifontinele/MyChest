@@ -1,11 +1,9 @@
-﻿using MyChest.Data.DAO;
-
-namespace MyChest.Forms
+﻿namespace MyChest.Forms
 {
     public partial class LoginForm : Form
     {
         /// <summary>
-        /// Além de representar um formulário de login, esta classe é responsável por verificar as credenciais do usuário.
+        /// Além de representar um formulário de login, essa classe é responsável por verificar as credenciais do usuário.
         /// </summary>
         public LoginForm()
         {

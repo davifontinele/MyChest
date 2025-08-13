@@ -1,6 +1,4 @@
 ﻿using MyChest.Models;
-using System;
-using static Mysqlx.Notice.Warning.Types;
 
 namespace MyChest.Data.DAO
 {
@@ -331,10 +329,7 @@ namespace MyChest.Data.DAO
                         MessageBox.Show($"Erro movimentar o produto {codeProd}: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                else
-                {
-                    return;
-                }
+                return;
             }
         }
     }

@@ -18,7 +18,7 @@ namespace MyChest.Data
 
             // Retorna uma nova instância de MySqlConnection com as informações de conexão.
             return new MySqlConnection(dbConnection);
-       }
+        }
         public static MySqlConnection GetConnection(string server, string database, string userId, string password)
         {
             string dbConnection = $"Server={server};" +
