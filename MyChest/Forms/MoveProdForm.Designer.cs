@@ -44,6 +44,23 @@ namespace MyChest.Forms
         }
 
         /// <summary>
+        /// Verifica se os labels possuem valores válidos.
+        /// </summary>
+        /// <param name="labels">Lista de labels a ser verificadas</param>
+        /// <returns>Retorna true se caso todos os valores forem válidos e false caso contrário</returns>
+        private bool TestLabelsContainsValidValues(List<Label> labels)
+        {
+            foreach (var item in labels)
+            {
+                if (string.IsNullOrWhiteSpace(item.Text))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
         /// Movimenta o produto selecionado para o endereço especificado.
         /// </summary>
         /// <param name="codeProd">Código do produto a ser movimentado</param>

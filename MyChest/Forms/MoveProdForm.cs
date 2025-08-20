@@ -15,13 +15,34 @@ namespace MyChest.Forms
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             // Verifica se o campo de texto não está vazio e se é possível converter o texto para um número inteiro
-            if (!string.IsNullOrWhiteSpace(txtBoxProd.Text) && int.TryParse(txtBoxProd.Text, out int code))
+            if (int.TryParse(txtBoxProd.Text, out int code) && !string.IsNullOrWhiteSpace(txtBoxProd.Text))
             {
+                txtBoxProd.BackColor = Color.White;
+
+                //Atualiza as informações do produto com base no código fornecido
                 UpdateLeftProductInfo(txtBoxProd.Text.ConvertToInt32());
+
+                List<Label> labels = new List<Label>
+                {
+                    lbInfoProdCode,
+                    lbProdAmount,
+                    lbProdBrand,
+                    lbProdCode,
+                    lbProdMeasure
+                };
+
+                if (!TestLabelsContainsValidValues(labels))
+                {
+                    txtBoxProd.BackColor = Color.IndianRed;
+                }
+                else
+                {
+                    txtBoxProd.BackColor = Color.LightGreen;
+                }
             }
             else
             {
-                // TODO: mensagem de erro, de preferência no textBox
+                txtBoxProd.BackColor = Color.IndianRed;
             }
         }
         private void txtBoxProd2_TextChanged(object sender, EventArgs e)
@@ -29,11 +50,37 @@ namespace MyChest.Forms
             // Verifica se o campo de texto não está vazio e se é possível converter o texto para um número inteiro
             if (!string.IsNullOrWhiteSpace(txtBoxProd2.Text) && int.TryParse(txtBoxProd2.Text, out int code))
             {
+                txtBoxProd2.BackColor = Color.White;
+
+                // Atualiza as informações do produto com base no código fornecido
                 UpdateRightProductInfo(txtBoxProd2.Text.ConvertToInt32());
+
+                List<Label> labels = new List<Label>
+                {
+                    lbInfoProdCode2,
+                    lbProdAmount2,
+                    lbProdBrand2,
+                    lbProdCode2,
+                    lbProdMeasure2
+                };
+
+                if (!TestLabelsContainsValidValues(labels))
+                {
+                    txtBoxProd2.BackColor = Color.IndianRed;
+                }
+
+                if (!TestLabelsContainsValidValues(labels))
+                {
+                    txtBoxProd2.BackColor = Color.IndianRed;
+                }
+                else
+                {
+                    txtBoxProd2.BackColor = Color.LightGreen;
+                }
             }
             else
             {
-                // TODO: mensagem de erro, de preferência no textBox
+                txtBoxProd2.BackColor = Color.IndianRed;
             }
         }
 
