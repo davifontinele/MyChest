@@ -1,5 +1,6 @@
 ﻿using MyChest.Data.DAO;
 using MyChest.Extensions;
+using MyChest.Interfaces;
 using MyChest.Models;
 
 namespace MyChest.Forms
@@ -71,13 +72,12 @@ namespace MyChest.Forms
                 AddressDAO addressDAO = new AddressDAO();
                 Address address = new Address();
 
-                // Adiciona os valores da linha do DataGridView selecionado ao objeto Address
                 address.Corridor = dataGrid.SelectedRows[0].Cells[0].Value.ToString().ConvertToInt32();
                 address.Column = dataGrid.SelectedRows[0].Cells[1].Value.ToString().ConvertToInt32();
                 address.Level = dataGrid.SelectedRows[0].Cells[2].Value.ToString().ConvertToInt32();
                 address.Hall = dataGrid.SelectedRows[0].Cells[3].Value.ToString().ConvertToInt32();
 
-                addressDAO.MoveProdForAddress(codeProd, address);
+                addressDAO.MoveProductForAddress(codeProd, address);
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -100,7 +100,7 @@ namespace MyChest.Forms
             try
             {
                 ProductDAO productDao = new ProductDAO();
-                productDao.MoveProductForProduct(firstCodeProd, secondCodeProd);
+                productDao.SwapAddressesBetweenProducts(firstCodeProd, secondCodeProd);
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -114,13 +114,13 @@ namespace MyChest.Forms
         /// <param name="code">Código usado como parâmetro de pesquisa</param>
         private void UpdateLeftProductInfo(int code)
         {
-            ProductDAO productDao = new ProductDAO();
+            IData<Product> productDao = new ProductDAO();
 
-            lbProdCode.Text = productDao.GetByCode(code).Code.ToString();
-            lbProdName.Text = productDao.GetByCode(code).Name;
-            lbProdBrand.Text = productDao.GetByCode(code).Brand;
-            lbProdAmount.Text = productDao.GetByCode(code).Amount.ToString();
-            lbProdMeasure.Text = productDao.GetByCode(code).Measure;
+            lbLeftProductCode.Text = productDao.GetById(code).Code.ToString();
+            lbLeftProductName.Text = productDao.GetById(code).Name;
+            lbLeftProductBrand.Text = productDao.GetById(code).Brand;
+            lbLeftProductAmount.Text = productDao.GetById(code).Amount.ToString();
+            lbLeftProductMeasure.Text = productDao.GetById(code).Measure;
         }
 
         /// <summary>
@@ -129,13 +129,13 @@ namespace MyChest.Forms
         /// <param name="code">Código usado como parâmetro de pesquisa</param>
         private void UpdateRightProductInfo(int code)
         {
-            ProductDAO productDao = new ProductDAO();
+            IData<Product> productDao = new ProductDAO();
 
-            lbProdCode2.Text = productDao.GetByCode(code).Code.ToString();
-            lbProdName2.Text = productDao.GetByCode(code).Name;
-            lbProdBrand2.Text = productDao.GetByCode(code).Brand;
-            lbProdAmount2.Text = productDao.GetByCode(code).Amount.ToString();
-            lbProdMeasure2.Text = productDao.GetByCode(code).Measure;
+            lbRightProductCode.Text = productDao.GetById(code).Code.ToString();
+            lbRightProductName.Text = productDao.GetById(code).Name;
+            lbRightProductBrand.Text = productDao.GetById(code).Brand;
+            lbRightProductAmount.Text = productDao.GetById(code).Amount.ToString();
+            lbRightProductMeasure.Text = productDao.GetById(code).Measure;
         }
 
         /// <summary>
@@ -155,7 +155,6 @@ namespace MyChest.Forms
         {
             dataGrid.Columns.Clear();
 
-            // Adiciona as colunas ao DataGridView com seu nome e texto visivel
             dataGrid.Columns.Add("corriorCollum", "Corredor");
             dataGrid.Columns.Add("columnCollum", "Coluna");
             dataGrid.Columns.Add("levelCollum", "Nivel");
@@ -171,8 +170,7 @@ namespace MyChest.Forms
         {
             AddressDAO address = new AddressDAO();
 
-            // Preenche o DataGridView com os dados dos endereços retornados pela DAO
-            foreach (var item in address.GetAllData())
+            foreach (var item in ((IData<Address>)address).GetAllData())
             {
                 dataGrid.Rows.Add(item.Corridor, item.Column, item.Level, item.Hall);
             }
@@ -198,20 +196,20 @@ namespace MyChest.Forms
         /// </summary>
         private void ShowProductMoveComponents()
         {
-            lbInfoProdCode2.Enabled = true;
-            lbProdCode2.Enabled = true;
-            lbProdName2.Enabled = true;
-            lbProdBrand2.Enabled = true;
-            lbProdAmount2.Enabled = true;
-            lbProdMeasure2.Enabled = true;
-            txtBoxProd2.Enabled = true;
-            lbInfoProdCode2.Show();
-            lbProdCode2.Show();
-            lbProdName2.Show();
-            lbProdBrand2.Show();
-            lbProdAmount2.Show();
-            lbProdMeasure2.Show();
-            txtBoxProd2.Show();
+            lbRightProductCodeInfo.Enabled = true;
+            lbRightProductCode.Enabled = true;
+            lbRightProductName.Enabled = true;
+            lbRightProductBrand.Enabled = true;
+            lbRightProductAmount.Enabled = true;
+            lbRightProductMeasure.Enabled = true;
+            txtBoxRightProduct.Enabled = true;
+            lbRightProductCodeInfo.Show();
+            lbRightProductCode.Show();
+            lbRightProductName.Show();
+            lbRightProductBrand.Show();
+            lbRightProductAmount.Show();
+            lbRightProductMeasure.Show();
+            txtBoxRightProduct.Show();
         }
 
         /// <summary>
@@ -234,20 +232,20 @@ namespace MyChest.Forms
         /// </summary>
         private void HideProductMoveComponents()
         {
-            lbInfoProdCode2.Enabled = false;
-            lbProdCode2.Enabled = false;
-            lbProdName2.Enabled = false;
-            lbProdBrand2.Enabled = false;
-            lbProdAmount2.Enabled = false;
-            lbProdMeasure2.Enabled = false;
-            txtBoxProd2.Enabled = false;
-            lbInfoProdCode2.Hide();
-            lbProdCode2.Hide();
-            lbProdName2.Hide();
-            lbProdBrand2.Hide();
-            lbProdAmount2.Hide();
-            lbProdMeasure2.Hide();
-            txtBoxProd2.Hide();
+            lbRightProductCodeInfo.Enabled = false;
+            lbRightProductCode.Enabled = false;
+            lbRightProductName.Enabled = false;
+            lbRightProductBrand.Enabled = false;
+            lbRightProductAmount.Enabled = false;
+            lbRightProductMeasure.Enabled = false;
+            txtBoxRightProduct.Enabled = false;
+            lbRightProductCodeInfo.Hide();
+            lbRightProductCode.Hide();
+            lbRightProductName.Hide();
+            lbRightProductBrand.Hide();
+            lbRightProductAmount.Hide();
+            lbRightProductMeasure.Hide();
+            txtBoxRightProduct.Hide();
         }
         #region Windows Form Designer generated code
 
@@ -258,21 +256,21 @@ namespace MyChest.Forms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveProdForm));
-            txtBoxProd = new TextBox();
-            lbInfoProdCode = new Label();
-            lbProdCode = new Label();
-            lbProdName = new Label();
-            lbProdBrand = new Label();
-            lbProdAmount = new Label();
-            lbProdMeasure = new Label();
-            lbProdMeasure2 = new Label();
-            lbProdAmount2 = new Label();
-            lbProdBrand2 = new Label();
-            lbProdName2 = new Label();
-            lbProdCode2 = new Label();
-            lbInfoProdCode2 = new Label();
-            txtBoxProd2 = new TextBox();
-            toolStrip1 = new ToolStrip();
+            txtBoxLeftProduct = new TextBox();
+            lbInfoProductCode = new Label();
+            lbLeftProductCode = new Label();
+            lbLeftProductName = new Label();
+            lbLeftProductBrand = new Label();
+            lbLeftProductAmount = new Label();
+            lbLeftProductMeasure = new Label();
+            lbRightProductMeasure = new Label();
+            lbRightProductAmount = new Label();
+            lbRightProductBrand = new Label();
+            lbRightProductName = new Label();
+            lbRightProductCode = new Label();
+            lbRightProductCodeInfo = new Label();
+            txtBoxRightProduct = new TextBox();
+            toolStrip = new ToolStrip();
             toolStripDropDownButton1 = new ToolStripDropDownButton();
             btnMovOptions = new ToolStripMenuItem();
             btnMovProdByProd = new ToolStripMenuItem();
@@ -282,155 +280,155 @@ namespace MyChest.Forms
             picBoxSearch = new PictureBox();
             maskTxtBoxSearchAddress = new MaskedTextBox();
             btnMoveConfirm = new Button();
-            toolStrip1.SuspendLayout();
+            toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picBoxArrows).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picBoxSearch).BeginInit();
             SuspendLayout();
             // 
-            // txtBoxProd
+            // txtBoxProduct
             // 
-            txtBoxProd.Location = new Point(12, 56);
-            txtBoxProd.Name = "txtBoxProd";
-            txtBoxProd.Size = new Size(109, 23);
-            txtBoxProd.TabIndex = 0;
-            txtBoxProd.TextChanged += textBox1_TextChanged;
+            txtBoxLeftProduct.Location = new Point(12, 56);
+            txtBoxLeftProduct.Name = "txtBoxProduct";
+            txtBoxLeftProduct.Size = new Size(109, 23);
+            txtBoxLeftProduct.TabIndex = 0;
+            txtBoxLeftProduct.TextChanged += textBoxLeft_TextChanged;
             // 
-            // lbInfoProdCode
+            // lbInfoProductCode
             // 
-            lbInfoProdCode.AutoSize = true;
-            lbInfoProdCode.Location = new Point(12, 38);
-            lbInfoProdCode.Name = "lbInfoProdCode";
-            lbInfoProdCode.Size = new Size(109, 15);
-            lbInfoProdCode.TabIndex = 1;
-            lbInfoProdCode.Text = "Código do produto";
+            lbInfoProductCode.AutoSize = true;
+            lbInfoProductCode.Location = new Point(12, 38);
+            lbInfoProductCode.Name = "lbInfoProductCode";
+            lbInfoProductCode.Size = new Size(109, 15);
+            lbInfoProductCode.TabIndex = 1;
+            lbInfoProductCode.Text = "Código do produto";
             // 
-            // lbProdCode
+            // lbProductCode
             // 
-            lbProdCode.AutoSize = true;
-            lbProdCode.BorderStyle = BorderStyle.Fixed3D;
-            lbProdCode.Location = new Point(12, 91);
-            lbProdCode.Name = "lbProdCode";
-            lbProdCode.Size = new Size(33, 17);
-            lbProdCode.TabIndex = 2;
-            lbProdCode.Text = "0000";
+            lbLeftProductCode.AutoSize = true;
+            lbLeftProductCode.BorderStyle = BorderStyle.Fixed3D;
+            lbLeftProductCode.Location = new Point(12, 91);
+            lbLeftProductCode.Name = "lbProductCode";
+            lbLeftProductCode.Size = new Size(33, 17);
+            lbLeftProductCode.TabIndex = 2;
+            lbLeftProductCode.Text = "0000";
             // 
-            // lbProdName
+            // lbProductName
             // 
-            lbProdName.AutoSize = true;
-            lbProdName.BorderStyle = BorderStyle.Fixed3D;
-            lbProdName.Location = new Point(12, 108);
-            lbProdName.Name = "lbProdName";
-            lbProdName.Size = new Size(105, 17);
-            lbProdName.TabIndex = 3;
-            lbProdName.Text = "Nome do produto";
+            lbLeftProductName.AutoSize = true;
+            lbLeftProductName.BorderStyle = BorderStyle.Fixed3D;
+            lbLeftProductName.Location = new Point(12, 108);
+            lbLeftProductName.Name = "lbProductName";
+            lbLeftProductName.Size = new Size(105, 17);
+            lbLeftProductName.TabIndex = 3;
+            lbLeftProductName.Text = "Nome do produto";
             // 
             // lbProdBrand
             // 
-            lbProdBrand.AutoSize = true;
-            lbProdBrand.BorderStyle = BorderStyle.Fixed3D;
-            lbProdBrand.Location = new Point(12, 125);
-            lbProdBrand.Name = "lbProdBrand";
-            lbProdBrand.Size = new Size(42, 17);
-            lbProdBrand.TabIndex = 4;
-            lbProdBrand.Text = "Marca";
+            lbLeftProductBrand.AutoSize = true;
+            lbLeftProductBrand.BorderStyle = BorderStyle.Fixed3D;
+            lbLeftProductBrand.Location = new Point(12, 125);
+            lbLeftProductBrand.Name = "lbProdBrand";
+            lbLeftProductBrand.Size = new Size(42, 17);
+            lbLeftProductBrand.TabIndex = 4;
+            lbLeftProductBrand.Text = "Marca";
             // 
             // lbProdAmount
             // 
-            lbProdAmount.AutoSize = true;
-            lbProdAmount.BorderStyle = BorderStyle.Fixed3D;
-            lbProdAmount.Location = new Point(12, 142);
-            lbProdAmount.Name = "lbProdAmount";
-            lbProdAmount.Size = new Size(27, 17);
-            lbProdAmount.TabIndex = 5;
-            lbProdAmount.Text = "000";
+            lbLeftProductAmount.AutoSize = true;
+            lbLeftProductAmount.BorderStyle = BorderStyle.Fixed3D;
+            lbLeftProductAmount.Location = new Point(12, 142);
+            lbLeftProductAmount.Name = "lbProdAmount";
+            lbLeftProductAmount.Size = new Size(27, 17);
+            lbLeftProductAmount.TabIndex = 5;
+            lbLeftProductAmount.Text = "000";
             // 
             // lbProdMeasure
             // 
-            lbProdMeasure.AutoSize = true;
-            lbProdMeasure.BorderStyle = BorderStyle.Fixed3D;
-            lbProdMeasure.Location = new Point(12, 159);
-            lbProdMeasure.Name = "lbProdMeasure";
-            lbProdMeasure.Size = new Size(49, 17);
-            lbProdMeasure.TabIndex = 6;
-            lbProdMeasure.Text = "Medida";
+            lbLeftProductMeasure.AutoSize = true;
+            lbLeftProductMeasure.BorderStyle = BorderStyle.Fixed3D;
+            lbLeftProductMeasure.Location = new Point(12, 159);
+            lbLeftProductMeasure.Name = "lbProdMeasure";
+            lbLeftProductMeasure.Size = new Size(49, 17);
+            lbLeftProductMeasure.TabIndex = 6;
+            lbLeftProductMeasure.Text = "Medida";
             // 
             // lbProdMeasure2
             // 
-            lbProdMeasure2.AutoSize = true;
-            lbProdMeasure2.BorderStyle = BorderStyle.Fixed3D;
-            lbProdMeasure2.Location = new Point(312, 159);
-            lbProdMeasure2.Name = "lbProdMeasure2";
-            lbProdMeasure2.Size = new Size(49, 17);
-            lbProdMeasure2.TabIndex = 13;
-            lbProdMeasure2.Text = "Medida";
+            lbRightProductMeasure.AutoSize = true;
+            lbRightProductMeasure.BorderStyle = BorderStyle.Fixed3D;
+            lbRightProductMeasure.Location = new Point(312, 159);
+            lbRightProductMeasure.Name = "lbProdMeasure2";
+            lbRightProductMeasure.Size = new Size(49, 17);
+            lbRightProductMeasure.TabIndex = 13;
+            lbRightProductMeasure.Text = "Medida";
             // 
             // lbProdAmount2
             // 
-            lbProdAmount2.AutoSize = true;
-            lbProdAmount2.BorderStyle = BorderStyle.Fixed3D;
-            lbProdAmount2.Location = new Point(312, 142);
-            lbProdAmount2.Name = "lbProdAmount2";
-            lbProdAmount2.Size = new Size(27, 17);
-            lbProdAmount2.TabIndex = 12;
-            lbProdAmount2.Text = "000";
+            lbRightProductAmount.AutoSize = true;
+            lbRightProductAmount.BorderStyle = BorderStyle.Fixed3D;
+            lbRightProductAmount.Location = new Point(312, 142);
+            lbRightProductAmount.Name = "lbProdAmount2";
+            lbRightProductAmount.Size = new Size(27, 17);
+            lbRightProductAmount.TabIndex = 12;
+            lbRightProductAmount.Text = "000";
             // 
             // lbProdBrand2
             // 
-            lbProdBrand2.AutoSize = true;
-            lbProdBrand2.BorderStyle = BorderStyle.Fixed3D;
-            lbProdBrand2.Location = new Point(312, 125);
-            lbProdBrand2.Name = "lbProdBrand2";
-            lbProdBrand2.Size = new Size(42, 17);
-            lbProdBrand2.TabIndex = 11;
-            lbProdBrand2.Text = "Marca";
+            lbRightProductBrand.AutoSize = true;
+            lbRightProductBrand.BorderStyle = BorderStyle.Fixed3D;
+            lbRightProductBrand.Location = new Point(312, 125);
+            lbRightProductBrand.Name = "lbProdBrand2";
+            lbRightProductBrand.Size = new Size(42, 17);
+            lbRightProductBrand.TabIndex = 11;
+            lbRightProductBrand.Text = "Marca";
             // 
             // lbProdName2
             // 
-            lbProdName2.AutoSize = true;
-            lbProdName2.BorderStyle = BorderStyle.Fixed3D;
-            lbProdName2.Location = new Point(312, 108);
-            lbProdName2.Name = "lbProdName2";
-            lbProdName2.Size = new Size(42, 17);
-            lbProdName2.TabIndex = 10;
-            lbProdName2.Text = "Nome";
+            lbRightProductName.AutoSize = true;
+            lbRightProductName.BorderStyle = BorderStyle.Fixed3D;
+            lbRightProductName.Location = new Point(312, 108);
+            lbRightProductName.Name = "lbProdName2";
+            lbRightProductName.Size = new Size(42, 17);
+            lbRightProductName.TabIndex = 10;
+            lbRightProductName.Text = "Nome";
             // 
             // lbProdCode2
             // 
-            lbProdCode2.AutoSize = true;
-            lbProdCode2.BorderStyle = BorderStyle.Fixed3D;
-            lbProdCode2.Location = new Point(312, 91);
-            lbProdCode2.Name = "lbProdCode2";
-            lbProdCode2.Size = new Size(33, 17);
-            lbProdCode2.TabIndex = 9;
-            lbProdCode2.Text = "0000";
+            lbRightProductCode.AutoSize = true;
+            lbRightProductCode.BorderStyle = BorderStyle.Fixed3D;
+            lbRightProductCode.Location = new Point(312, 91);
+            lbRightProductCode.Name = "lbProdCode2";
+            lbRightProductCode.Size = new Size(33, 17);
+            lbRightProductCode.TabIndex = 9;
+            lbRightProductCode.Text = "0000";
             // 
             // lbInfoProdCode2
             // 
-            lbInfoProdCode2.AutoSize = true;
-            lbInfoProdCode2.Location = new Point(312, 38);
-            lbInfoProdCode2.Name = "lbInfoProdCode2";
-            lbInfoProdCode2.Size = new Size(109, 15);
-            lbInfoProdCode2.TabIndex = 8;
-            lbInfoProdCode2.Text = "Código do produto";
+            lbRightProductCodeInfo.AutoSize = true;
+            lbRightProductCodeInfo.Location = new Point(312, 38);
+            lbRightProductCodeInfo.Name = "lbInfoProdCode2";
+            lbRightProductCodeInfo.Size = new Size(109, 15);
+            lbRightProductCodeInfo.TabIndex = 8;
+            lbRightProductCodeInfo.Text = "Código do produto";
             // 
             // txtBoxProd2
             // 
-            txtBoxProd2.Location = new Point(312, 56);
-            txtBoxProd2.Name = "txtBoxProd2";
-            txtBoxProd2.Size = new Size(109, 23);
-            txtBoxProd2.TabIndex = 7;
-            txtBoxProd2.TextChanged += txtBoxProd2_TextChanged;
+            txtBoxRightProduct.Location = new Point(312, 56);
+            txtBoxRightProduct.Name = "txtBoxProd2";
+            txtBoxRightProduct.Size = new Size(109, 23);
+            txtBoxRightProduct.TabIndex = 7;
+            txtBoxRightProduct.TextChanged += txtBoxProdRight_TextChanged;
             // 
             // toolStrip1
             // 
-            toolStrip1.GripStyle = ToolStripGripStyle.Hidden;
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1 });
-            toolStrip1.Location = new Point(0, 0);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(704, 25);
-            toolStrip1.TabIndex = 14;
-            toolStrip1.Text = "tooStrip";
+            toolStrip.GripStyle = ToolStripGripStyle.Hidden;
+            toolStrip.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1 });
+            toolStrip.Location = new Point(0, 0);
+            toolStrip.Name = "toolStrip1";
+            toolStrip.Size = new Size(704, 25);
+            toolStrip.TabIndex = 14;
+            toolStrip.Text = "tooStrip";
             // 
             // toolStripDropDownButton1
             // 
@@ -538,29 +536,29 @@ namespace MyChest.Forms
             Controls.Add(picBoxSearch);
             Controls.Add(dataGrid);
             Controls.Add(picBoxArrows);
-            Controls.Add(toolStrip1);
-            Controls.Add(lbProdMeasure2);
-            Controls.Add(lbProdAmount2);
-            Controls.Add(lbProdBrand2);
-            Controls.Add(lbProdName2);
-            Controls.Add(lbProdCode2);
-            Controls.Add(lbInfoProdCode2);
-            Controls.Add(txtBoxProd2);
-            Controls.Add(lbProdMeasure);
-            Controls.Add(lbProdAmount);
-            Controls.Add(lbProdBrand);
-            Controls.Add(lbProdName);
-            Controls.Add(lbProdCode);
-            Controls.Add(lbInfoProdCode);
-            Controls.Add(txtBoxProd);
+            Controls.Add(toolStrip);
+            Controls.Add(lbRightProductMeasure);
+            Controls.Add(lbRightProductAmount);
+            Controls.Add(lbRightProductBrand);
+            Controls.Add(lbRightProductName);
+            Controls.Add(lbRightProductCode);
+            Controls.Add(lbRightProductCodeInfo);
+            Controls.Add(txtBoxRightProduct);
+            Controls.Add(lbLeftProductMeasure);
+            Controls.Add(lbLeftProductAmount);
+            Controls.Add(lbLeftProductBrand);
+            Controls.Add(lbLeftProductName);
+            Controls.Add(lbLeftProductCode);
+            Controls.Add(lbInfoProductCode);
+            Controls.Add(txtBoxLeftProduct);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "MoveProdForm";
             Text = "Movimentar";
-            toolStrip1.ResumeLayout(false);
-            toolStrip1.PerformLayout();
+            toolStrip.ResumeLayout(false);
+            toolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picBoxArrows).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGrid).EndInit();
             ((System.ComponentModel.ISupportInitialize)picBoxSearch).EndInit();
@@ -570,21 +568,21 @@ namespace MyChest.Forms
 
         #endregion
 
-        private TextBox txtBoxProd;
-        private Label lbInfoProdCode;
-        private Label lbProdCode;
-        private Label lbProdName;
-        private Label lbProdBrand;
-        private Label lbProdAmount;
-        private Label lbProdMeasure;
-        private Label lbProdMeasure2;
-        private Label lbProdAmount2;
-        private Label lbProdBrand2;
-        private Label lbProdName2;
-        private Label lbProdCode2;
-        private Label lbInfoProdCode2;
-        private TextBox txtBoxProd2;
-        private ToolStrip toolStrip1;
+        private TextBox txtBoxLeftProduct;
+        private Label lbInfoProductCode;
+        private Label lbLeftProductCode;
+        private Label lbLeftProductName;
+        private Label lbLeftProductBrand;
+        private Label lbLeftProductAmount;
+        private Label lbLeftProductMeasure;
+        private Label lbRightProductMeasure;
+        private Label lbRightProductAmount;
+        private Label lbRightProductBrand;
+        private Label lbRightProductName;
+        private Label lbRightProductCode;
+        private Label lbRightProductCodeInfo;
+        private TextBox txtBoxRightProduct;
+        private ToolStrip toolStrip;
         private PictureBox picBoxArrows;
         private DataGridView dataGrid;
         private ToolStripDropDownButton toolStripDropDownButton1;

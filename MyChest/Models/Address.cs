@@ -1,9 +1,5 @@
 ﻿namespace MyChest.Models
 {
-    /// <summary>
-    /// Representa um endereço no sistema.
-    /// Cada endereço é composto por um corredor, coluna, nível, hall e código do produto.
-    /// </summary>
     internal class Address
     {
         public int Id { get; set; }

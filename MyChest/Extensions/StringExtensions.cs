@@ -1,15 +1,12 @@
 ﻿namespace MyChest.Extensions
 {
     public static class StringExtensions
-    {        /// <summary>
-             /// Representa extensões de métodos para a classe string.
-             /// </summary>
-             /// 
-             /// <summary>
-             /// Converte uma string para um int32 bits.
-             /// </summary>
-             /// <param name="text">Parâmetro esperado para converter em int</param>
-             /// <returns>Retorna o valor "text" convertido em int</returns>
+    {
+        /// <summary>
+        /// Converte uma string para um int32 bits.
+        /// </summary>
+        /// <param name="text">Parâmetro esperado para converter em int</param>
+        /// <returns>Retorna o valor "text" convertido em int</returns>
         public static int ConvertToInt32(this string text)
         {
             if (!string.IsNullOrWhiteSpace(text))

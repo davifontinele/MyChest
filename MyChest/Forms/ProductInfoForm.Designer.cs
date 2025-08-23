@@ -48,8 +48,7 @@ namespace MyChest.Forms
             dataGridAddresses.Columns.Add("hallCollum", "Lote");
             ProductDAO product = new ProductDAO();
 
-            // Preenche o DataGridView com os dados dos endereços retornados pela DAO
-            dataGridAddresses.Rows.Add(product.GetAddressByProdCode(Product.Code).Corridor, product.GetAddressByProdCode(Product.Code).Column, product.GetAddressByProdCode(Product.Code).Level, product.GetAddressByProdCode(Product.Code).Hall, product.GetAddressByProdCode(Product.Code).ProductCode);
+            dataGridAddresses.Rows.Add(product.GetAddressByProductId(Product.Code).Corridor, product.GetAddressByProductId(Product.Code).Column, product.GetAddressByProductId(Product.Code).Level, product.GetAddressByProductId(Product.Code).Hall, product.GetAddressByProductId(Product.Code).ProductCode);
         }
 
         #region Windows Form Designer generated code

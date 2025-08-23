@@ -12,7 +12,6 @@ namespace MyChest.Forms
             _formHome = homeForm;
             _userLoged = userLoged;
 
-            // Verificação usada em testes, remover depois
             if (_userLoged == null)
             {
                 Text = "nome do usuário";
@@ -21,7 +20,6 @@ namespace MyChest.Forms
             }
             else
             {
-                // Manter somente esse bloco
                 Text = _userLoged.Name;
                 lbUserName.Text = _userLoged.Name;
                 lbPassword.Text = _userLoged.Password;
@@ -29,7 +27,6 @@ namespace MyChest.Forms
         }
         private void btnLogoff_Click(object sender, EventArgs e)
         {
-            // Exibe uma caixa de diálogo de confirmação para o logoff, result é um objeto DialogResult que indica a escolha do usuário
             DialogResult result = MessageBox.Show("Você tem certeza que deseja deslogar?", "Confirmação de Logoff", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {

@@ -2,10 +2,6 @@
 {
     public class User
     {
-        /// <summary>
-        /// Representa um usuário no sistema.
-        /// Cada instância contém informações como nome, senha e cargo.
-        /// </summary>
 
         // Remover os '?' das propriedades depois, estão por enquanto para testes
         public string? Name { get; set; }

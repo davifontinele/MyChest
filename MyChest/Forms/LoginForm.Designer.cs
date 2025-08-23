@@ -30,19 +30,14 @@ namespace MyChest.Forms
         {
             UserDAO userDAO = new UserDAO();
 
-            // Compara os dados inseridos pelo usuário com os dados armazenados no banco de dados.
             if (userDAO.VerifyLogin(txtBoxUser.Text, txtBoxPassword.Text))
             {
-                // Se as credenciais forem válidas, cria um novo objeto User passando como parâmetro senha e user.
                 User userLoged = new User(txtBoxUser.Text,txtBoxPassword.Text, userDAO.GetByUserName(txtBoxUser.Text).Role);
 
-                // Fecha o formulário de login e abre o formulário HomeForm, passando o usuário logado como parâmetro.
-                HomeForm newForm = new HomeForm(userLoged);
+                HomeForm newForm = new HomeForm(userLoged: userLoged);
                 this.Hide();
                 newForm.Show();
             }
-
-            // Se as credenciais forem inválidas, limpa os campos de texto e exibe uma mensagem de erro
             else
             {
                 MessageBox.Show("Usuário ou senha inválidos","Erro de login",MessageBoxButtons.OK,MessageBoxIcon.Warning);
