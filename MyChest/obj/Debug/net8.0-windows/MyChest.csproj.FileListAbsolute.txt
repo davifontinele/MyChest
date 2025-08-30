@@ -220,3 +220,4 @@ D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.UserInfoForm.resou
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.MoveProdForm.resources
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.ProductInfoForm.resources
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.UserForm.resources
+D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.ReceiptProductForm.resources

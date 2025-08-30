@@ -56,7 +56,7 @@ namespace MyChest
 
             foreach (var item in ((IData<Product>)prod).GetAllData())
             {
-                dataGrid.Rows.Add(item.Code, item.Name, item.Brand, item.Amount, item.TagsId, item.Measure);
+                dataGrid.Rows.Add(item.Code, item.Name, item.Brand, item.Amount, item.Tags, item.Measure);
             }
         }
 
@@ -207,10 +207,12 @@ namespace MyChest
             // toolStripButton4
             // 
             toolStripButton4.Image = (Image)resources.GetObject("toolStripButton4.Image");
+            toolStripButton4.ImageScaling = ToolStripItemImageScaling.None;
             toolStripButton4.ImageTransparentColor = Color.Magenta;
             toolStripButton4.Name = "toolStripButton4";
-            toolStripButton4.Size = new Size(148, 20);
+            toolStripButton4.Size = new Size(148, 36);
             toolStripButton4.Text = "Recebimento";
+            toolStripButton4.Click += toolStripButton4_Click;
             // 
             // btnConfig
             // 

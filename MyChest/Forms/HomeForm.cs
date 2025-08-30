@@ -31,7 +31,7 @@ namespace MyChest
 
         // OBS: Precisamos fazer um sistema de verificação dos dados no DB para implementarem com essa funcionalidade de avisos
         private void listBoxWarning_KeyDown(object sender, KeyEventArgs e)
-        { 
+        {
             if (e.KeyCode == Keys.Delete)
             {
                 if (listBoxWarning.SelectedItems.Count > 0)
@@ -75,7 +75,6 @@ namespace MyChest
             moveProdForm.ShowDialog();
         }
 
-        // OBS: Tentar diminuir esse metodo. Se precisar cria-lo em HomeForm.Designer.cs e chama-lo aqui
         private void dataGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dataGrid.SelectedRows.Count == 1 && dataGrid.Columns.Count == 6)
@@ -104,10 +103,15 @@ namespace MyChest
                 newForm.Show();
 
                 newForm.Owner = this;
-            } else if (dataGrid.SelectedRows.Count == 1 && dataGrid.Columns.Count == 3)
-            {
-                // TODO: fazer dos demais objetos. Address, Users, etc...
             }
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            ReceiptProductForm newForm = new ReceiptProductForm();
+            newForm.Show();
+
+            newForm.Owner = this;
         }
     }
 }

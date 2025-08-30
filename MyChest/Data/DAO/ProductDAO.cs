@@ -42,6 +42,7 @@ namespace MyChest.Data.DAO
                 return null!;
             }
         }
+
         List<Product> IData<Product>.GetAllData()
         {
             List<Product> products = new List<Product>();
@@ -86,6 +87,118 @@ namespace MyChest.Data.DAO
             }
         }
 
+        public void InsertProduct(Product product)
+        {
+            try
+            {
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+                    string query = "INSERT INTO products (code, name, brand, amount, Measures_idMeasures) " +
+                        "VALUES (@code, @name, @brand, @amount, @measure);";
+                    using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@code", product.Code);
+                        command.Parameters.AddWithValue("@name", product.Name);
+                        command.Parameters.AddWithValue("@brand", product.Brand);
+                        command.Parameters.AddWithValue("@amount", product.Amount);
+                        command.Parameters.AddWithValue("@measure", product.Measure);
+                        command.ExecuteNonQuery();
+                    }
+                }
+                MessageBox.Show("Produto inserido com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Erro ao inserir produto: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void InsertProductTags(int productCode, List<Tag> tagsIds)
+        {
+            try
+            {
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+                    foreach (Tag tag in tagsIds)
+                    {
+                        string query = "INSERT INTO `products_has_tags` (`Products_code`, `Tags_idTags`) " +
+                            "VALUES (@productCode, @tagId)";
+                        using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@productCode", productCode);
+                            command.Parameters.AddWithValue("@tagId", tag.id);
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                }
+                MessageBox.Show("Tags do produto inseridas com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Erro ao inserir tags do produto: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public Dictionary<int, string> GetMeasures()
+        {
+            Dictionary<int, string> measures = new Dictionary<int, string>();
+            try
+            {
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+                    string query = "SELECT idMeasures, name FROM measures;";
+                    using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                measures.Add(reader.GetInt32("idMeasures"), reader.GetString("name"));
+                            }
+                        }
+                    }
+                }
+                return measures;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao buscar medidas: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return measures;
+            }
+        }
+
+        public List<Tag> GetTags()
+        {
+            List<Tag> tags = new List<Tag>();
+            try
+            {
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+                    string query = "SELECT idTags, name FROM tags;";
+                    using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                tags.Add(new Tag(reader.GetInt32("idTags"), reader.GetString("name")));
+                            }
+                        }
+                    }
+                }
+                return tags;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao buscar tags: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return tags;
+            }
+        }
+
         /// <summary>
         /// Pesquisa o endereço usando o código do produto como parâmetro.
         /// </summary>
@@ -126,6 +239,7 @@ namespace MyChest.Data.DAO
                 return null!;
             }
         }
+
         /// <summary>
         /// Pesquisa o ID do endereço usando o código do produto como parâmetro.
         /// </summary>
