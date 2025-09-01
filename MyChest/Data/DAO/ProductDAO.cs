@@ -14,7 +14,7 @@ namespace MyChest.Data.DAO
                 {
                     connection.Open();
 
-                    string query = $"SELECT p.code,p.name,p.brand,p.amount,m.name AS nome_medida " +
+                    string query = $"SELECT p.code,p.name,p.brand,p.amount,p.validity,m.name AS nome_medida " +
                         $"FROM products p " +
                         $"LEFT JOIN measures m ON p.Measures_idMeasures = m.idMeasures " +
                         $"WHERE p.code = {id};";
@@ -30,6 +30,7 @@ namespace MyChest.Data.DAO
                                 product.Brand = reader.GetString("brand");
                                 product.Amount = reader.GetInt32("amount");
                                 product.Measure = reader.GetString("nome_medida");
+                                product.validity = reader.GetString("validity");
                             }
                         }
                     }
@@ -52,7 +53,7 @@ namespace MyChest.Data.DAO
                 {
                     connection.Open();
 
-                    string query = "SELECT p.code, p.name, p.brand, p.amount, m.name AS nome_medida," +
+                    string query = "SELECT p.code, p.name, p.brand, p.amount, p.validity, m.name AS nome_medida," +
                         "GROUP_CONCAT(t.name) AS nomes_tags " +
                         "FROM products p " +
                         "LEFT JOIN products_has_tags pt ON p.code = pt.Products_code " +
@@ -72,7 +73,16 @@ namespace MyChest.Data.DAO
                                 int amount = reader.GetInt32("amount");
                                 string tagsId = reader.GetString("nomes_tags");
                                 string measure = reader.GetString("nome_medida");
-                                Product product = new Product(code, name, brand, amount, tagsId, measure);
+                                string validity;
+                                if (reader["validity"] == DBNull.Value)
+                                {
+                                    validity = "";
+                                }
+                                else
+                                {
+                                    validity = DateOnly.FromDateTime(Convert.ToDateTime(reader["validity"])).ToString();
+                                }
+                                Product product = new Product(code, name, brand, amount, tagsId, measure, validity);
                                 products.Add(product);
                             }
                         }
@@ -94,8 +104,8 @@ namespace MyChest.Data.DAO
                 using (var connection = DbConnection.GetConnection())
                 {
                     connection.Open();
-                    string query = "INSERT INTO products (code, name, brand, amount, Measures_idMeasures) " +
-                        "VALUES (@code, @name, @brand, @amount, @measure);";
+                    string query = "INSERT INTO products (code, name, brand, amount, Measures_idMeasures, validity) " +
+                        "VALUES (@code, @name, @brand, @amount, @measure, @validity);";
                     using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@code", product.Code);
@@ -103,6 +113,7 @@ namespace MyChest.Data.DAO
                         command.Parameters.AddWithValue("@brand", product.Brand);
                         command.Parameters.AddWithValue("@amount", product.Amount);
                         command.Parameters.AddWithValue("@measure", product.Measure);
+                        command.Parameters.AddWithValue("@validity", DateTime.Parse(product.validity!));
                         command.ExecuteNonQuery();
                     }
                 }
@@ -133,7 +144,6 @@ namespace MyChest.Data.DAO
                         }
                     }
                 }
-                MessageBox.Show("Tags do produto inseridas com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception e)
             {

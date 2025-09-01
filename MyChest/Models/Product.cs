@@ -1,4 +1,6 @@
-﻿namespace MyChest.Models
+﻿using Microsoft.VisualBasic;
+
+namespace MyChest.Models
 {
     public class Product
     {
@@ -8,7 +10,8 @@
         public int? Amount { get; set; }
         public string? Tags { get; set; }
         public string? Measure { get; set; }
-        public Product(int code, string name, string brand, int amount, string tagsId, string measure)
+        public string? validity { get; set; }
+        public Product(int code, string name, string brand, int amount, string tagsId, string measure, string validity)
         {
             this.Code = code;
             this.Name = name;
@@ -16,6 +19,7 @@
             this.Amount = amount;
             this.Tags = tagsId;
             this.Measure = measure;
+            this.validity = validity;
         }
         public Product()
         {
