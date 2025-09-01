@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "D:\\MyChestCode\\MyChest\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\data\\dao\\productdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:data\\dao\\productdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\forms\\productinfoform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:forms\\productinfoform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\forms\\receiptproductform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:forms\\receiptproductform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\forms\\productinfoform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:forms\\productinfoform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\forms\\receiptproductform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:forms\\receiptproductform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\forms\\productinfoform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:forms\\productinfoform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\forms\\homeform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:forms\\homeform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,54 +34,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Product.cs",
-              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Models\\Product.cs",
-              "RelativeDocumentMoniker": "Models\\Product.cs",
-              "ToolTip": "D:\\MyChestCode\\MyChest\\Models\\Product.cs",
-              "RelativeToolTip": "Models\\Product.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAA9wBAAAAAdAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "ProductInfoForm.Designer.cs",
+              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Forms\\ProductInfoForm.Designer.cs",
+              "RelativeDocumentMoniker": "Forms\\ProductInfoForm.Designer.cs",
+              "ToolTip": "D:\\MyChestCode\\MyChest\\Forms\\ProductInfoForm.Designer.cs",
+              "RelativeToolTip": "Forms\\ProductInfoForm.Designer.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAApwC8AAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-01T21:44:09.128Z",
+              "WhenOpened": "2025-09-01T21:59:10.113Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ProductDAO.cs",
-              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Data\\DAO\\ProductDAO.cs",
-              "RelativeDocumentMoniker": "Data\\DAO\\ProductDAO.cs",
-              "ToolTip": "D:\\MyChestCode\\MyChest\\Data\\DAO\\ProductDAO.cs",
-              "RelativeToolTip": "Data\\DAO\\ProductDAO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAxAAAAAAAAAA==",
+              "Title": "ProductInfoForm.cs",
+              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Forms\\ProductInfoForm.cs",
+              "RelativeDocumentMoniker": "Forms\\ProductInfoForm.cs",
+              "ToolTip": "D:\\MyChestCode\\MyChest\\Forms\\ProductInfoForm.cs",
+              "RelativeToolTip": "Forms\\ProductInfoForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-01T21:35:28.536Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ReceiptProductForm.Designer.cs",
-              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Forms\\ReceiptProductForm.Designer.cs",
-              "RelativeDocumentMoniker": "Forms\\ReceiptProductForm.Designer.cs",
-              "ToolTip": "D:\\MyChestCode\\MyChest\\Forms\\ReceiptProductForm.Designer.cs",
-              "RelativeToolTip": "Forms\\ReceiptProductForm.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADUAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-01T21:17:02.654Z",
+              "WhenOpened": "2025-09-01T21:55:59.105Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ReceiptProductForm.cs [Projeto]",
-              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Forms\\ReceiptProductForm.cs",
-              "RelativeDocumentMoniker": "Forms\\ReceiptProductForm.cs",
-              "ToolTip": "D:\\MyChestCode\\MyChest\\Forms\\ReceiptProductForm.cs [Projeto]",
-              "RelativeToolTip": "Forms\\ReceiptProductForm.cs [Projeto]",
+              "Title": "ProductInfoForm.cs [Projeto]",
+              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Forms\\ProductInfoForm.cs",
+              "RelativeDocumentMoniker": "Forms\\ProductInfoForm.cs",
+              "ToolTip": "D:\\MyChestCode\\MyChest\\Forms\\ProductInfoForm.cs [Projeto]",
+              "RelativeToolTip": "Forms\\ProductInfoForm.cs [Projeto]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-01T21:32:11.335Z",
+              "WhenOpened": "2025-09-01T21:56:12.132Z",
               "EditorCaption": " [Projeto]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HomeForm.cs",
+              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Forms\\HomeForm.cs",
+              "RelativeDocumentMoniker": "Forms\\HomeForm.cs",
+              "ToolTip": "D:\\MyChestCode\\MyChest\\Forms\\HomeForm.cs",
+              "RelativeToolTip": "Forms\\HomeForm.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAmwE4AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-01T21:54:14.161Z",
+              "EditorCaption": ""
             }
           ]
         }

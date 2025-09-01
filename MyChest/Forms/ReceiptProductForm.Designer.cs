@@ -37,21 +37,20 @@ namespace MyChest.Forms
                         txtBoxProductName.Text.ToUpper(),
                         txtBoxProductBrand.Text.ToUpper(),
                         txtBoxProductAmount.Text.ConvertToInt32(),
-                        string.Empty,
-                        comboBoxProductMeasure.SelectedValue.ToString(),
-                        maskTxtBoxProductValidity.Text
-                        ));
+                        "",
+                        comboBoxProductMeasure.SelectedValue.ToString()));
                     productDAO.InsertProductTags(txtBoxProductId.Text.ConvertToInt32(), checkBoxProductTags.CheckedItems.Cast<Tag>().ToList());
                 }
                 catch(Exception e)
                 {
-                     MessageBox.Show($"Erro ao receber produto: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                     MessageBox.Show($"Erro ao inserir produto: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
                 MessageBox.Show("Nome do produto ou marca inválido. Use apenas letras.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
 
         private void LoadProductTags()
@@ -95,8 +94,6 @@ namespace MyChest.Forms
             btnConfirmReceipt = new Button();
             label1 = new Label();
             checkBoxProductTags = new CheckedListBox();
-            lbProductValidity = new Label();
-            maskTxtBoxProductValidity = new MaskedTextBox();
             SuspendLayout();
             // 
             // lbProductName
@@ -214,32 +211,11 @@ namespace MyChest.Forms
             checkBoxProductTags.Size = new Size(194, 112);
             checkBoxProductTags.TabIndex = 27;
             // 
-            // lbProductValidity
-            // 
-            lbProductValidity.AutoSize = true;
-            lbProductValidity.BorderStyle = BorderStyle.FixedSingle;
-            lbProductValidity.Location = new Point(12, 83);
-            lbProductValidity.Name = "lbProductValidity";
-            lbProductValidity.Size = new Size(53, 17);
-            lbProductValidity.TabIndex = 28;
-            lbProductValidity.Text = "Validade";
-            // 
-            // maskTxtBoxProductValidity
-            // 
-            maskTxtBoxProductValidity.Location = new Point(71, 80);
-            maskTxtBoxProductValidity.Mask = "00/00/0000";
-            maskTxtBoxProductValidity.Name = "maskTxtBoxProductValidity";
-            maskTxtBoxProductValidity.Size = new Size(100, 23);
-            maskTxtBoxProductValidity.TabIndex = 29;
-            maskTxtBoxProductValidity.ValidatingType = typeof(DateTime);
-            // 
             // ReceiptProductForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(622, 174);
-            Controls.Add(maskTxtBoxProductValidity);
-            Controls.Add(lbProductValidity);
             Controls.Add(checkBoxProductTags);
             Controls.Add(label1);
             Controls.Add(btnConfirmReceipt);
@@ -280,7 +256,5 @@ namespace MyChest.Forms
         private Button btnConfirmReceipt;
         private Label label1;
         private CheckedListBox checkBoxProductTags;
-        private Label lbProductValidity;
-        private MaskedTextBox maskTxtBoxProductValidity;
     }
 }

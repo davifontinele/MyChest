@@ -5,7 +5,7 @@ namespace MyChest
 {
     public partial class HomeForm : Form
     {
-        protected User? _userLoged;
+        private User? _userLoged;
         public HomeForm(User userLoged)
         {
             InitializeComponent();
@@ -69,7 +69,7 @@ namespace MyChest
             Application.Exit();
         }
 
-        private void btnMoveProduct_Click(object sender, EventArgs e)
+        private void btnMoveProd_Click(object sender, EventArgs e)
         {
             MoveProdForm moveProdForm = new MoveProdForm();
             moveProdForm.ShowDialog();
@@ -96,10 +96,7 @@ namespace MyChest
                     Convert.ToString(dataGrid.SelectedRows[0].Cells[4].Value)!,
 
                     // Medida
-                    Convert.ToString(dataGrid.SelectedRows[0].Cells[5].Value)!,
-
-                    // Validade
-                    DateOnly.FromDateTime(Convert.ToDateTime(dataGrid.SelectedRows[0].Cells[6].Value)).ToString()
+                    Convert.ToString(dataGrid.SelectedRows[0].Cells[5].Value)!
                     );
 
                 ProductInfoForm newForm = new ProductInfoForm(selectedProd);
@@ -109,7 +106,7 @@ namespace MyChest
             }
         }
 
-        private void btnReceiptProduct_Click(object sender, EventArgs e)
+        private void toolStripButton4_Click(object sender, EventArgs e)
         {
             ReceiptProductForm newForm = new ReceiptProductForm();
             newForm.Show();

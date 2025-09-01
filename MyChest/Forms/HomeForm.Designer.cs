@@ -52,12 +52,11 @@ namespace MyChest
             dataGrid.Columns.Add("amountCollum", "Quantidade");
             dataGrid.Columns.Add("tagsCollum", "Tags");
             dataGrid.Columns.Add("measureCollum", "Medida");
-            dataGrid.Columns.Add("validityCollum", "Validade");
             ProductDAO prod = new ProductDAO();
 
             foreach (var item in ((IData<Product>)prod).GetAllData())
             {
-                dataGrid.Rows.Add(item.Code, item.Name, item.Brand, item.Amount, item.Tags, item.Measure, item.validity);
+                dataGrid.Rows.Add(item.Code, item.Name, item.Brand, item.Amount, item.Tags, item.Measure);
             }
         }
 
@@ -203,7 +202,7 @@ namespace MyChest
             btnMoveProd.Name = "btnMoveProd";
             btnMoveProd.Size = new Size(148, 36);
             btnMoveProd.Text = "Movimentar";
-            btnMoveProd.Click += btnMoveProduct_Click;
+            btnMoveProd.Click += btnMoveProd_Click;
             // 
             // toolStripButton4
             // 
@@ -213,7 +212,7 @@ namespace MyChest
             toolStripButton4.Name = "toolStripButton4";
             toolStripButton4.Size = new Size(148, 36);
             toolStripButton4.Text = "Recebimento";
-            toolStripButton4.Click += btnReceiptProduct_Click;
+            toolStripButton4.Click += toolStripButton4_Click;
             // 
             // btnConfig
             // 
