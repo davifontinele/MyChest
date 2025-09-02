@@ -20,5 +20,10 @@
         {
             
         }
+
+        public override string ToString()
+        {
+            return $"{Corridor}-{Column}-{Level}-{Hall}";
+        }
     }
 }

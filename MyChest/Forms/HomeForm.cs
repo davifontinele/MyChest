@@ -1,3 +1,5 @@
+using MyChest.Data.DAO;
+using MyChest.Extensions;
 using MyChest.Forms;
 using MyChest.Models;
 
@@ -5,7 +7,7 @@ namespace MyChest
 {
     public partial class HomeForm : Form
     {
-        private User? _userLoged;
+        protected User? _userLoged;
         public HomeForm(User userLoged)
         {
             InitializeComponent();
@@ -14,10 +16,17 @@ namespace MyChest
 
             btnUserInfo.Text = _userLoged.Name;
         }
+
         public HomeForm()
         {
             InitializeComponent();
         }
+
+        private void Home_Load(object sender, EventArgs e)
+        {
+            DataGridProductLoad();
+        }
+
         private void btnProd_Click(object sender, EventArgs e)
         {
             DataGridProductLoad();
@@ -49,11 +58,6 @@ namespace MyChest
             }
         }
 
-        private void Home_Load(object sender, EventArgs e)
-        {
-            DataGridProductLoad();
-        }
-
         private void btnUser_Click(object sender, EventArgs e)
         {
             DataGridUserLoad();
@@ -79,7 +83,7 @@ namespace MyChest
         {
             if (dataGrid.SelectedRows.Count == 1 && dataGrid.Columns.Count == 6)
             {
-                Product selectedProd = new Product(
+                Product selectedProduct = new Product(
                     // Code
                     Convert.ToInt32(dataGrid.SelectedRows[0].Cells[0].Value),
 
@@ -99,7 +103,7 @@ namespace MyChest
                     Convert.ToString(dataGrid.SelectedRows[0].Cells[5].Value)!
                     );
 
-                ProductInfoForm newForm = new ProductInfoForm(selectedProd);
+                ProductInfoForm newForm = new ProductInfoForm(selectedProduct);
                 newForm.Show();
 
                 newForm.Owner = this;
@@ -112,6 +116,31 @@ namespace MyChest
             newForm.Show();
 
             newForm.Owner = this;
+        }
+
+        private void maskTextSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && dataGrid.Columns.Count == 5)
+            {
+                string[] addressNumbers = maskTextSearch.Text.Split('-');
+                Address searchAddress = new Address
+                {
+                    Corridor = addressNumbers[0].ConvertToInt32(),
+                    Column = addressNumbers[1].ConvertToInt32(),
+                    Level = addressNumbers[2].ConvertToInt32(),
+                    Hall = addressNumbers[3].ConvertToInt32(),
+                };
+
+                AddressDAO addressDAO = new AddressDAO();
+
+                dataGrid.Rows.Clear();
+                dataGrid.Rows.Add(
+                    addressDAO.GetAddressByNumbers(searchAddress.Corridor, searchAddress.Column, searchAddress.Level, searchAddress.Hall).Corridor,
+                    addressDAO.GetAddressByNumbers(searchAddress.Corridor, searchAddress.Column, searchAddress.Level, searchAddress.Hall).Column,
+                    addressDAO.GetAddressByNumbers(searchAddress.Corridor, searchAddress.Column, searchAddress.Level, searchAddress.Hall).Level,
+                    addressDAO.GetAddressByNumbers(searchAddress.Corridor, searchAddress.Column, searchAddress.Level, searchAddress.Hall).Hall,
+                    addressDAO.GetAddressByNumbers(searchAddress.Corridor, searchAddress.Column, searchAddress.Level, searchAddress.Hall).ProductCode);
+            }
         }
     }
 }

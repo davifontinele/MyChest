@@ -23,6 +23,7 @@ namespace MyChest
             }
             base.Dispose(disposing);
         }
+
         /// <summary>
         /// Desativa e esconde funcionalidades que o nivel de acesso do usuário nao permite acessar
         /// </summary> 
@@ -39,11 +40,14 @@ namespace MyChest
                     break;
             }
         }
+
         /// <summary>
         /// Preence o DataGridView com os dados dos produtos
         /// </summary>
         private void DataGridProductLoad()
         {
+            maskTextSearch.Mask = "";
+
             dataGrid.Columns.Clear();
 
             dataGrid.Columns.Add("codeCollum", "Código");
@@ -65,6 +69,8 @@ namespace MyChest
         /// </summary>
         private void DataGridUserLoad()
         {
+            maskTextSearch.Mask = "";
+
             dataGrid.Columns.Clear();
 
             dataGrid.Columns.Add("nameCollum", "Nome");
@@ -83,6 +89,8 @@ namespace MyChest
         /// </summary>
         private void DataGridAddressLoad()
         {
+            maskTextSearch.Mask = "000-000-00-000";
+
             dataGrid.Columns.Clear();
 
             dataGrid.Columns.Add("corriorCollum", "Corredor");
@@ -123,8 +131,8 @@ namespace MyChest
             contextMenuStrip1 = new ContextMenuStrip(components);
             listBoxWarning = new ListBox();
             dataGrid = new DataGridView();
-            txtBoxSearch = new TextBox();
             panel1 = new Panel();
+            maskTextSearch = new MaskedTextBox();
             picBoxSearcIcon = new PictureBox();
             toolStripBtns.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGrid).BeginInit();
@@ -278,31 +286,31 @@ namespace MyChest
             dataGrid.TabIndex = 2;
             dataGrid.CellDoubleClick += dataGrid_CellDoubleClick;
             // 
-            // txtBoxSearch
-            // 
-            txtBoxSearch.AcceptsTab = true;
-            txtBoxSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtBoxSearch.BackColor = SystemColors.Info;
-            txtBoxSearch.Cursor = Cursors.IBeam;
-            txtBoxSearch.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtBoxSearch.ForeColor = SystemColors.ButtonShadow;
-            txtBoxSearch.Location = new Point(27, 0);
-            txtBoxSearch.Name = "txtBoxSearch";
-            txtBoxSearch.PlaceholderText = "Pesquisar";
-            txtBoxSearch.Size = new Size(1089, 25);
-            txtBoxSearch.TabIndex = 3;
-            // 
             // panel1
             // 
             panel1.AutoSize = true;
             panel1.BackColor = SystemColors.Info;
+            panel1.Controls.Add(maskTextSearch);
             panel1.Controls.Add(picBoxSearcIcon);
-            panel1.Controls.Add(txtBoxSearch);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(150, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(1114, 28);
             panel1.TabIndex = 4;
+            // 
+            // maskTextSearch
+            // 
+            maskTextSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            maskTextSearch.BackColor = SystemColors.Info;
+            maskTextSearch.Cursor = Cursors.IBeam;
+            maskTextSearch.Font = new Font("Segoe UI", 9.75F);
+            maskTextSearch.ForeColor = SystemColors.ButtonShadow;
+            maskTextSearch.Location = new Point(25, 0);
+            maskTextSearch.Mask = "000-000-00-000";
+            maskTextSearch.Name = "maskTextSearch";
+            maskTextSearch.Size = new Size(1089, 25);
+            maskTextSearch.TabIndex = 5;
+            maskTextSearch.KeyDown += maskTextSearch_KeyDown;
             // 
             // picBoxSearcIcon
             // 
@@ -356,12 +364,12 @@ namespace MyChest
         private ContextMenuStrip contextMenuStrip1;
         private ListBox listBoxWarning;
         private DataGridView dataGrid;
-        private TextBox txtBoxSearch;
         private Panel panel1;
         private PictureBox picBoxSearcIcon;
         private ToolStripButton btnUserInfo;
         private ToolStripButton btnConfig;
         private ToolStripButton toolStripButton4;
         private ToolStripButton btnMoveProd;
+        private MaskedTextBox maskTextSearch;
     }
 }

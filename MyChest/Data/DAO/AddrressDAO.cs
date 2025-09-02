@@ -80,6 +80,7 @@ namespace MyChest.Data.DAO
                 return address;
             }
         }
+
         /// <summary>
         /// Pesquisa todos os endereços que estão vazios, ou seja, onde o campo Products_code é nulo.
         /// </summary>
@@ -122,6 +123,7 @@ namespace MyChest.Data.DAO
                 return addresses;
             }
         }
+
         /// <summary>
         /// Pesquisa um endereço específico baseado no número do corredor, coluna, nível e hall.
         /// </summary>
@@ -207,6 +209,7 @@ namespace MyChest.Data.DAO
                 return 0;
             }
         }
+
         /// <summary>
         /// Pesquisa o código do produto vinculado a um endereço específico baseado no corredor, coluna, nível e hall.
         /// </summary>
@@ -242,6 +245,7 @@ namespace MyChest.Data.DAO
                 return 0;
             }
         }
+
         /// <summary>
         /// Move o produto especificado para o endereço especificado.
         /// </summary>
