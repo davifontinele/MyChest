@@ -2,12 +2,10 @@
 {
     public enum Permissions
     {
-        Show,
+        View,
         Dele,
-        DeleteProduct,
         EditProduct,
         EditUser,
-        DeleteUser,
         MoveProduct,
         Admin
     }

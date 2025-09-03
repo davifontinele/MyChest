@@ -1,7 +1,28 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\MyChestCode\\MyChest\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\forms\\homeform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:forms\\homeform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\models\\permissions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:models\\permissions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\forms\\homeform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:forms\\homeform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|d:\\mychestcode\\mychest\\forms\\homeform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{51F812A7-40B3-448D-B2AE-137649244260}|MyChest.csproj|solutionrelative:forms\\homeform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +30,75 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{fbcae063-e2c0-4ab1-a516-996ea3dafb72}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Permissions.cs",
+              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Models\\Permissions.cs",
+              "RelativeDocumentMoniker": "Models\\Permissions.cs",
+              "ToolTip": "D:\\MyChestCode\\MyChest\\Models\\Permissions.cs",
+              "RelativeToolTip": "Models\\Permissions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T22:53:02.163Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\MyChestCode\\MyChest\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T20:12:08.321Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "HomeForm.cs [Projeto]",
+              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Forms\\HomeForm.cs",
+              "RelativeDocumentMoniker": "Forms\\HomeForm.cs",
+              "ToolTip": "D:\\MyChestCode\\MyChest\\Forms\\HomeForm.cs [Projeto]",
+              "RelativeToolTip": "Forms\\HomeForm.cs [Projeto]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T22:38:47.928Z",
+              "EditorCaption": " [Projeto]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HomeForm.Designer.cs",
+              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Forms\\HomeForm.Designer.cs",
+              "RelativeDocumentMoniker": "Forms\\HomeForm.Designer.cs",
+              "ToolTip": "D:\\MyChestCode\\MyChest\\Forms\\HomeForm.Designer.cs",
+              "RelativeToolTip": "Forms\\HomeForm.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADcAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T20:11:31.431Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HomeForm.cs",
+              "DocumentMoniker": "D:\\MyChestCode\\MyChest\\Forms\\HomeForm.cs",
+              "RelativeDocumentMoniker": "Forms\\HomeForm.cs",
+              "ToolTip": "D:\\MyChestCode\\MyChest\\Forms\\HomeForm.cs",
+              "RelativeToolTip": "Forms\\HomeForm.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA4AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T20:11:29.487Z",
+              "EditorCaption": ""
             }
           ]
         }

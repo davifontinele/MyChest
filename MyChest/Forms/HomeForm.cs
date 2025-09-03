@@ -12,7 +12,7 @@ namespace MyChest
         {
             InitializeComponent();
             _userLoged = userLoged;
-            ValidadeRole();
+            ConfigureUIByUserPermissions();
 
             btnUserInfo.Text = _userLoged.Name;
         }
@@ -24,6 +24,7 @@ namespace MyChest
 
         private void Home_Load(object sender, EventArgs e)
         {
+            HideAndDisableButtons();
             DataGridProductLoad();
         }
 

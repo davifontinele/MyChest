@@ -27,18 +27,40 @@ namespace MyChest
         /// <summary>
         /// Desativa e esconde funcionalidades que o nivel de acesso do usuário nao permite acessar
         /// </summary> 
-        private void ValidadeRole()
+        private void ConfigureUIByUserPermissions()
         {
-            //TODO: Implementar sistema de permissões
             foreach (var permission in _userLoged.Permissions)
             {
                 switch (permission)
                 {
+                    case Permissions.View:
+                        btnMoveProduct.Enabled = false;
+                        btnMoveProduct.Visible = false;
+                        btnUser.Enabled = false;
+                        btnUser.Visible = false;
+                        btnReceiptProduct.Enabled = false;
+                        btnReceiptProduct.Visible = false;
+                        break;
                     case Permissions.MoveProduct:
-                        
+                        btnMoveProduct.Enabled = true;
+                        btnMoveProduct.Visible = true;
+                        break;
+                    case Permissions.EditUser:
+                        btnUser.Enabled = true;
+                        btnUser.Visible = true;
                         break;
                 }
             }
+        }
+
+        public void HideAndDisableButtons()
+        {
+            btnMoveProduct.Enabled = false;
+            btnMoveProduct.Visible = false;
+            btnUser.Enabled = false;
+            btnUser.Visible = false;
+            btnReceiptProduct.Enabled = false;
+            btnReceiptProduct.Visible = false;
         }
 
         /// <summary>
@@ -122,8 +144,8 @@ namespace MyChest
             btnProd = new ToolStripButton();
             btnUser = new ToolStripButton();
             btnAddress = new ToolStripButton();
-            btnMoveProd = new ToolStripButton();
-            toolStripButton4 = new ToolStripButton();
+            btnMoveProduct = new ToolStripButton();
+            btnReceiptProduct = new ToolStripButton();
             btnConfig = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
             btnUserInfo = new ToolStripButton();
@@ -148,7 +170,7 @@ namespace MyChest
             toolStripBtns.CanOverflow = false;
             toolStripBtns.Dock = DockStyle.Left;
             toolStripBtns.GripStyle = ToolStripGripStyle.Hidden;
-            toolStripBtns.Items.AddRange(new ToolStripItem[] { lbLogoTeste, toolStripSeparator1, btnProd, btnUser, btnAddress, btnMoveProd, toolStripButton4, btnConfig, toolStripSeparator2, btnUserInfo });
+            toolStripBtns.Items.AddRange(new ToolStripItem[] { lbLogoTeste, toolStripSeparator1, btnProd, btnUser, btnAddress, btnMoveProduct, btnReceiptProduct, btnConfig, toolStripSeparator2, btnUserInfo });
             toolStripBtns.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
             toolStripBtns.Location = new Point(0, 0);
             toolStripBtns.Name = "toolStripBtns";
@@ -202,25 +224,25 @@ namespace MyChest
             btnAddress.Text = "Endereços";
             btnAddress.Click += btnAddress_Click;
             // 
-            // btnMoveProd
+            // btnMoveProduct
             // 
-            btnMoveProd.Image = (Image)resources.GetObject("btnMoveProd.Image");
-            btnMoveProd.ImageScaling = ToolStripItemImageScaling.None;
-            btnMoveProd.ImageTransparentColor = Color.Magenta;
-            btnMoveProd.Name = "btnMoveProd";
-            btnMoveProd.Size = new Size(148, 36);
-            btnMoveProd.Text = "Movimentar";
-            btnMoveProd.Click += btnMoveProduct_Click;
+            btnMoveProduct.Image = (Image)resources.GetObject("btnMoveProduct.Image");
+            btnMoveProduct.ImageScaling = ToolStripItemImageScaling.None;
+            btnMoveProduct.ImageTransparentColor = Color.Magenta;
+            btnMoveProduct.Name = "btnMoveProduct";
+            btnMoveProduct.Size = new Size(148, 36);
+            btnMoveProduct.Text = "Movimentar";
+            btnMoveProduct.Click += btnMoveProduct_Click;
             // 
-            // toolStripButton4
+            // btnReceiptProduct
             // 
-            toolStripButton4.Image = (Image)resources.GetObject("toolStripButton4.Image");
-            toolStripButton4.ImageScaling = ToolStripItemImageScaling.None;
-            toolStripButton4.ImageTransparentColor = Color.Magenta;
-            toolStripButton4.Name = "toolStripButton4";
-            toolStripButton4.Size = new Size(148, 36);
-            toolStripButton4.Text = "Recebimento";
-            toolStripButton4.Click += btnReceiptProduct_Click;
+            btnReceiptProduct.Image = (Image)resources.GetObject("btnReceiptProduct.Image");
+            btnReceiptProduct.ImageScaling = ToolStripItemImageScaling.None;
+            btnReceiptProduct.ImageTransparentColor = Color.Magenta;
+            btnReceiptProduct.Name = "btnReceiptProduct";
+            btnReceiptProduct.Size = new Size(148, 36);
+            btnReceiptProduct.Text = "Recebimento";
+            btnReceiptProduct.Click += btnReceiptProduct_Click;
             // 
             // btnConfig
             // 
@@ -368,8 +390,8 @@ namespace MyChest
         private PictureBox picBoxSearcIcon;
         private ToolStripButton btnUserInfo;
         private ToolStripButton btnConfig;
-        private ToolStripButton toolStripButton4;
-        private ToolStripButton btnMoveProd;
+        private ToolStripButton btnReceiptProduct;
+        private ToolStripButton btnMoveProduct;
         private MaskedTextBox maskTextSearch;
     }
 }

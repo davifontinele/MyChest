@@ -235,7 +235,6 @@ namespace MyChest.Forms
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "ReceiptProductForm";
-            StartPosition = FormStartPosition.CenterScreen;
             Text = "Recebimento";
             Load += ReceiptProductForm_Load;
             ResumeLayout(false);
