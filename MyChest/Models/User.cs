@@ -7,23 +7,26 @@
         public string? Name { get; set; }
         public string? Password { get; set; }
         public string? Role { get; set; }
+        public List<Permissions> Permissions { get; set; }
         public User(string name, string password, string role)
         {
             Name = name;
             Password = password;
             Role = role;
         }
+        public User(string name, string password, List<Permissions> permissions)
+        {
+            Name = name;
+            Password = password;
+            Permissions = permissions;
+        }
 
-        /// <summary>
-        /// Construtor apenas para testes remover depois
-        /// </summary>
-        /// <param name="name">Nome do usuário</param>
-        /// <param name="password">Senha do usuário</param>
         public User(string name, string password)
         {
             Name = name;
             Password = password;
         }
+
         public User()
         {
             

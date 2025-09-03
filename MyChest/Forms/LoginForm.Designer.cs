@@ -32,9 +32,10 @@ namespace MyChest.Forms
 
             if (userDAO.VerifyLogin(txtBoxUser.Text, txtBoxPassword.Text))
             {
-                User userLoged = new User(txtBoxUser.Text,txtBoxPassword.Text, userDAO.GetByUserName(txtBoxUser.Text).Role);
+                var userPermissionsList = userDAO.GetUserPermissionsByUserName(txtBoxUser.Text);
+                User userLoged = new User(txtBoxUser.Text, txtBoxPassword.Text, userPermissionsList);
 
-                HomeForm newForm = new HomeForm(userLoged: userLoged);
+                HomeForm newForm = new HomeForm(userLoged);
                 this.Hide();
                 newForm.Show();
             }

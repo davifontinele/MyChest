@@ -27,7 +27,12 @@ namespace MyChest
             DataGridProductLoad();
         }
 
-        private void btnProd_Click(object sender, EventArgs e)
+        private void HomeForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnProduct_Click(object sender, EventArgs e)
         {
             DataGridProductLoad();
         }
@@ -68,12 +73,7 @@ namespace MyChest
             DataGridAddressLoad();
         }
 
-        private void HomeForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void btnMoveProd_Click(object sender, EventArgs e)
+        private void btnMoveProduct_Click(object sender, EventArgs e)
         {
             MoveProdForm moveProdForm = new MoveProdForm();
             moveProdForm.ShowDialog();
@@ -110,10 +110,10 @@ namespace MyChest
             }
         }
 
-        private void toolStripButton4_Click(object sender, EventArgs e)
+        private void btnReceiptProduct_Click(object sender, EventArgs e)
         {
             ReceiptProductForm newForm = new ReceiptProductForm();
-            newForm.Show();
+            newForm.ShowDialog();
 
             newForm.Owner = this;
         }

@@ -27,17 +27,17 @@ namespace MyChest
         /// <summary>
         /// Desativa e esconde funcionalidades que o nivel de acesso do usuário nao permite acessar
         /// </summary> 
-        // OBS: Mudar essa implementação. O sistema deve ter uma funcionalidade do usuário admin criar novas Roles
-        // Caso ele criar outra Role como que ela se aplicaria nesse metodo? Provavelmente teremos que mudar como essa
-        // funcionalidade funciona
         private void ValidadeRole()
         {
-            switch (_userLoged.Role)
+            //TODO: Implementar sistema de permissões
+            foreach (var permission in _userLoged.Permissions)
             {
-                case "Suporte":
-                    btnUser.Enabled = false;
-                    btnUser.Visible = false;
-                    break;
+                switch (permission)
+                {
+                    case Permissions.MoveProduct:
+                        
+                        break;
+                }
             }
         }
 
@@ -180,7 +180,7 @@ namespace MyChest
             btnProd.Name = "btnProd";
             btnProd.Size = new Size(148, 36);
             btnProd.Text = "Produtos";
-            btnProd.Click += btnProd_Click;
+            btnProd.Click += btnProduct_Click;
             // 
             // btnUser
             // 
@@ -210,7 +210,7 @@ namespace MyChest
             btnMoveProd.Name = "btnMoveProd";
             btnMoveProd.Size = new Size(148, 36);
             btnMoveProd.Text = "Movimentar";
-            btnMoveProd.Click += btnMoveProd_Click;
+            btnMoveProd.Click += btnMoveProduct_Click;
             // 
             // toolStripButton4
             // 
@@ -220,7 +220,7 @@ namespace MyChest
             toolStripButton4.Name = "toolStripButton4";
             toolStripButton4.Size = new Size(148, 36);
             toolStripButton4.Text = "Recebimento";
-            toolStripButton4.Click += toolStripButton4_Click;
+            toolStripButton4.Click += btnReceiptProduct_Click;
             // 
             // btnConfig
             // 

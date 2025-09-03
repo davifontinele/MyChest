@@ -215,6 +215,7 @@ namespace MyChest.Forms
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(622, 174);
             Controls.Add(checkBoxProductTags);
             Controls.Add(label1);
@@ -229,7 +230,7 @@ namespace MyChest.Forms
             Controls.Add(lbProductBrand);
             Controls.Add(lbProductId);
             Controls.Add(lbProductName);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimizeBox = false;

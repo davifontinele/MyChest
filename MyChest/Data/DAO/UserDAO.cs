@@ -3,11 +3,11 @@ using MyChest.Models;
 
 namespace MyChest.Data.DAO
 {
-    internal class UserDAO : IData<User>
+    internal class UserDAO : IData<Models.User>
     {
-        List<User> IData<User>.GetAllData()
+        List<Models.User> IData<Models.User>.GetAllData()
         {
-            List<User> users = new List<Models.User>();
+            List<Models.User> users = new List<Models.User>();
             try
             {
                 using (var connection = DbConnection.GetConnection())
@@ -42,9 +42,9 @@ namespace MyChest.Data.DAO
             }
         }
 
-        public User GetById(int id)
+        public Models.User GetById(int id)
         {
-            User user = new User();
+            Models.User user = new Models.User();
             try
             {
                 using (var connection = DbConnection.GetConnection())
@@ -118,9 +118,9 @@ namespace MyChest.Data.DAO
         /// </summary>
         /// <param name="userName">Nome utilziado como parâmetro para a pesquisa</param>
         /// <returns>Retorna um obj User</returns>
-        public User GetByUserName(string userName)
+        public Models.User GetByUserName(string userName)
         {
-            User user = new Models.User();
+            Models.User user = new Models.User();
             try
             {
                 using (var connection = DbConnection.GetConnection())
@@ -151,6 +151,42 @@ namespace MyChest.Data.DAO
             {
                 MessageBox.Show($"Erro ao verificar login: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return new Models.User();
+            }
+        }
+
+        public List<Permissions> GetUserPermissionsByUserName(string userName)
+        {
+            List<Permissions> userPermissions = new List<Permissions>();
+            try
+            {
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+
+                    string query = $"SELECT p.name AS permissao_nome " +
+                        $"FROM users u " +
+                        $"JOIN roles r ON u.Roles_idRoles = r.idRoles " +
+                        $"JOIN roles_has_permissions rp ON r.idRoles = rp.Roles_idRoles " +
+                        $"JOIN permissions p ON rp.Permissions_idPermissions = p.idPermissions " +
+                        $"WHERE u.name = '{userName}';";
+
+                    using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                userPermissions.Add(Enum.Parse<Permissions>(reader.GetString("permissao_nome")));
+                            }
+                        }
+                    }
+                }
+                return userPermissions;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao buscar permissões do usuário: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return new List<Permissions>();
             }
         }
     }
