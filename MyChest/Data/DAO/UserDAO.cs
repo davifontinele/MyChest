@@ -5,7 +5,7 @@ namespace MyChest.Data.DAO
 {
     internal class UserDAO : IData<Models.User>
     {
-        List<Models.User> IData<Models.User>.GetAllData()
+        public List<Models.User> GetAllData()
         {
             List<Models.User> users = new List<Models.User>();
             try
@@ -14,22 +14,45 @@ namespace MyChest.Data.DAO
                 {
                     connection.Open();
 
-                    string query = "SELECT users.name, users.password, roles.title " +
-                        "FROM users " +
-                        "INNER JOIN roles ON users.Roles_idRoles = roles.idRoles;";
+                    string query = "SELECT u.idUsers, u.name, u.password, p.name AS permission_title " +
+                                   "FROM users u " +
+                                   "LEFT JOIN users_has_permissions up ON u.idUsers = up.Users_idUsers " +
+                                   "LEFT JOIN permissions p ON up.Permissions_idPermissions = p.idPermissions " +
+                                   "ORDER BY u.idUsers;";
 
                     using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
                     {
                         using (var reader = command.ExecuteReader())
                         {
+                            Dictionary<int, Models.User> userMap = new Dictionary<int, Models.User>();
+
                             while (reader.Read())
                             {
-                                string name = reader.GetString("name");
-                                string password = reader.GetString("password");
-                                string role = reader.GetString("title");
-                                Models.User user = new Models.User(name, password, role);
-                                users.Add(user);
+                                int userId = reader.GetInt32("idUsers");
+
+                                if (!userMap.ContainsKey(userId))
+                                {
+                                    string name = reader.GetString("name");
+                                    string password = reader.GetString("password");
+                                    userMap[userId] = new Models.User
+                                    {
+                                        Name = name,
+                                        Password = password,
+                                        Permissions = new List<Permissions>()
+                                    };
+                                }
+
+                                if (!reader.IsDBNull(reader.GetOrdinal("permission_title")))
+                                {
+                                    string permissionName = reader.GetString("permission_title");
+
+                                    if (Enum.TryParse<Permissions>(permissionName, ignoreCase: true, out var permissionEnum))
+                                    {
+                                        userMap[userId].Permissions.Add(permissionEnum);
+                                    }
+                                }
                             }
+                            users = userMap.Values.ToList();
                         }
                     }
                 }
@@ -51,20 +74,33 @@ namespace MyChest.Data.DAO
                 {
                     connection.Open();
 
-                    string query = $"SELECT u.name, u.password, r.title AS role_nome " +
-                        $"FROM users u " +
-                        $"JOIN roles r ON u.Roles_idRoles = r.idRoles " +
-                        $"WHERE u.idUsers = '{id}';";
+                    string query = "SELECT u.name, u.password, p.idPermissions " +
+                                   "FROM users u " +
+                                   "JOIN users_has_permissions up ON u.idUsers = up.Users_idUsers " +
+                                   "JOIN permissions p ON up.Permissions_idPermissions = p.idPermissions " +
+                                   "WHERE u.idUsers = @id;";
 
                     using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
                     {
+                        command.Parameters.AddWithValue("@id", id);
+
                         using (var reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                user.Name = reader.GetString("name");
-                                user.Password = reader.GetString("password");
-                                user.Role = reader.GetString("role_nome");
+                                if (string.IsNullOrEmpty(user.Name))
+                                {
+                                    user.Name = reader.GetString("name");
+                                    user.Password = reader.GetString("password");
+                                }
+
+                                int permissionId = reader.GetInt32("idPermissions");
+
+                                if (Enum.IsDefined(typeof(Permissions), permissionId))
+                                {
+                                    var permissionEnum = (Permissions)permissionId;
+                                    user.Permissions.Add(permissionEnum);
+                                }
                             }
                         }
                     }
@@ -73,8 +109,83 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao verificar login: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar usuário: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return new Models.User();
+            }
+        }
+
+        public void InsertUser(User user)
+        {
+            try
+            {
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+                    string query = "INSERT INTO `users` (`name`, `password`) " +
+                        $"VALUES ('{user.Name}', '{user.Password}')";
+                    using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Erro ao cadastrar usuário: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void InsertUserPermissions(int userId, List<int> permissionId)
+        {
+            try
+            {
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+                    foreach (int item in permissionId)
+                    {
+                        string query = "INSERT INTO `users_has_permissions` (`Users_idUsers`, `Permissions_idPermissions`) " +
+                        $"VALUES ({userId}, {item})";
+                        using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
+                        {
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                }
+                MessageBox.Show("Permissões do usuário cadastradas com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Erro ao cadastrar permissões do usuário: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public int GetUserId(string userName)
+        {
+            try
+            {
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+                    string query = "SELECT idUsers " +
+                        "FROM users " +
+                        "WHERE name = @userName;";
+                    using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@userName", userName);
+                        var result = command.ExecuteScalar();
+                        if (result != null)
+                        {
+                            return Convert.ToInt32(result);
+                        }
+                    }
+                }
+                return 0;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Erro ao buscar ID do usuário: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
             }
         }
 
@@ -92,17 +203,17 @@ namespace MyChest.Data.DAO
                 {
                     connection.Open();
 
-                    string query = $"SELECT u.name, u.password, r.title AS role_nome " +
-                        $"FROM users u " +
-                        $"JOIN roles r ON u.Roles_idRoles = r.idRoles " +
-                        $"WHERE u.name = '{user}' " +
-                        $"AND u.password = '{password}';";
+                    string query = "SELECT COUNT(*) " +
+                                   "FROM users " +
+                                   "WHERE name = @user AND password = @password;";
 
                     using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
                     {
-                        {
-                            return command.ExecuteScalar() != null;
-                        }
+                        command.Parameters.AddWithValue("@user", user);
+                        command.Parameters.AddWithValue("@password", password);
+
+                        var result = Convert.ToInt32(command.ExecuteScalar());
+                        return result > 0;
                     }
                 }
             }
@@ -127,20 +238,33 @@ namespace MyChest.Data.DAO
                 {
                     connection.Open();
 
-                    string query = $"SELECT u.name, u.password, r.title AS role_nome " +
-                        $"FROM users u " +
-                        $"JOIN roles r ON u.Roles_idRoles = r.idRoles " +
-                        $"WHERE u.name = '{userName}';";
+                    string query = "SELECT u.name, u.password, p.idPermissions " +
+                                   "FROM users u " +
+                                   "JOIN users_has_permissions up ON u.idUsers = up.Users_idUsers " +
+                                   "JOIN permissions p ON up.Permissions_idPermissions = p.idPermissions " +
+                                   "WHERE u.name = @userName;";
 
                     using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
                     {
+                        command.Parameters.AddWithValue("@userName", userName);
+
                         using (var reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                user.Name = reader.GetString("name");
-                                user.Password = reader.GetString("password");
-                                user.Role = reader.GetString("role_nome");
+                                if (string.IsNullOrEmpty(user.Name))
+                                {
+                                    user.Name = reader.GetString("name");
+                                    user.Password = reader.GetString("password");
+                                }
+
+                                int permissionId = reader.GetInt32("idPermissions");
+
+                                if (Enum.IsDefined(typeof(Permissions), permissionId))
+                                {
+                                    var permissionEnum = (Permissions)permissionId;
+                                    user.Permissions.Add(permissionEnum);
+                                }
                             }
                         }
                     }
@@ -163,20 +287,26 @@ namespace MyChest.Data.DAO
                 {
                     connection.Open();
 
-                    string query = $"SELECT p.name AS permissao_nome " +
-                        $"FROM users u " +
-                        $"JOIN roles r ON u.Roles_idRoles = r.idRoles " +
-                        $"JOIN roles_has_permissions rp ON r.idRoles = rp.Roles_idRoles " +
-                        $"JOIN permissions p ON rp.Permissions_idPermissions = p.idPermissions " +
-                        $"WHERE u.name = '{userName}';";
+                    string query = "SELECT p.name AS permissao_nome " +
+                                   "FROM users u " +
+                                   "JOIN users_has_permissions up ON u.idUsers = up.Users_idUsers " +
+                                   "JOIN permissions p ON up.Permissions_idPermissions = p.idPermissions " +
+                                   "WHERE u.name = @userName;";
 
                     using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
                     {
+                        command.Parameters.AddWithValue("@userName", userName);
+
                         using (var reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                userPermissions.Add(Enum.Parse<Permissions>(reader.GetString("permissao_nome")));
+                                string nomePermissao = reader.GetString("permissao_nome");
+
+                                if (Enum.TryParse<Permissions>(nomePermissao, ignoreCase: true, out var permissaoEnum))
+                                {
+                                    userPermissions.Add(permissaoEnum);
+                                }
                             }
                         }
                     }
@@ -187,6 +317,68 @@ namespace MyChest.Data.DAO
             {
                 MessageBox.Show($"Erro ao buscar permissões do usuário: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return new List<Permissions>();
+            }
+        }
+
+        public Dictionary<int, Permissions> GetAllPermissions()
+        {
+            Dictionary<int, Permissions> allPermissions = new Dictionary<int, Permissions>();
+            try
+            {
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+
+                    string query = "SELECT permissions.name, permissions.idPermissions FROM `permissions`";
+
+                    using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string permission = reader.GetString("name");
+                                int permissionId = reader.GetInt32("idPermissions");
+                                if (Enum.TryParse<Permissions>(permission, ignoreCase: true, out var permissaoEnum))
+                                {
+                                    allPermissions.Add(permissionId, permissaoEnum);
+                                }
+                            }
+                        }
+                    }
+                }
+                return allPermissions;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao buscar permissões: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return new Dictionary<int, Permissions>();
+            }
+        }
+
+        public int GetPermissionId(string permissionName)
+        {
+            try
+            {
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+                    string query = $"SELECT idPermissions FROM permissions WHERE name = '{permissionName}';";
+                    using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
+                    {
+                        var result = command.ExecuteScalar();
+                        if (result != null)
+                        {
+                            return Convert.ToInt32(result);
+                        }
+                    }
+                }
+                return 0;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Erro ao buscar ID da permissão: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
             }
         }
     }

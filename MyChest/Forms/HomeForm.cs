@@ -151,11 +151,13 @@ namespace MyChest
         {
             if (dataGrid.Columns.Count == 3)
             {
-
+                AddUserForm AddUserForm = new AddUserForm();
+                AddUserForm.ShowDialog();
             }
             else if (dataGrid.Columns.Count == 5)
             {
-
+                AddAddressForm addAddressForm = new AddAddressForm();
+                addAddressForm.ShowDialog();
             }
         }
     }

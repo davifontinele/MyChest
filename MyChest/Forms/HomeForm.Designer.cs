@@ -33,15 +33,15 @@ namespace MyChest
             {
                 switch (permission)
                 {
-                    case Permissions.MoveProduct:
+                    case Permissions.MOVEPRODUCT:
                         btnMoveProduct.Enabled = true;
                         btnMoveProduct.Visible = true;
                         break;
-                    case Permissions.EditUser:
+                    case Permissions.EDITUSER:
                         btnUser.Enabled = true;
                         btnUser.Visible = true;
                         break;
-                    case Permissions.Admin:
+                    case Permissions.ADMIN:
                         btnMoveProduct.Enabled = true;
                         btnMoveProduct.Visible = true;
                         btnUser.Enabled = true;
@@ -90,7 +90,7 @@ namespace MyChest
         }
 
         /// <summary>
-        /// Preence o DataGridView com os dados dos usuários
+        /// Preenche o DataGridView com os dados dos usuários
         /// </summary>
         private void DataGridUserLoad()
         {
@@ -101,14 +101,22 @@ namespace MyChest
 
             dataGrid.Columns.Clear();
 
-            dataGrid.Columns.Add("nameCollum", "Nome");
-            dataGrid.Columns.Add("passwordCollum", "Senha");
-            dataGrid.Columns.Add("roleCollum", "Cargo");
+            dataGrid.Columns.Add("nameColumn", "Nome");
+            dataGrid.Columns.Add("passwordColumn", "Senha");
+            dataGrid.Columns.Add("permissionsColumn", "Permissões");
             UserDAO user = new UserDAO();
 
             foreach (var item in ((IData<User>)user).GetAllData())
             {
-                dataGrid.Rows.Add(item.Name, item.Password, item.Role);
+                string permissoesTexto = string.Join(", ", item.Permissions);
+                if (string.IsNullOrWhiteSpace(permissoesTexto))
+                {
+                    dataGrid.Rows.Add(item.Name, item.Password, "SEM PERMISSÕES");
+                }
+                else
+                {
+                    dataGrid.Rows.Add(item.Name, item.Password, permissoesTexto);
+                }
             }
         }
 

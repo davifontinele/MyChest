@@ -222,3 +222,4 @@ D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.ProductInfoForm.re
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.UserForm.resources
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.ReceiptProductForm.resources
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.AddAddressForm.resources
+D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.AddUserForm.resources
