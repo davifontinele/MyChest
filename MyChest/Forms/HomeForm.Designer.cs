@@ -33,14 +33,6 @@ namespace MyChest
             {
                 switch (permission)
                 {
-                    case Permissions.View:
-                        btnMoveProduct.Enabled = false;
-                        btnMoveProduct.Visible = false;
-                        btnUser.Enabled = false;
-                        btnUser.Visible = false;
-                        btnReceiptProduct.Enabled = false;
-                        btnReceiptProduct.Visible = false;
-                        break;
                     case Permissions.MoveProduct:
                         btnMoveProduct.Enabled = true;
                         btnMoveProduct.Visible = true;
@@ -48,6 +40,14 @@ namespace MyChest
                     case Permissions.EditUser:
                         btnUser.Enabled = true;
                         btnUser.Visible = true;
+                        break;
+                    case Permissions.Admin:
+                        btnMoveProduct.Enabled = true;
+                        btnMoveProduct.Visible = true;
+                        btnUser.Enabled = true;
+                        btnUser.Visible = true;
+                        btnReceiptProduct.Enabled = true;
+                        btnReceiptProduct.Visible = true;
                         break;
                 }
             }
@@ -69,6 +69,9 @@ namespace MyChest
         private void DataGridProductLoad()
         {
             maskTextSearch.Mask = "";
+
+            picBoxAdd.Visible = false;
+            picBoxAdd.Enabled = false;
 
             dataGrid.Columns.Clear();
 
@@ -93,6 +96,9 @@ namespace MyChest
         {
             maskTextSearch.Mask = "";
 
+            picBoxAdd.Visible = true;
+            picBoxAdd.Enabled = true;
+
             dataGrid.Columns.Clear();
 
             dataGrid.Columns.Add("nameCollum", "Nome");
@@ -112,6 +118,9 @@ namespace MyChest
         private void DataGridAddressLoad()
         {
             maskTextSearch.Mask = "000-000-00-000";
+
+            picBoxAdd.Visible = true;
+            picBoxAdd.Enabled = true;
 
             dataGrid.Columns.Clear();
 
@@ -154,11 +163,13 @@ namespace MyChest
             listBoxWarning = new ListBox();
             dataGrid = new DataGridView();
             panel1 = new Panel();
+            picBoxAdd = new PictureBox();
             maskTextSearch = new MaskedTextBox();
             picBoxSearcIcon = new PictureBox();
             toolStripBtns.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGrid).BeginInit();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picBoxAdd).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picBoxSearcIcon).BeginInit();
             SuspendLayout();
             // 
@@ -312,6 +323,7 @@ namespace MyChest
             // 
             panel1.AutoSize = true;
             panel1.BackColor = SystemColors.Info;
+            panel1.Controls.Add(picBoxAdd);
             panel1.Controls.Add(maskTextSearch);
             panel1.Controls.Add(picBoxSearcIcon);
             panel1.Dock = DockStyle.Top;
@@ -319,6 +331,19 @@ namespace MyChest
             panel1.Name = "panel1";
             panel1.Size = new Size(1114, 28);
             panel1.TabIndex = 4;
+            // 
+            // picBoxAdd
+            // 
+            picBoxAdd.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            picBoxAdd.BorderStyle = BorderStyle.Fixed3D;
+            picBoxAdd.Image = (Image)resources.GetObject("picBoxAdd.Image");
+            picBoxAdd.Location = new Point(1082, 0);
+            picBoxAdd.Name = "picBoxAdd";
+            picBoxAdd.Size = new Size(32, 25);
+            picBoxAdd.SizeMode = PictureBoxSizeMode.Zoom;
+            picBoxAdd.TabIndex = 6;
+            picBoxAdd.TabStop = false;
+            picBoxAdd.Click += picBoxAdd_Click;
             // 
             // maskTextSearch
             // 
@@ -330,7 +355,7 @@ namespace MyChest
             maskTextSearch.Location = new Point(25, 0);
             maskTextSearch.Mask = "000-000-00-000";
             maskTextSearch.Name = "maskTextSearch";
-            maskTextSearch.Size = new Size(1089, 25);
+            maskTextSearch.Size = new Size(1059, 25);
             maskTextSearch.TabIndex = 5;
             maskTextSearch.KeyDown += maskTextSearch_KeyDown;
             // 
@@ -368,6 +393,7 @@ namespace MyChest
             ((System.ComponentModel.ISupportInitialize)dataGrid).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)picBoxAdd).EndInit();
             ((System.ComponentModel.ISupportInitialize)picBoxSearcIcon).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -393,5 +419,6 @@ namespace MyChest
         private ToolStripButton btnReceiptProduct;
         private ToolStripButton btnMoveProduct;
         private MaskedTextBox maskTextSearch;
+        private PictureBox picBoxAdd;
     }
 }

@@ -81,6 +81,35 @@ namespace MyChest.Data.DAO
             }
         }
 
+        public void InsertNewAddress(Address address)
+        {
+            try
+            {
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+                    string query = "INSERT INTO `addresses` (`corridor`, `column`, `level`, `hall`, `Products_code`) " +
+                                   "VALUES (@corridor, @column, @level, @hall, @productCode)";
+                    using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@corridor", address.Corridor);
+                        command.Parameters.AddWithValue("@column", address.Column);
+                        command.Parameters.AddWithValue("@level", address.Level);
+                        command.Parameters.AddWithValue("@hall", address.Hall);
+                        command.Parameters.AddWithValue("@productCode",
+                            address.ProductCode.HasValue ? address.ProductCode.Value : DBNull.Value);
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+                MessageBox.Show("Endereço inserido com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Erro ao inserir novo endereço: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         /// <summary>
         /// Pesquisa todos os endereços que estão vazios, ou seja, onde o campo Products_code é nulo.
         /// </summary>

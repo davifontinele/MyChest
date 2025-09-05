@@ -87,6 +87,55 @@ namespace MyChest.Data.DAO
             }
         }
 
+        public List<Product> GetProductsWithoutAddress()
+        {
+            List<Product> products = new List<Product>();
+            try
+            {
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+                    string query = "SELECT " +
+                        "p.code, " +
+                        "p.name AS product_name, " +
+                        "p.brand, " +
+                        "p.amount, " +
+                        "p.validity, " +
+                        "m.name AS measure_name, " +
+                        "t.name AS tag_name " +
+                        "FROM products p " +
+                        "LEFT JOIN addresses a ON a.Products_code = p.code " +
+                        "LEFT JOIN measures m ON p.Measures_idMeasures = m.idMeasures " +
+                        "LEFT JOIN products_has_tags pt ON pt.Products_code = p.code " +
+                        "LEFT JOIN tags t ON pt.Tags_idTags = t.idTags " +
+                        "WHERE a.Products_code IS NULL;";
+                    using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int code = reader.GetInt32("code");
+                                string name = reader.GetString("product_name");
+                                string brand = reader.GetString("brand");
+                                int amount = reader.GetInt32("amount");
+                                string tagsId = reader.GetString("tag_name");
+                                string measure = reader.GetString("measure_name");
+                                Product product = new Product(code, name, brand, amount, tagsId, measure);
+                                products.Add(product);
+                            }
+                        }
+                    }
+                }
+                return products;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Erro ao buscar produtos sem endereço: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return products;
+            }
+        }
+
         public void InsertProduct(Product product)
         {
             try
@@ -133,7 +182,6 @@ namespace MyChest.Data.DAO
                         }
                     }
                 }
-                MessageBox.Show("Tags do produto inseridas com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception e)
             {

@@ -12,8 +12,6 @@ namespace MyChest
         {
             InitializeComponent();
             _userLoged = userLoged;
-            ConfigureUIByUserPermissions();
-
             btnUserInfo.Text = _userLoged.Name;
         }
 
@@ -24,7 +22,12 @@ namespace MyChest
 
         private void Home_Load(object sender, EventArgs e)
         {
-            HideAndDisableButtons();
+            // Apenas para teste, remover depois
+            if (_userLoged != null)
+            {
+                HideAndDisableButtons();
+                ConfigureUIByUserPermissions();
+            }
             DataGridProductLoad();
         }
 
@@ -141,6 +144,18 @@ namespace MyChest
                     addressDAO.GetAddressByNumbers(searchAddress.Corridor, searchAddress.Column, searchAddress.Level, searchAddress.Hall).Level,
                     addressDAO.GetAddressByNumbers(searchAddress.Corridor, searchAddress.Column, searchAddress.Level, searchAddress.Hall).Hall,
                     addressDAO.GetAddressByNumbers(searchAddress.Corridor, searchAddress.Column, searchAddress.Level, searchAddress.Hall).ProductCode);
+            }
+        }
+
+        private void picBoxAdd_Click(object sender, EventArgs e)
+        {
+            if (dataGrid.Columns.Count == 3)
+            {
+
+            }
+            else if (dataGrid.Columns.Count == 5)
+            {
+
             }
         }
     }
