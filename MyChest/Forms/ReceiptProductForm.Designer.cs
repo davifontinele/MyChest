@@ -166,6 +166,7 @@ namespace MyChest.Forms
             // 
             // comboBoxProductMeasure
             // 
+            comboBoxProductMeasure.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxProductMeasure.FormattingEnabled = true;
             comboBoxProductMeasure.Location = new Point(484, 6);
             comboBoxProductMeasure.Name = "comboBoxProductMeasure";

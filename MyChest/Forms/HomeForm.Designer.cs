@@ -171,6 +171,7 @@ namespace MyChest
             listBoxWarning = new ListBox();
             dataGrid = new DataGridView();
             panel1 = new Panel();
+            comboBoxSearch = new ComboBox();
             picBoxAdd = new PictureBox();
             maskTextSearch = new MaskedTextBox();
             picBoxSearcIcon = new PictureBox();
@@ -331,14 +332,30 @@ namespace MyChest
             // 
             panel1.AutoSize = true;
             panel1.BackColor = SystemColors.Info;
+            panel1.Controls.Add(comboBoxSearch);
             panel1.Controls.Add(picBoxAdd);
             panel1.Controls.Add(maskTextSearch);
             panel1.Controls.Add(picBoxSearcIcon);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(150, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1114, 28);
+            panel1.Size = new Size(1114, 29);
             panel1.TabIndex = 4;
+            // 
+            // comboBoxSearch
+            // 
+            comboBoxSearch.BackColor = SystemColors.Info;
+            comboBoxSearch.Cursor = Cursors.Hand;
+            comboBoxSearch.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxSearch.Enabled = false;
+            comboBoxSearch.FormattingEnabled = true;
+            comboBoxSearch.Items.AddRange(new object[] { "Código", "Nome", "Marca" });
+            comboBoxSearch.Location = new Point(25, 3);
+            comboBoxSearch.Name = "comboBoxSearch";
+            comboBoxSearch.Size = new Size(72, 23);
+            comboBoxSearch.TabIndex = 7;
+            comboBoxSearch.Visible = false;
+            comboBoxSearch.SelectedIndexChanged += comboBoxSearch_SelectedIndexChanged;
             // 
             // picBoxAdd
             // 
@@ -363,13 +380,14 @@ namespace MyChest
             maskTextSearch.Location = new Point(25, 0);
             maskTextSearch.Mask = "000-000-00-000";
             maskTextSearch.Name = "maskTextSearch";
-            maskTextSearch.Size = new Size(1059, 25);
+            maskTextSearch.Size = new Size(1056, 25);
             maskTextSearch.TabIndex = 5;
             maskTextSearch.KeyDown += maskTextSearch_KeyDown;
             // 
             // picBoxSearcIcon
             // 
             picBoxSearcIcon.BorderStyle = BorderStyle.Fixed3D;
+            picBoxSearcIcon.Cursor = Cursors.Hand;
             picBoxSearcIcon.Image = (Image)resources.GetObject("picBoxSearcIcon.Image");
             picBoxSearcIcon.Location = new Point(0, 0);
             picBoxSearcIcon.Name = "picBoxSearcIcon";
@@ -377,6 +395,7 @@ namespace MyChest
             picBoxSearcIcon.SizeMode = PictureBoxSizeMode.StretchImage;
             picBoxSearcIcon.TabIndex = 0;
             picBoxSearcIcon.TabStop = false;
+            picBoxSearcIcon.Click += picBoxSearcIcon_Click;
             // 
             // HomeForm
             // 
@@ -421,12 +440,13 @@ namespace MyChest
         private ListBox listBoxWarning;
         private DataGridView dataGrid;
         private Panel panel1;
-        private PictureBox picBoxSearcIcon;
         private ToolStripButton btnUserInfo;
         private ToolStripButton btnConfig;
         private ToolStripButton btnReceiptProduct;
         private ToolStripButton btnMoveProduct;
         private MaskedTextBox maskTextSearch;
         private PictureBox picBoxAdd;
+        private PictureBox picBoxSearcIcon;
+        private ComboBox comboBoxSearch;
     }
 }

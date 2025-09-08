@@ -1,5 +1,6 @@
 ﻿using MyChest.Interfaces;
 using MyChest.Models;
+using MySql.Data.MySqlClient;
 
 namespace MyChest.Data.DAO
 {
@@ -87,6 +88,110 @@ namespace MyChest.Data.DAO
             }
         }
 
+        public Product GetByBrand(string brand)
+        {
+            Product product = new Product();
+            try
+            {
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+                    string query = $"SELECT p.code, p.name, p.brand, p.amount, p.validity, m.name AS measure_name " +
+                        $"FROM products p " +
+                        $"LEFT JOIN measures m ON p.Measures_idMeasures = m.idMeasures " +
+                        $"WHERE p.brand LIKE '{brand}'";
+                    using (var command = new MySqlCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                product.Code = reader.GetInt32("code");
+                                product.Name = reader.GetString("name");
+                                product.Brand = reader.GetString("brand");
+                                product.Amount = reader.GetInt32("amount");
+                                product.Measure = reader.GetString("measure_name");
+                            }
+                        }
+                    }
+                }
+                return product;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao buscar produto: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return product;
+            }
+        }
+
+        public Product GetByName(string productName)
+        {
+            Product product = new Product();
+            try
+            {
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+                    string query = $"SELECT p.code, p.name, p.brand, p.amount, p.validity, m.name AS measure_name " +
+                        $"FROM products p " +
+                        $"LEFT JOIN measures m ON p.Measures_idMeasures = m.idMeasures " +
+                        $"WHERE p.name LIKE '{productName}'";
+                    using (var command = new MySqlCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                product.Code = reader.GetInt32("code");
+                                product.Name = reader.GetString("name");
+                                product.Brand = reader.GetString("brand");
+                                product.Amount = reader.GetInt32("amount");
+                                product.Measure = reader.GetString("measure_name");
+                            }
+                        }
+                    }
+                }
+                return product;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao buscar produto: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return product;
+            }
+        }
+
+        public List<Tag> GetProductTags(int productId)
+        {
+            List<Tag> tags = new List<Tag>();
+            try
+            {
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+                    string query = "SELECT t.idTags, t.name AS tag_name " +
+                        "FROM products_has_tags pt " +
+                        "JOIN tags t ON pt.Tags_idTags = t.idTags " +
+                        $"WHERE pt.Products_code = '{productId}';";
+                    using (var command = new MySqlCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                tags.Add(new Tag(reader.GetInt32("idTags"), reader.GetString("tag_name")));
+                            }
+                        }
+                    }
+                }
+                return tags;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao buscar tags do produto: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return tags;
+            }
+        }
+
         public List<Product> GetProductsWithoutAddress()
         {
             List<Product> products = new List<Product>();
@@ -133,88 +238,6 @@ namespace MyChest.Data.DAO
             {
                 MessageBox.Show($"Erro ao buscar produtos sem endereço: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return products;
-            }
-        }
-
-        public void InsertProduct(Product product)
-        {
-            try
-            {
-                using (var connection = DbConnection.GetConnection())
-                {
-                    connection.Open();
-                    string query = "INSERT INTO products (code, name, brand, amount, Measures_idMeasures) " +
-                        "VALUES (@code, @name, @brand, @amount, @measure);";
-                    using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@code", product.Code);
-                        command.Parameters.AddWithValue("@name", product.Name);
-                        command.Parameters.AddWithValue("@brand", product.Brand);
-                        command.Parameters.AddWithValue("@amount", product.Amount);
-                        command.Parameters.AddWithValue("@measure", product.Measure);
-                        command.ExecuteNonQuery();
-                    }
-                }
-                MessageBox.Show("Produto inserido com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show($"Erro ao inserir produto: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        public void InsertProductTags(int productCode, List<Tag> tagsIds)
-        {
-            try
-            {
-                using (var connection = DbConnection.GetConnection())
-                {
-                    connection.Open();
-                    foreach (Tag tag in tagsIds)
-                    {
-                        string query = "INSERT INTO `products_has_tags` (`Products_code`, `Tags_idTags`) " +
-                            "VALUES (@productCode, @tagId)";
-                        using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
-                        {
-                            command.Parameters.AddWithValue("@productCode", productCode);
-                            command.Parameters.AddWithValue("@tagId", tag.id);
-                            command.ExecuteNonQuery();
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show($"Erro ao inserir tags do produto: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        public Dictionary<int, string> GetMeasures()
-        {
-            Dictionary<int, string> measures = new Dictionary<int, string>();
-            try
-            {
-                using (var connection = DbConnection.GetConnection())
-                {
-                    connection.Open();
-                    string query = "SELECT idMeasures, name FROM measures;";
-                    using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
-                    {
-                        using (var reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                measures.Add(reader.GetInt32("idMeasures"), reader.GetString("name"));
-                            }
-                        }
-                    }
-                }
-                return measures;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erro ao buscar medidas: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return measures;
             }
         }
 
@@ -318,6 +341,88 @@ namespace MyChest.Data.DAO
                 MessageBox.Show($"Erro ao buscar ID do endereço: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return 0;
+        }
+
+        public void InsertProduct(Product product)
+        {
+            try
+            {
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+                    string query = "INSERT INTO products (code, name, brand, amount, Measures_idMeasures) " +
+                        "VALUES (@code, @name, @brand, @amount, @measure);";
+                    using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@code", product.Code);
+                        command.Parameters.AddWithValue("@name", product.Name);
+                        command.Parameters.AddWithValue("@brand", product.Brand);
+                        command.Parameters.AddWithValue("@amount", product.Amount);
+                        command.Parameters.AddWithValue("@measure", product.Measure);
+                        command.ExecuteNonQuery();
+                    }
+                }
+                MessageBox.Show("Produto inserido com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Erro ao inserir produto: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void InsertProductTags(int productCode, List<Tag> tagsIds)
+        {
+            try
+            {
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+                    foreach (Tag tag in tagsIds)
+                    {
+                        string query = "INSERT INTO `products_has_tags` (`Products_code`, `Tags_idTags`) " +
+                            "VALUES (@productCode, @tagId)";
+                        using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@productCode", productCode);
+                            command.Parameters.AddWithValue("@tagId", tag.id);
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Erro ao inserir tags do produto: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public Dictionary<int, string> GetMeasures()
+        {
+            Dictionary<int, string> measures = new Dictionary<int, string>();
+            try
+            {
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+                    string query = "SELECT idMeasures, name FROM measures;";
+                    using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                measures.Add(reader.GetInt32("idMeasures"), reader.GetString("name"));
+                            }
+                        }
+                    }
+                }
+                return measures;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao buscar medidas: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return measures;
+            }
         }
 
         /// <summary>

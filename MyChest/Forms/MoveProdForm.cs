@@ -39,6 +39,7 @@ namespace MyChest.Forms
             else
                 txtBoxLeftProduct.BackColor = Color.IndianRed;
         }
+
         private void txtBoxProdRight_TextChanged(object sender, EventArgs e)
         {
             if (

@@ -1,7 +1,9 @@
 using MyChest.Data.DAO;
 using MyChest.Extensions;
 using MyChest.Forms;
+using MyChest.Interfaces;
 using MyChest.Models;
+using System.Text.RegularExpressions;
 
 namespace MyChest
 {
@@ -31,6 +33,7 @@ namespace MyChest
                 ConfigureUIByUserPermissions();
             }
             DataGridProductLoad();
+            comboBoxSearch.SelectedIndex = 0;
         }
 
         private void HomeForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -147,6 +150,82 @@ namespace MyChest
                     addressDAO.GetAddressByNumbers(searchAddress.Corridor, searchAddress.Column, searchAddress.Level, searchAddress.Hall).Hall,
                     addressDAO.GetAddressByNumbers(searchAddress.Corridor, searchAddress.Column, searchAddress.Level, searchAddress.Hall).ProductCode);
             }
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Código
+                if (dataGrid.ColumnCount == 6 && comboBoxSearch.SelectedIndex == 0)
+                {
+                    ProductDAO productDAO = new ProductDAO();
+                    if (maskTextSearch.Text.TestConvertToInt32())
+                    {
+                        Product product = ((IData<Product>)productDAO).GetById(maskTextSearch.Text.ConvertToInt32());
+                        foreach (var item in productDAO.GetProductTags(product.Code))
+                        {
+                            product.Tags += item + " ";
+                        }
+
+                        dataGrid.Rows.Clear();
+                        dataGrid.Rows.Add(product.Code, product.Name, product.Brand, product.Amount, product.Tags, product.Measure);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Por favor, insira um número válido para a busca por código.");
+                    }
+                }
+                // Nome
+                else if (comboBoxSearch.SelectedIndex == 1)
+                {
+                    ProductDAO productDAO = new ProductDAO();
+                    if (Regex.IsMatch(maskTextSearch.Text, "^[a-zA-Z]+$"))
+                    {
+                        Product product = productDAO.GetByName(maskTextSearch.Text.ToUpper());
+                        foreach (var item in productDAO.GetProductTags(product.Code))
+                        {
+                            product.Tags += item + " ";
+                        }
+
+                        dataGrid.Rows.Clear();
+                        dataGrid.Rows.Add(product.Code, product.Name, product.Brand, product.Amount, product.Tags, product.Measure);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Por favor, insira apenas letras para a busca por nome.");
+                    }
+                }
+                // Marca
+                else if (comboBoxSearch.SelectedIndex == 2)
+                {
+                    ProductDAO productDAO = new ProductDAO();
+                    if (Regex.IsMatch(maskTextSearch.Text, "^[a-zA-Z]+$"))
+                    {
+                        Product product = productDAO.GetByBrand(maskTextSearch.Text);
+                        foreach (var item in productDAO.GetProductTags(product.Code))
+                        {
+                            product.Tags += item + " ";
+                        }
+
+                        dataGrid.Rows.Clear();
+                        dataGrid.Rows.Add(product.Code, product.Name, product.Brand, product.Amount, product.Tags, product.Measure);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Por favor, insira apenas letras para a busca por marca.");
+                    }
+                }
+            }
+        }
+
+        private void picBoxSearcIcon_Click(object sender, EventArgs e)
+        {
+            comboBoxSearch.Visible = true;
+            comboBoxSearch.Enabled = true;
+        }
+
+        private void comboBoxSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBoxSearch.Visible = false;
+            comboBoxSearch.Enabled = false;
         }
 
         private void picBoxAdd_Click(object sender, EventArgs e)
