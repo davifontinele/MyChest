@@ -1,6 +1,6 @@
 ﻿namespace MyChest.Forms
 {
-    partial class UserForm
+    partial class UserLogedForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserLogedForm));
             pictureBox1 = new PictureBox();
             lbUserName = new Label();
             btnLogoff = new Button();

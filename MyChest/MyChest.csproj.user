@@ -22,7 +22,7 @@
     <Compile Update="Forms\ReceiptProductForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\UserForm.cs">
+    <Compile Update="Forms\UserLogedForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\UserInfoForm.cs">

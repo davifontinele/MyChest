@@ -219,7 +219,7 @@ D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.LoginForm.resource
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.UserInfoForm.resources
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.MoveProdForm.resources
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.ProductInfoForm.resources
-D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.UserForm.resources
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.ReceiptProductForm.resources
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.AddAddressForm.resources
 D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.AddUserForm.resources
+D:\MyChestCode\MyChest\obj\Debug\net8.0-windows\MyChest.Forms.UserLogedForm.resources

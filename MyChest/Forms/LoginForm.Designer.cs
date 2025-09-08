@@ -34,18 +34,24 @@ namespace MyChest.Forms
             {
                 var userPermissionsList = userDAO.GetUserPermissionsByUserName(txtBoxUser.Text);
                 User userLoged = new User(txtBoxUser.Text, txtBoxPassword.Text, userPermissionsList);
+                ClearFields();
 
-                HomeForm newForm = new HomeForm(userLoged);
-                this.Hide();
+                HomeForm newForm = new HomeForm(userLoged, this);
+                Hide();
                 newForm.Show();
             }
             else
             {
                 MessageBox.Show("Usuário ou senha inválidos","Erro de login",MessageBoxButtons.OK,MessageBoxIcon.Warning);
-                txtBoxUser.Text = string.Empty;
-                txtBoxPassword.Text = string.Empty;
-                txtBoxUser.Focus();
+                ClearFields();
             }
+        }
+
+        private void ClearFields()
+        {
+            txtBoxUser.Text = string.Empty;
+            txtBoxPassword.Text = string.Empty;
+            txtBoxUser.Focus();
         }
 
         #region Windows Form Designer generated code
@@ -154,6 +160,7 @@ namespace MyChest.Forms
             StartPosition = FormStartPosition.CenterScreen;
             Text = "MyChest";
             FormClosed += LoginForm_FormClosed;
+            Load += LoginForm_Load;
             ((System.ComponentModel.ISupportInitialize)picBoxLogo).EndInit();
             ResumeLayout(false);
             PerformLayout();

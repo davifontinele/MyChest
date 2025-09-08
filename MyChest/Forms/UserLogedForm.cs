@@ -2,15 +2,17 @@
 
 namespace MyChest.Forms
 {
-    public partial class UserForm : Form
+    public partial class UserLogedForm : Form
     {
         private User? _userLoged;
-        public Form _formHome;
-        public UserForm(User userLoged, Form homeForm)
+        private Form _formHome;
+        private LoginForm loginForm;
+        public UserLogedForm(User userLoged, Form homeForm, LoginForm loginForm)
         {
             InitializeComponent();
             _formHome = homeForm;
             _userLoged = userLoged;
+            this.loginForm = loginForm;
 
             if (_userLoged == null)
             {
@@ -32,8 +34,7 @@ namespace MyChest.Forms
             {
                 _userLoged = null;
                 Close();
-                _formHome.Close();
-                LoginForm loginForm = new LoginForm();
+                _formHome.Hide();
                 loginForm.Show();
             }
         }

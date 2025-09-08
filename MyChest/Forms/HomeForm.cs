@@ -8,10 +8,12 @@ namespace MyChest
     public partial class HomeForm : Form
     {
         protected User? _userLoged;
-        public HomeForm(User userLoged)
+        protected LoginForm? _loginForm;
+        public HomeForm(User userLoged, LoginForm loginForm)
         {
             InitializeComponent();
             _userLoged = userLoged;
+            _loginForm = loginForm;
             btnUserInfo.Text = _userLoged.Name;
         }
 
@@ -33,7 +35,7 @@ namespace MyChest
 
         private void HomeForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+            _loginForm!.Close();
         }
 
         private void btnProduct_Click(object sender, EventArgs e)
@@ -41,9 +43,9 @@ namespace MyChest
             DataGridProductLoad();
         }
 
-        private void btnUserInfo_Click(object sender, EventArgs e)
+        private void btnUserLoged_Click(object sender, EventArgs e)
         {
-            UserForm userForm = new UserForm(_userLoged!, this);
+            UserLogedForm userForm = new UserLogedForm(_userLoged!, this, _loginForm);
             userForm.ShowDialog();
         }
 

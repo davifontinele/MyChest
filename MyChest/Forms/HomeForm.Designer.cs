@@ -286,7 +286,7 @@ namespace MyChest
             btnUserInfo.Size = new Size(148, 51);
             btnUserInfo.Text = "User";
             btnUserInfo.TextImageRelation = TextImageRelation.ImageAboveText;
-            btnUserInfo.Click += btnUserInfo_Click;
+            btnUserInfo.Click += btnUserLoged_Click;
             // 
             // contextMenuStrip1
             // 

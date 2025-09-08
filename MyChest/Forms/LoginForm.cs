@@ -6,6 +6,10 @@
         {
             InitializeComponent();
         }
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+            ClearFields();
+        }
 
         private void BtnLogar_Click(object sender, EventArgs e)
         {
