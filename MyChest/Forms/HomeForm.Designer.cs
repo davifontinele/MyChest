@@ -99,6 +99,9 @@ namespace MyChest
             picBoxAdd.Visible = true;
             picBoxAdd.Enabled = true;
 
+            comboBoxSearch.Visible = false;
+            comboBoxSearch.Enabled = false;
+
             dataGrid.Columns.Clear();
 
             dataGrid.Columns.Add("nameColumn", "Nome");
@@ -129,6 +132,9 @@ namespace MyChest
 
             picBoxAdd.Visible = true;
             picBoxAdd.Enabled = true;
+
+            comboBoxSearch.Visible = false;
+            comboBoxSearch.Enabled = false;
 
             dataGrid.Columns.Clear();
 
@@ -171,10 +177,10 @@ namespace MyChest
             listBoxWarning = new ListBox();
             dataGrid = new DataGridView();
             panel1 = new Panel();
-            comboBoxSearch = new ComboBox();
             picBoxAdd = new PictureBox();
             maskTextSearch = new MaskedTextBox();
             picBoxSearcIcon = new PictureBox();
+            comboBoxSearch = new ComboBox();
             toolStripBtns.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGrid).BeginInit();
             panel1.SuspendLayout();
@@ -342,21 +348,6 @@ namespace MyChest
             panel1.Size = new Size(1114, 29);
             panel1.TabIndex = 4;
             // 
-            // comboBoxSearch
-            // 
-            comboBoxSearch.BackColor = SystemColors.Info;
-            comboBoxSearch.Cursor = Cursors.Hand;
-            comboBoxSearch.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxSearch.Enabled = false;
-            comboBoxSearch.FormattingEnabled = true;
-            comboBoxSearch.Items.AddRange(new object[] { "Código", "Nome", "Marca" });
-            comboBoxSearch.Location = new Point(25, 3);
-            comboBoxSearch.Name = "comboBoxSearch";
-            comboBoxSearch.Size = new Size(72, 23);
-            comboBoxSearch.TabIndex = 7;
-            comboBoxSearch.Visible = false;
-            comboBoxSearch.SelectedIndexChanged += comboBoxSearch_SelectedIndexChanged;
-            // 
             // picBoxAdd
             // 
             picBoxAdd.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -396,6 +387,21 @@ namespace MyChest
             picBoxSearcIcon.TabIndex = 0;
             picBoxSearcIcon.TabStop = false;
             picBoxSearcIcon.Click += picBoxSearcIcon_Click;
+            // 
+            // comboBoxSearch
+            // 
+            comboBoxSearch.BackColor = SystemColors.Info;
+            comboBoxSearch.Cursor = Cursors.Hand;
+            comboBoxSearch.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxSearch.Enabled = false;
+            comboBoxSearch.FormattingEnabled = true;
+            comboBoxSearch.Items.AddRange(new object[] { "Código", "Nome", "Marca", "Tags", "Medida" });
+            comboBoxSearch.Location = new Point(25, 3);
+            comboBoxSearch.Name = "comboBoxSearch";
+            comboBoxSearch.Size = new Size(72, 23);
+            comboBoxSearch.TabIndex = 7;
+            comboBoxSearch.Visible = false;
+            comboBoxSearch.SelectedIndexChanged += comboBoxSearch_SelectedIndexChanged;
             // 
             // HomeForm
             // 

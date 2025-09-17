@@ -177,7 +177,7 @@ namespace MyChest
                 else if (comboBoxSearch.SelectedIndex == 1)
                 {
                     ProductDAO productDAO = new ProductDAO();
-                    if (Regex.IsMatch(maskTextSearch.Text, "^[a-zA-Z]+$"))
+                    if (Regex.IsMatch(maskTextSearch.Text, "^[a-zA-Z ]+$"))
                     {
                         Product product = productDAO.GetByName(maskTextSearch.Text.ToUpper());
                         foreach (var item in productDAO.GetProductTags(product.Code))
@@ -197,7 +197,7 @@ namespace MyChest
                 else if (comboBoxSearch.SelectedIndex == 2)
                 {
                     ProductDAO productDAO = new ProductDAO();
-                    if (Regex.IsMatch(maskTextSearch.Text, "^[a-zA-Z]+$"))
+                    if (Regex.IsMatch(maskTextSearch.Text, "^[a-zA-Z ]+$"))
                     {
                         Product product = productDAO.GetByBrand(maskTextSearch.Text);
                         foreach (var item in productDAO.GetProductTags(product.Code))
@@ -213,13 +213,47 @@ namespace MyChest
                         MessageBox.Show("Por favor, insira apenas letras para a busca por marca.");
                     }
                 }
+                // Tags
+                else if (comboBoxSearch.SelectedIndex == 3)
+                {
+                    ProductDAO productDAO = new ProductDAO();
+                    if (Regex.IsMatch(maskTextSearch.Text, "^[a-zA-Z]+$"))
+                    {
+                        dataGrid.Rows.Clear();
+                        foreach (var item in productDAO.GetProductByTag(maskTextSearch.Text.ToUpper().Trim()))
+                        {
+                            dataGrid.Rows.Add(item.Code, item.Name, item.Brand, item.Amount, item.Tags, item.Measure);
+                        }
+                    }
+                }
+                // Medida
+                else if (comboBoxSearch.SelectedIndex == 4)
+                {
+                    ProductDAO productDAO = new ProductDAO();
+                    if (Regex.IsMatch(maskTextSearch.Text, "^[a-zA-Z]+$"))
+                    {
+                        dataGrid.Rows.Clear();
+                        foreach (var item in productDAO.GetProductByMeasureType(maskTextSearch.Text.ToUpper().Trim()))
+                        {
+                            dataGrid.Rows.Add(item.Code, item.Name, item.Brand, item.Amount, item.Tags, item.Measure);
+                        }
+                    }
+                }
             }
         }
 
         private void picBoxSearcIcon_Click(object sender, EventArgs e)
         {
-            comboBoxSearch.Visible = true;
-            comboBoxSearch.Enabled = true;
+            if (comboBoxSearch.Visible || comboBoxSearch.Enabled)
+            {
+                comboBoxSearch.Visible = false;
+                comboBoxSearch.Enabled = false;
+            }
+            else if (dataGrid.ColumnCount == 6)
+            {
+                comboBoxSearch.Visible = true;
+                comboBoxSearch.Enabled = true;
+            }
         }
 
         private void comboBoxSearch_SelectedIndexChanged(object sender, EventArgs e)

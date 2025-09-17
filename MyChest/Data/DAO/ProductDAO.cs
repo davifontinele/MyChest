@@ -270,6 +270,104 @@ namespace MyChest.Data.DAO
             }
         }
 
+        public List<Product> GetProductByTag(string tag)
+        {
+            List<Product> products = new List<Product>();
+            try
+            {
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+                    string query = "SELECT " +
+                        "p.code, " +
+                        "p.name, " +
+                        "p.brand, " +
+                        "p.amount, " +
+                        "p.validity, " +
+                        "t.name AS tag " +
+                        "FROM " +
+                        "products p " +
+                        "JOIN " +
+                        "products_has_tags pt ON p.code = pt.Products_code " +
+                        "JOIN " +
+                        "tags t ON pt.Tags_idTags = t.idTags " +
+                        "WHERE " +
+                        $"t.name = '{tag}';";
+                    using (var command = new MySqlCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                products.Add(new Product
+                                {
+                                    Code = reader.GetInt32("code"),
+                                    Name = reader.GetString("name"),
+                                    Brand = reader.GetString("brand"),
+                                    Amount = reader.GetInt32("amount"),
+                                    Tags = reader.GetString("tag")
+                                });
+                            }
+                        }
+                    }
+                }
+                return products;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Erro ao buscar produtos pela tag especificada: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return products;
+        }
+
+        public List<Product> GetProductByMeasureType(string measure)
+        {
+            List<Product> products = new List<Product>();
+            try
+            {
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+                    string query = "SELECT " +
+                        "p.code, " +
+                        "p.name, " +
+                        "p.brand, " +
+                        "p.amount, " +
+                        "p.validity, " +
+                        "m.name AS medida " +
+                        "FROM " +
+                        "products p " +
+                        "JOIN " +
+                        "measures m ON p.Measures_idMeasures = m.idMeasures " +
+                        "WHERE " +
+                        $"m.name = '{measure}';";
+                    using (var command = new MySqlCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                products.Add(new Product
+                                {
+                                    Code = reader.GetInt32("code"),
+                                    Name = reader.GetString("name"),
+                                    Brand = reader.GetString("brand"),
+                                    Amount = reader.GetInt32("amount"),
+                                    Measure = reader.GetString("medida")
+                                });
+                            }
+                        }
+                    }
+                }
+                return products;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Erro ao buscar produtos pela medida especificada: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return products;
+            }
+        }
+
         /// <summary>
         /// Pesquisa o endereço usando o código do produto como parâmetro.
         /// </summary>
