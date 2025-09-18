@@ -232,7 +232,7 @@ namespace MyChest.Data.DAO
         /// <returns>Retorna um obj User</returns>
         public Models.User GetByUserName(string userName)
         {
-            Models.User user = new Models.User();
+            Models.User user = new Models.User { Permissions = new List<Permissions>() };
             try
             {
                 using (var connection = DbConnection.GetConnection())

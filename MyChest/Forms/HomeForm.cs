@@ -1,3 +1,4 @@
+using Microsoft.VisualBasic.ApplicationServices;
 using MyChest.Data.DAO;
 using MyChest.Extensions;
 using MyChest.Forms;
@@ -10,9 +11,9 @@ namespace MyChest
 {
     public partial class HomeForm : Form
     {
-        protected User? _userLoged;
+        protected Models.User? _userLoged;
         protected LoginForm? _loginForm;
-        public HomeForm(User userLoged, LoginForm loginForm)
+        public HomeForm(Models.User userLoged, LoginForm loginForm)
         {
             InitializeComponent();
             _userLoged = userLoged;
@@ -49,7 +50,7 @@ namespace MyChest
 
         private void btnUserLoged_Click(object sender, EventArgs e)
         {
-            UserLogedForm userForm = new UserLogedForm(_userLoged!, this, _loginForm);
+            UserLogedForm userForm = new UserLogedForm(_userLoged!, this, _loginForm!);
             userForm.ShowDialog();
         }
 
@@ -121,7 +122,7 @@ namespace MyChest
             else if (dataGrid.SelectedRows.Count == 1 && dataGrid.Columns.Count == 3)
             {
                 DataGridViewRow selectedRow = dataGrid.SelectedRows[0];
-                User selectedUser = new User(selectedRow.Cells[0].Value.ToString()!, selectedRow.Cells[1].Value.ToString()!);
+                Models.User selectedUser = new Models.User(selectedRow.Cells[0].Value.ToString()!, selectedRow.Cells[1].Value.ToString()!);
                 UserInfoForm newUserInfoForm = new UserInfoForm(selectedUser);
                 newUserInfoForm.Show();
 
@@ -248,6 +249,24 @@ namespace MyChest
                             dataGrid.Rows.Add(item.Code, item.Name, item.Brand, item.Amount, item.Tags, item.Measure);
                         }
                     }
+                }
+            }
+
+            if (e.KeyCode == Keys.Enter && dataGrid.Columns.Count == 3)
+            {
+                UserDAO userDAO = new UserDAO();
+
+                Models.User user = userDAO.GetByUserName(maskTextSearch.Text);
+                dataGrid.Rows.Clear();
+
+                string permissoesTexto = string.Join(", ", user.Permissions);
+                if (string.IsNullOrWhiteSpace(permissoesTexto))
+                {
+                    dataGrid.Rows.Add(user.Name, user.Password, "SEM PERMISSÕES");
+                }
+                else
+                {
+                    dataGrid.Rows.Add(user.Name, user.Password, permissoesTexto);
                 }
             }
         }
