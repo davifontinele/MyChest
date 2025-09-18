@@ -4,6 +4,7 @@ using MyChest.Forms;
 using MyChest.Interfaces;
 using MyChest.Models;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace MyChest
 {
@@ -116,6 +117,15 @@ namespace MyChest
                 newForm.Show();
 
                 newForm.Owner = this;
+            }
+            else if (dataGrid.SelectedRows.Count == 1 && dataGrid.Columns.Count == 3)
+            {
+                DataGridViewRow selectedRow = dataGrid.SelectedRows[0];
+                User selectedUser = new User(selectedRow.Cells[0].Value.ToString()!, selectedRow.Cells[1].Value.ToString()!);
+                UserInfoForm newUserInfoForm = new UserInfoForm(selectedUser);
+                newUserInfoForm.Show();
+
+                newUserInfoForm.Owner = this;
             }
         }
 
@@ -273,6 +283,19 @@ namespace MyChest
             {
                 AddAddressForm addAddressForm = new AddAddressForm();
                 addAddressForm.ShowDialog();
+            }
+        }
+
+        private void dataGrid_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && dataGrid.ColumnCount == 3)
+            {
+                var hit = dataGrid.HitTest(e.X, e.Y);
+                if (hit.RowIndex >= 0)
+                {
+                    dataGrid.ClearSelection();
+                    dataGrid.Rows[hit.RowIndex].Selected = true;
+                }
             }
         }
     }

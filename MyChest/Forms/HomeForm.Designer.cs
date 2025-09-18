@@ -169,18 +169,16 @@ namespace MyChest
             btnAddress = new ToolStripButton();
             btnMoveProduct = new ToolStripButton();
             btnReceiptProduct = new ToolStripButton();
-            btnConfig = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
             btnUserInfo = new ToolStripButton();
             colorDialog1 = new ColorDialog();
-            contextMenuStrip1 = new ContextMenuStrip(components);
             listBoxWarning = new ListBox();
             dataGrid = new DataGridView();
             panel1 = new Panel();
+            comboBoxSearch = new ComboBox();
             picBoxAdd = new PictureBox();
             maskTextSearch = new MaskedTextBox();
             picBoxSearcIcon = new PictureBox();
-            comboBoxSearch = new ComboBox();
             toolStripBtns.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGrid).BeginInit();
             panel1.SuspendLayout();
@@ -196,7 +194,7 @@ namespace MyChest
             toolStripBtns.CanOverflow = false;
             toolStripBtns.Dock = DockStyle.Left;
             toolStripBtns.GripStyle = ToolStripGripStyle.Hidden;
-            toolStripBtns.Items.AddRange(new ToolStripItem[] { lbLogoTeste, toolStripSeparator1, btnProd, btnUser, btnAddress, btnMoveProduct, btnReceiptProduct, btnConfig, toolStripSeparator2, btnUserInfo });
+            toolStripBtns.Items.AddRange(new ToolStripItem[] { lbLogoTeste, toolStripSeparator1, btnProd, btnUser, btnAddress, btnMoveProduct, btnReceiptProduct, toolStripSeparator2, btnUserInfo });
             toolStripBtns.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
             toolStripBtns.Location = new Point(0, 0);
             toolStripBtns.Name = "toolStripBtns";
@@ -270,15 +268,6 @@ namespace MyChest
             btnReceiptProduct.Text = "Recebimento";
             btnReceiptProduct.Click += btnReceiptProduct_Click;
             // 
-            // btnConfig
-            // 
-            btnConfig.Image = (Image)resources.GetObject("btnConfig.Image");
-            btnConfig.ImageScaling = ToolStripItemImageScaling.None;
-            btnConfig.ImageTransparentColor = Color.Magenta;
-            btnConfig.Name = "btnConfig";
-            btnConfig.Size = new Size(148, 36);
-            btnConfig.Text = "Configurações";
-            // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
@@ -294,11 +283,6 @@ namespace MyChest
             btnUserInfo.Text = "User";
             btnUserInfo.TextImageRelation = TextImageRelation.ImageAboveText;
             btnUserInfo.Click += btnUserLoged_Click;
-            // 
-            // contextMenuStrip1
-            // 
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(61, 4);
             // 
             // listBoxWarning
             // 
@@ -333,6 +317,7 @@ namespace MyChest
             dataGrid.Size = new Size(1114, 446);
             dataGrid.TabIndex = 2;
             dataGrid.CellDoubleClick += dataGrid_CellDoubleClick;
+            dataGrid.MouseDown += dataGrid_MouseDown;
             // 
             // panel1
             // 
@@ -347,6 +332,21 @@ namespace MyChest
             panel1.Name = "panel1";
             panel1.Size = new Size(1114, 29);
             panel1.TabIndex = 4;
+            // 
+            // comboBoxSearch
+            // 
+            comboBoxSearch.BackColor = SystemColors.Info;
+            comboBoxSearch.Cursor = Cursors.Hand;
+            comboBoxSearch.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxSearch.Enabled = false;
+            comboBoxSearch.FormattingEnabled = true;
+            comboBoxSearch.Items.AddRange(new object[] { "Código", "Nome", "Marca", "Tags", "Medida" });
+            comboBoxSearch.Location = new Point(25, 3);
+            comboBoxSearch.Name = "comboBoxSearch";
+            comboBoxSearch.Size = new Size(72, 23);
+            comboBoxSearch.TabIndex = 7;
+            comboBoxSearch.Visible = false;
+            comboBoxSearch.SelectedIndexChanged += comboBoxSearch_SelectedIndexChanged;
             // 
             // picBoxAdd
             // 
@@ -388,21 +388,6 @@ namespace MyChest
             picBoxSearcIcon.TabStop = false;
             picBoxSearcIcon.Click += picBoxSearcIcon_Click;
             // 
-            // comboBoxSearch
-            // 
-            comboBoxSearch.BackColor = SystemColors.Info;
-            comboBoxSearch.Cursor = Cursors.Hand;
-            comboBoxSearch.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxSearch.Enabled = false;
-            comboBoxSearch.FormattingEnabled = true;
-            comboBoxSearch.Items.AddRange(new object[] { "Código", "Nome", "Marca", "Tags", "Medida" });
-            comboBoxSearch.Location = new Point(25, 3);
-            comboBoxSearch.Name = "comboBoxSearch";
-            comboBoxSearch.Size = new Size(72, 23);
-            comboBoxSearch.TabIndex = 7;
-            comboBoxSearch.Visible = false;
-            comboBoxSearch.SelectedIndexChanged += comboBoxSearch_SelectedIndexChanged;
-            // 
             // HomeForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -442,12 +427,10 @@ namespace MyChest
         private ToolStripSeparator toolStripSeparator1;
         private ColorDialog colorDialog1;
         private ToolStripSeparator toolStripSeparator2;
-        private ContextMenuStrip contextMenuStrip1;
         private ListBox listBoxWarning;
         private DataGridView dataGrid;
         private Panel panel1;
         private ToolStripButton btnUserInfo;
-        private ToolStripButton btnConfig;
         private ToolStripButton btnReceiptProduct;
         private ToolStripButton btnMoveProduct;
         private MaskedTextBox maskTextSearch;

@@ -1,6 +1,5 @@
 using MyChest.Forms;
 
-
 namespace MyChest
 {
     internal static class Program

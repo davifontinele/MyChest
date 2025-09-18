@@ -20,6 +20,18 @@
             base.Dispose(disposing);
         }
 
+        private bool UserModified()
+        {
+            if (_originalLogin != txtBoxUserLogin.Text || _originalPassword != txtBoxUserPassword.Text)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -30,11 +42,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserInfoForm));
             lbUserLogin = new Label();
-            lbUserLoginInfo = new Label();
             lbUserPassword = new Label();
-            lbUserPasswordInfo = new Label();
-            btnChangePassword = new Button();
-            btnChangeLogin = new Button();
+            btnDeleteUser = new Button();
+            btnConfirm = new Button();
+            txtBoxUserLogin = new TextBox();
+            txtBoxUserPassword = new TextBox();
             SuspendLayout();
             // 
             // lbUserLogin
@@ -47,16 +59,6 @@
             lbUserLogin.TabIndex = 5;
             lbUserLogin.Text = "Login";
             // 
-            // lbUserLoginInfo
-            // 
-            lbUserLoginInfo.AutoSize = true;
-            lbUserLoginInfo.BorderStyle = BorderStyle.Fixed3D;
-            lbUserLoginInfo.Location = new Point(57, 9);
-            lbUserLoginInfo.Name = "lbUserLoginInfo";
-            lbUserLoginInfo.Size = new Size(92, 17);
-            lbUserLoginInfo.TabIndex = 12;
-            lbUserLoginInfo.Text = "\"Login do User\"";
-            // 
             // lbUserPassword
             // 
             lbUserPassword.AutoSize = true;
@@ -67,46 +69,58 @@
             lbUserPassword.TabIndex = 14;
             lbUserPassword.Text = "Senha";
             // 
-            // lbUserPasswordInfo
+            // btnDeleteUser
             // 
-            lbUserPasswordInfo.AutoSize = true;
-            lbUserPasswordInfo.BorderStyle = BorderStyle.Fixed3D;
-            lbUserPasswordInfo.Location = new Point(59, 43);
-            lbUserPasswordInfo.Name = "lbUserPasswordInfo";
-            lbUserPasswordInfo.Size = new Size(92, 17);
-            lbUserPasswordInfo.TabIndex = 15;
-            lbUserPasswordInfo.Text = "\"Login do User\"";
+            btnDeleteUser.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnDeleteUser.Location = new Point(99, 127);
+            btnDeleteUser.Name = "btnDeleteUser";
+            btnDeleteUser.Size = new Size(75, 23);
+            btnDeleteUser.TabIndex = 18;
+            btnDeleteUser.Text = "Deletar";
+            btnDeleteUser.UseVisualStyleBackColor = true;
+            btnDeleteUser.Click += btnDeleteUser_Click;
             // 
-            // btnChangePassword
+            // btnConfirm
             // 
-            btnChangePassword.Location = new Point(12, 151);
-            btnChangePassword.Name = "btnChangePassword";
-            btnChangePassword.Size = new Size(89, 23);
-            btnChangePassword.TabIndex = 16;
-            btnChangePassword.Text = "Mudar senha";
-            btnChangePassword.UseVisualStyleBackColor = true;
+            btnConfirm.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnConfirm.Location = new Point(180, 127);
+            btnConfirm.Name = "btnConfirm";
+            btnConfirm.Size = new Size(75, 23);
+            btnConfirm.TabIndex = 19;
+            btnConfirm.Text = "Confirmar";
+            btnConfirm.UseVisualStyleBackColor = true;
+            btnConfirm.Click += btnConfirm_Click;
             // 
-            // btnChangeLogin
+            // txtBoxUserLogin
             // 
-            btnChangeLogin.Location = new Point(115, 151);
-            btnChangeLogin.Name = "btnChangeLogin";
-            btnChangeLogin.Size = new Size(82, 23);
-            btnChangeLogin.TabIndex = 17;
-            btnChangeLogin.Text = "Mudar login";
-            btnChangeLogin.UseVisualStyleBackColor = true;
+            txtBoxUserLogin.Location = new Point(59, 6);
+            txtBoxUserLogin.Name = "txtBoxUserLogin";
+            txtBoxUserLogin.Size = new Size(100, 23);
+            txtBoxUserLogin.TabIndex = 20;
+            txtBoxUserLogin.Text = "\"Login do User\"";
+            // 
+            // txtBoxUserPassword
+            // 
+            txtBoxUserPassword.Location = new Point(59, 40);
+            txtBoxUserPassword.Name = "txtBoxUserPassword";
+            txtBoxUserPassword.Size = new Size(100, 23);
+            txtBoxUserPassword.TabIndex = 21;
+            txtBoxUserPassword.Text = "\"Login do User\"";
             // 
             // UserInfoForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(209, 186);
-            Controls.Add(btnChangeLogin);
-            Controls.Add(btnChangePassword);
-            Controls.Add(lbUserPasswordInfo);
+            ClientSize = new Size(267, 162);
+            Controls.Add(txtBoxUserPassword);
+            Controls.Add(txtBoxUserLogin);
+            Controls.Add(btnConfirm);
+            Controls.Add(btnDeleteUser);
             Controls.Add(lbUserPassword);
-            Controls.Add(lbUserLoginInfo);
             Controls.Add(lbUserLogin);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "UserInfoForm";
             Text = "Nome do usuário";
             ResumeLayout(false);
@@ -116,10 +130,10 @@
         #endregion
 
         private Label lbUserLogin;
-        private Label lbUserLoginInfo;
         private Label lbUserPassword;
-        private Label lbUserPasswordInfo;
-        private Button btnChangePassword;
-        private Button btnChangeLogin;
+        private Button btnDeleteUser;
+        private Button btnConfirm;
+        private TextBox txtBoxUserLogin;
+        private TextBox txtBoxUserPassword;
     }
 }

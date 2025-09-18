@@ -1,5 +1,7 @@
 ﻿using MyChest.Interfaces;
 using MyChest.Models;
+using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Asn1.BC;
 
 namespace MyChest.Data.DAO
 {
@@ -152,7 +154,6 @@ namespace MyChest.Data.DAO
                         }
                     }
                 }
-                MessageBox.Show("Permissões do usuário cadastradas com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception e)
             {
@@ -379,6 +380,52 @@ namespace MyChest.Data.DAO
             {
                 MessageBox.Show($"Erro ao buscar ID da permissão: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return 0;
+            }
+        }
+
+        public void UpdateUser(int userId, string updatedLogin, string updatedPassword)
+        {
+            try
+            {
+                using (var connnection = DbConnection.GetConnection())
+                {
+                    connnection.Open();
+
+                    UserDAO userDAO = new UserDAO();
+                    string query = "UPDATE `users` " +
+                        $"SET `name` = '{updatedLogin}', " +
+                        $"`password` = '{updatedPassword}' " +
+                        $"WHERE `users`.`idUsers` = {userId}";
+                    using (var command = new MySqlCommand(query, connnection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Erro ao atualizar usuário: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void DeleteUser(int userId)
+        {
+            try
+            {
+                using (var connection = DbConnection.GetConnection())
+                {
+                    connection.Open();
+                    string query = $"DELETE FROM users_has_permissions WHERE Users_idUsers = {userId};" +
+                        $"DELETE FROM users WHERE idUsers = {userId};";
+                    using (var command = new MySqlCommand(query, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Erro ao deletar usuário: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
