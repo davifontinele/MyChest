@@ -4,11 +4,11 @@ namespace MyChest.Forms
 {
     public partial class ProductInfoForm : Form
     {
-        private Product Product { get; set; }
-        public ProductInfoForm(Product _prod)
+        private Product _selectedProduct { get; set; }
+        public ProductInfoForm(Product _selectedProduct)
         {
             InitializeComponent();
-            Product = _prod;
+            this._selectedProduct = _selectedProduct;
             DataGridLoad();
             LoadLabelsText();
         }

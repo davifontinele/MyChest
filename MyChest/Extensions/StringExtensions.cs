@@ -32,5 +32,13 @@
             }
             return false;
         }
+        public static bool TestConvertToDateOnly(this string date)
+        {
+            if (DateOnly.TryParse(date, out var s))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -28,7 +28,8 @@ namespace MyChest.Forms
                     lbLeftProductAmount,
                     lbLeftProductBrand,
                     lbLeftProductCode,
-                    lbLeftProductMeasure
+                    lbLeftProductMeasure,
+                    lbLeftProductValidity
                 };
 
                 if (!TestLabelsContainsValidValues(labels))

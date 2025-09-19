@@ -1,6 +1,7 @@
 ﻿using MyChest.Interfaces;
 using MyChest.Models;
 using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace MyChest.Data.DAO
 {
@@ -15,9 +16,18 @@ namespace MyChest.Data.DAO
                 {
                     connection.Open();
 
-                    string query = $"SELECT p.code,p.name,p.brand,p.amount,m.name AS nome_medida " +
+                    string query = $"SELECT " +
+                        $"p.code, " +
+                        $"p.name, " +
+                        $"p.brand, " +
+                        $"p.validity, " +
+                        $"p.amount, " +
+                        $"t.name AS tag_name, " +
+                        $"m.name AS nome_medida " +
                         $"FROM products p " +
                         $"LEFT JOIN measures m ON p.Measures_idMeasures = m.idMeasures " +
+                        $"LEFT JOIN products_has_tags pt ON pt.Products_code = p.code " +
+                        $"LEFT JOIN tags t ON t.idTags = pt.Tags_idTags " +
                         $"WHERE p.code = {id};";
 
                     using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
@@ -31,6 +41,8 @@ namespace MyChest.Data.DAO
                                 product.Brand = reader.GetString("brand");
                                 product.Amount = reader.GetInt32("amount");
                                 product.Measure = reader.GetString("nome_medida");
+                                product.Tags = reader.IsDBNull(reader.GetOrdinal("tag_name")) ? null : reader.GetString("tag_name");
+                                product.Validity = reader.IsDBNull(reader.GetOrdinal("validity")) ? null : DateOnly.FromDateTime(reader.GetDateTime("validity"));
                             }
                         }
                     }
@@ -53,7 +65,13 @@ namespace MyChest.Data.DAO
                 {
                     connection.Open();
 
-                    string query = "SELECT p.code, p.name, p.brand, p.amount, m.name AS nome_medida," +
+                    string query = "SELECT " +
+                        "p.code, " +
+                        "p.name, " +
+                        "p.brand, " +
+                        "p.amount, " +
+                        "p.validity, " +
+                        "m.name AS nome_medida," +
                         "GROUP_CONCAT(t.name) AS nomes_tags " +
                         "FROM products p " +
                         "LEFT JOIN products_has_tags pt ON p.code = pt.Products_code " +
@@ -71,9 +89,10 @@ namespace MyChest.Data.DAO
                                 string name = reader.GetString("name");
                                 string brand = reader.GetString("brand");
                                 int amount = reader.GetInt32("amount");
-                                string tagsId = reader.GetString("nomes_tags");
+                                string tagsId = reader.IsDBNull(reader.GetOrdinal("nomes_tags")) ? string.Empty : reader.GetString("nomes_tags");
                                 string measure = reader.GetString("nome_medida");
-                                Product product = new Product(code, name, brand, amount, tagsId, measure);
+                                DateOnly? validity = reader.IsDBNull(reader.GetOrdinal("validity")) ? null : DateOnly.FromDateTime(reader.GetDateTime("validity"));
+                                Product product = new Product(code, name, brand, amount, tagsId, measure, validity);
                                 products.Add(product);
                             }
                         }
@@ -88,29 +107,43 @@ namespace MyChest.Data.DAO
             }
         }
 
-        public Product GetByBrand(string brand)
+        public List<Product> GetByBrand(string brand)
         {
-            Product product = new Product();
+            List<Product> product = new List<Product>();
             try
             {
                 using (var connection = DbConnection.GetConnection())
                 {
                     connection.Open();
-                    string query = $"SELECT p.code, p.name, p.brand, p.amount, p.validity, m.name AS measure_name " +
+                    string query = $"SELECT " +
+                        $"p.code, " +
+                        $"p.name, " +
+                        $"p.brand, " +
+                        $"p.amount, " +
+                        $"p.validity, " +
+                        $"m.name AS measure_name, " +
+                        $"t.name AS tag_name " +
                         $"FROM products p " +
-                        $"LEFT JOIN measures m ON p.Measures_idMeasures = m.idMeasures " +
-                        $"WHERE p.brand LIKE '{brand}'";
+                        $"JOIN measures m ON m.idMeasures = p.Measures_idMeasures " +
+                        $"LEFT JOIN products_has_tags pt ON pt.Products_code = p.code " +
+                        $"LEFT JOIN tags t ON t.idTags = pt.Tags_idTags " +
+                        $"WHERE p.brand = 'OMO' " +
+                        $"ORDER BY p.code, t.name;";
                     using (var command = new MySqlCommand(query, connection))
                     {
                         using (var reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                product.Code = reader.GetInt32("code");
-                                product.Name = reader.GetString("name");
-                                product.Brand = reader.GetString("brand");
-                                product.Amount = reader.GetInt32("amount");
-                                product.Measure = reader.GetString("measure_name");
+                                int code = reader.GetInt32("code");
+                                string name = reader.GetString("name");
+                                string brandName = reader.GetString("brand");
+                                string tagsId = reader.IsDBNull(reader.GetOrdinal("tag_name")) ? string.Empty : reader.GetString("tag_name");
+                                int amount = reader.GetInt32("amount");
+                                string measure = reader.GetString("measure_name");
+                                DateOnly? validity = reader.IsDBNull(reader.GetOrdinal("validity")) ? null : DateOnly.FromDateTime(reader.GetDateTime("validity"));
+                                Product prod = new Product(code, name, brandName, amount, null, measure, validity);
+                                product.Add(prod);
                             }
                         }
                     }
@@ -132,9 +165,18 @@ namespace MyChest.Data.DAO
                 using (var connection = DbConnection.GetConnection())
                 {
                     connection.Open();
-                    string query = $"SELECT p.code, p.name, p.brand, p.amount, p.validity, m.name AS measure_name " +
+                    string query = $"SELECT " +
+                        $"p.code, " +
+                        $"p.name, " +
+                        $"p.brand, " +
+                        $"p.amount, " +
+                        $"p.validity, " +
+                        $"t.name AS tag_name, " +
+                        $"m.name AS measure_name " +
                         $"FROM products p " +
                         $"LEFT JOIN measures m ON p.Measures_idMeasures = m.idMeasures " +
+                        $"LEFT JOIN products_has_tags pt ON pt.Products_code = p.code " +
+                        $"LEFT JOIN tags t ON t.idTags = pt.Tags_idTags " +
                         $"WHERE p.name LIKE '{productName}'";
                     using (var command = new MySqlCommand(query, connection))
                     {
@@ -147,6 +189,8 @@ namespace MyChest.Data.DAO
                                 product.Brand = reader.GetString("brand");
                                 product.Amount = reader.GetInt32("amount");
                                 product.Measure = reader.GetString("measure_name");
+                                product.Tags = reader.IsDBNull(reader.GetOrdinal("tag_name")) ? null : reader.GetString("tag_name");
+                                product.Validity = reader.IsDBNull(reader.GetOrdinal("validity")) ? null : DateOnly.FromDateTime(reader.GetDateTime("validity"));
                             }
                         }
                     }
@@ -226,7 +270,8 @@ namespace MyChest.Data.DAO
                                 int amount = reader.GetInt32("amount");
                                 string tagsId = reader.GetString("tag_name");
                                 string measure = reader.GetString("measure_name");
-                                Product product = new Product(code, name, brand, amount, tagsId, measure);
+                                string validity = reader.IsDBNull(reader.GetOrdinal("validity")) ? string.Empty : reader.GetDateTime("validity").ToString();
+                                Product product = new Product(code, name, brand, amount, tagsId, measure, DateOnly.Parse(validity));
                                 products.Add(product);
                             }
                         }
@@ -305,7 +350,8 @@ namespace MyChest.Data.DAO
                                     Name = reader.GetString("name"),
                                     Brand = reader.GetString("brand"),
                                     Amount = reader.GetInt32("amount"),
-                                    Tags = reader.GetString("tag")
+                                    Tags = reader.GetString("tag"),
+                                    Validity = reader.IsDBNull(reader.GetOrdinal("validity")) ? null : DateOnly.FromDateTime(reader.GetDateTime("validity"))
                                 });
                             }
                         }
@@ -353,7 +399,8 @@ namespace MyChest.Data.DAO
                                     Name = reader.GetString("name"),
                                     Brand = reader.GetString("brand"),
                                     Amount = reader.GetInt32("amount"),
-                                    Measure = reader.GetString("medida")
+                                    Measure = reader.GetString("medida"),
+                                    Validity = reader.IsDBNull(reader.GetOrdinal("validity")) ? null : DateOnly.FromDateTime(reader.GetDateTime("validity"))
                                 });
                             }
                         }
@@ -448,8 +495,8 @@ namespace MyChest.Data.DAO
                 using (var connection = DbConnection.GetConnection())
                 {
                     connection.Open();
-                    string query = "INSERT INTO products (code, name, brand, amount, Measures_idMeasures) " +
-                        "VALUES (@code, @name, @brand, @amount, @measure);";
+                    string query = "INSERT INTO products (code, name, brand, amount, validity, Measures_idMeasures) " +
+                        "VALUES (@code, @name, @brand, @amount, @validity ,@measure);";
                     using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@code", product.Code);
@@ -457,10 +504,10 @@ namespace MyChest.Data.DAO
                         command.Parameters.AddWithValue("@brand", product.Brand);
                         command.Parameters.AddWithValue("@amount", product.Amount);
                         command.Parameters.AddWithValue("@measure", product.Measure);
+                        command.Parameters.AddWithValue("@validity", product.Validity);
                         command.ExecuteNonQuery();
                     }
                 }
-                MessageBox.Show("Produto inserido com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception e)
             {

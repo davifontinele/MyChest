@@ -81,11 +81,12 @@ namespace MyChest
             dataGrid.Columns.Add("amountCollum", "Quantidade");
             dataGrid.Columns.Add("tagsCollum", "Tags");
             dataGrid.Columns.Add("measureCollum", "Medida");
+            dataGrid.Columns.Add("validityCollum", "Validade");
             ProductDAO prod = new ProductDAO();
 
             foreach (var item in ((IData<Product>)prod).GetAllData())
             {
-                dataGrid.Rows.Add(item.Code, item.Name, item.Brand, item.Amount, item.Tags, item.Measure);
+                dataGrid.Rows.Add(item.Code, item.Name, item.Brand, item.Amount, item.Tags, item.Measure, item.Validity == null ? "Indefinido" : item.Validity);
             }
         }
 

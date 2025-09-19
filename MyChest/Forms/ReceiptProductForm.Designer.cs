@@ -38,12 +38,13 @@ namespace MyChest.Forms
                         txtBoxProductBrand.Text.ToUpper(),
                         txtBoxProductAmount.Text.ConvertToInt32(),
                         "",
-                        comboBoxProductMeasure.SelectedValue.ToString()));
+                        comboBoxProductMeasure.SelectedValue.ToString(),
+                        DateOnly.Parse(dateTimeProductValidityPicker.Text)));
                     productDAO.InsertProductTags(txtBoxProductId.Text.ConvertToInt32(), checkBoxProductTags.CheckedItems.Cast<Tag>().ToList());
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
-                     MessageBox.Show($"Erro ao inserir produto: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Erro ao inserir produto: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
@@ -94,6 +95,8 @@ namespace MyChest.Forms
             btnConfirmReceipt = new Button();
             label1 = new Label();
             checkBoxProductTags = new CheckedListBox();
+            lbProductValidity = new Label();
+            dateTimeProductValidityPicker = new DateTimePicker();
             SuspendLayout();
             // 
             // lbProductName
@@ -212,12 +215,33 @@ namespace MyChest.Forms
             checkBoxProductTags.Size = new Size(194, 112);
             checkBoxProductTags.TabIndex = 27;
             // 
+            // lbProductValidity
+            // 
+            lbProductValidity.AutoSize = true;
+            lbProductValidity.BorderStyle = BorderStyle.FixedSingle;
+            lbProductValidity.Location = new Point(12, 83);
+            lbProductValidity.Name = "lbProductValidity";
+            lbProductValidity.Size = new Size(53, 17);
+            lbProductValidity.TabIndex = 28;
+            lbProductValidity.Text = "Validade";
+            // 
+            // dateTimeProductValidityPicker
+            // 
+            dateTimeProductValidityPicker.CustomFormat = "";
+            dateTimeProductValidityPicker.Format = DateTimePickerFormat.Short;
+            dateTimeProductValidityPicker.Location = new Point(71, 80);
+            dateTimeProductValidityPicker.Name = "dateTimeProductValidityPicker";
+            dateTimeProductValidityPicker.Size = new Size(98, 23);
+            dateTimeProductValidityPicker.TabIndex = 29;
+            // 
             // ReceiptProductForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(622, 174);
+            Controls.Add(dateTimeProductValidityPicker);
+            Controls.Add(lbProductValidity);
             Controls.Add(checkBoxProductTags);
             Controls.Add(label1);
             Controls.Add(btnConfirmReceipt);
@@ -257,5 +281,7 @@ namespace MyChest.Forms
         private Button btnConfirmReceipt;
         private Label label1;
         private CheckedListBox checkBoxProductTags;
+        private Label lbProductValidity;
+        private DateTimePicker dateTimeProductValidityPicker;
     }
 }

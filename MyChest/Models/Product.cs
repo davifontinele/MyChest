@@ -8,7 +8,8 @@
         public int? Amount { get; set; }
         public string? Tags { get; set; }
         public string? Measure { get; set; }
-        public Product(int code, string name, string brand, int amount, string tagsId, string measure)
+        public DateOnly? Validity { get; set; }
+        public Product(int code, string name, string brand, int amount, string? tagsId, string measure, DateOnly? validity)
         {
             this.Code = code;
             this.Name = name;
@@ -16,6 +17,7 @@
             this.Amount = amount;
             this.Tags = tagsId;
             this.Measure = measure;
+            this.Validity = validity;
         }
         public Product()
         {

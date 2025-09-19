@@ -27,12 +27,13 @@ namespace MyChest.Forms
         /// </summary>
         private void LoadLabelsText()
         {
-            this.Text = Product.Name;
-            lbProdCodeInfo.Text = Product.Code.ToString();
-            lbProdNameInfo.Text = Product.Name.ToString();
-            lbProdMeasureInfo.Text = Product.Measure.ToString();
-            lbProdBrandInfo.Text = Product.Brand.ToString();
-            lbProdAmountInfo.Text = Product.Amount.ToString();
+            this.Text = _selectedProduct.Name;
+            lbProdCodeInfo.Text = _selectedProduct.Code.ToString();
+            lbProdNameInfo.Text = _selectedProduct.Name.ToString();
+            lbProdMeasureInfo.Text = _selectedProduct.Measure.ToString();
+            lbProdBrandInfo.Text = _selectedProduct.Brand.ToString();
+            lbProdAmountInfo.Text = _selectedProduct.Amount.ToString();
+            lbProdValidityInfo.Text = _selectedProduct.Validity.HasValue ? _selectedProduct.Validity.ToString() : "Indefinida";
         }
 
         /// <summary>
@@ -48,7 +49,7 @@ namespace MyChest.Forms
             dataGridAddresses.Columns.Add("hallCollum", "Lote");
             ProductDAO product = new ProductDAO();
 
-            dataGridAddresses.Rows.Add(product.GetAddressByProductId(Product.Code).Corridor, product.GetAddressByProductId(Product.Code).Column, product.GetAddressByProductId(Product.Code).Level, product.GetAddressByProductId(Product.Code).Hall, product.GetAddressByProductId(Product.Code).ProductCode);
+            dataGridAddresses.Rows.Add(product.GetAddressByProductId(_selectedProduct.Code).Corridor, product.GetAddressByProductId(_selectedProduct.Code).Column, product.GetAddressByProductId(_selectedProduct.Code).Level, product.GetAddressByProductId(_selectedProduct.Code).Hall, product.GetAddressByProductId(_selectedProduct.Code).ProductCode);
         }
 
         #region Windows Form Designer generated code
@@ -72,6 +73,8 @@ namespace MyChest.Forms
             lbProdAmountInfo = new Label();
             lbAddresses = new Label();
             dataGridAddresses = new DataGridView();
+            lbProdValidity = new Label();
+            lbProdValidityInfo = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridAddresses).BeginInit();
             SuspendLayout();
             // 
@@ -180,7 +183,7 @@ namespace MyChest.Forms
             lbAddresses.AutoSize = true;
             lbAddresses.BorderStyle = BorderStyle.FixedSingle;
             lbAddresses.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lbAddresses.Location = new Point(157, 155);
+            lbAddresses.Location = new Point(157, 165);
             lbAddresses.Name = "lbAddresses";
             lbAddresses.Size = new Size(79, 22);
             lbAddresses.TabIndex = 17;
@@ -196,20 +199,42 @@ namespace MyChest.Forms
             dataGridAddresses.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridAddresses.BorderStyle = BorderStyle.Fixed3D;
             dataGridAddresses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridAddresses.Location = new Point(12, 180);
+            dataGridAddresses.Location = new Point(12, 190);
             dataGridAddresses.MultiSelect = false;
             dataGridAddresses.Name = "dataGridAddresses";
             dataGridAddresses.ReadOnly = true;
             dataGridAddresses.RowHeadersVisible = false;
             dataGridAddresses.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridAddresses.Size = new Size(384, 162);
+            dataGridAddresses.Size = new Size(384, 152);
             dataGridAddresses.TabIndex = 20;
+            // 
+            // lbProdValidity
+            // 
+            lbProdValidity.AutoSize = true;
+            lbProdValidity.BorderStyle = BorderStyle.FixedSingle;
+            lbProdValidity.Location = new Point(12, 146);
+            lbProdValidity.Name = "lbProdValidity";
+            lbProdValidity.Size = new Size(53, 17);
+            lbProdValidity.TabIndex = 21;
+            lbProdValidity.Text = "Validade";
+            // 
+            // lbProdValidityInfo
+            // 
+            lbProdValidityInfo.AutoSize = true;
+            lbProdValidityInfo.BorderStyle = BorderStyle.Fixed3D;
+            lbProdValidityInfo.Location = new Point(71, 146);
+            lbProdValidityInfo.Name = "lbProdValidityInfo";
+            lbProdValidityInfo.Size = new Size(67, 17);
+            lbProdValidityInfo.TabIndex = 22;
+            lbProdValidityInfo.Text = "00/00/0000";
             // 
             // ProductInfoForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(408, 354);
+            Controls.Add(lbProdValidityInfo);
+            Controls.Add(lbProdValidity);
             Controls.Add(dataGridAddresses);
             Controls.Add(lbAddresses);
             Controls.Add(lbProdAmountInfo);
@@ -246,5 +271,7 @@ namespace MyChest.Forms
         private Label lbProdAmountInfo;
         private Label lbAddresses;
         private DataGridView dataGridAddresses;
+        private Label lbProdValidity;
+        private Label lbProdValidityInfo;
     }
 }

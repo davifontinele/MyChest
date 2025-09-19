@@ -1,11 +1,9 @@
-using Microsoft.VisualBasic.ApplicationServices;
 using MyChest.Data.DAO;
 using MyChest.Extensions;
 using MyChest.Forms;
 using MyChest.Interfaces;
 using MyChest.Models;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 
 namespace MyChest
 {
@@ -92,7 +90,7 @@ namespace MyChest
 
         private void dataGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGrid.SelectedRows.Count == 1 && dataGrid.Columns.Count == 6)
+            if (dataGrid.SelectedRows.Count == 1 && dataGrid.Columns.Count == 7)
             {
                 Product selectedProduct = new Product(
                     // Code
@@ -111,7 +109,10 @@ namespace MyChest
                     Convert.ToString(dataGrid.SelectedRows[0].Cells[4].Value)!,
 
                     // Medida
-                    Convert.ToString(dataGrid.SelectedRows[0].Cells[5].Value)!
+                    Convert.ToString(dataGrid.SelectedRows[0].Cells[5].Value)!,
+
+                    // Validade
+                    dataGrid.SelectedRows[0].Cells[6].Value.ToString()!.TestConvertToDateOnly() ? DateOnly.Parse(dataGrid.SelectedRows[0].Cells[6].Value.ToString()!) : null
                     );
 
                 ProductInfoForm newForm = new ProductInfoForm(selectedProduct);
@@ -165,7 +166,7 @@ namespace MyChest
             if (e.KeyCode == Keys.Enter)
             {
                 // Código
-                if (dataGrid.ColumnCount == 6 && comboBoxSearch.SelectedIndex == 0)
+                if (dataGrid.ColumnCount == 7 && comboBoxSearch.SelectedIndex == 0)
                 {
                     ProductDAO productDAO = new ProductDAO();
                     if (maskTextSearch.Text.TestConvertToInt32())
@@ -177,7 +178,7 @@ namespace MyChest
                         }
 
                         dataGrid.Rows.Clear();
-                        dataGrid.Rows.Add(product.Code, product.Name, product.Brand, product.Amount, product.Tags, product.Measure);
+                        dataGrid.Rows.Add(product.Code, product.Name, product.Brand, product.Amount, product.Tags, product.Measure, product.Validity);
                     }
                     else
                     {
@@ -197,7 +198,7 @@ namespace MyChest
                         }
 
                         dataGrid.Rows.Clear();
-                        dataGrid.Rows.Add(product.Code, product.Name, product.Brand, product.Amount, product.Tags, product.Measure);
+                        dataGrid.Rows.Add(product.Code, product.Name, product.Brand, product.Amount, product.Tags, product.Measure, product.Validity);
                     }
                     else
                     {
@@ -210,14 +211,11 @@ namespace MyChest
                     ProductDAO productDAO = new ProductDAO();
                     if (Regex.IsMatch(maskTextSearch.Text, "^[a-zA-Z ]+$"))
                     {
-                        Product product = productDAO.GetByBrand(maskTextSearch.Text);
-                        foreach (var item in productDAO.GetProductTags(product.Code))
-                        {
-                            product.Tags += item + " ";
-                        }
-
                         dataGrid.Rows.Clear();
-                        dataGrid.Rows.Add(product.Code, product.Name, product.Brand, product.Amount, product.Tags, product.Measure);
+                        foreach (var item in productDAO.GetByBrand(maskTextSearch.Text))
+                        {
+                            dataGrid.Rows.Add(item.Code, item.Name, item.Brand, item.Amount, item.Tags, item.Measure, item.Validity);
+                        }
                     }
                     else
                     {
@@ -228,12 +226,12 @@ namespace MyChest
                 else if (comboBoxSearch.SelectedIndex == 3)
                 {
                     ProductDAO productDAO = new ProductDAO();
-                    if (Regex.IsMatch(maskTextSearch.Text, "^[a-zA-Z]+$"))
+                    if (Regex.IsMatch(maskTextSearch.Text, "^[a-zA-Z/]+$"))
                     {
                         dataGrid.Rows.Clear();
                         foreach (var item in productDAO.GetProductByTag(maskTextSearch.Text.ToUpper().Trim()))
                         {
-                            dataGrid.Rows.Add(item.Code, item.Name, item.Brand, item.Amount, item.Tags, item.Measure);
+                            dataGrid.Rows.Add(item.Code, item.Name, item.Brand, item.Amount, item.Tags, item.Measure, item.Validity);
                         }
                     }
                 }
@@ -241,12 +239,12 @@ namespace MyChest
                 else if (comboBoxSearch.SelectedIndex == 4)
                 {
                     ProductDAO productDAO = new ProductDAO();
-                    if (Regex.IsMatch(maskTextSearch.Text, "^[a-zA-Z]+$"))
+                    if (Regex.IsMatch(maskTextSearch.Text, "^[a-zA-Z/]+$"))
                     {
                         dataGrid.Rows.Clear();
                         foreach (var item in productDAO.GetProductByMeasureType(maskTextSearch.Text.ToUpper().Trim()))
                         {
-                            dataGrid.Rows.Add(item.Code, item.Name, item.Brand, item.Amount, item.Tags, item.Measure);
+                            dataGrid.Rows.Add(item.Code, item.Name, item.Brand, item.Amount, item.Tags, item.Measure, item.Validity);
                         }
                     }
                 }
@@ -278,7 +276,7 @@ namespace MyChest
                 comboBoxSearch.Visible = false;
                 comboBoxSearch.Enabled = false;
             }
-            else if (dataGrid.ColumnCount == 6)
+            else if (dataGrid.ColumnCount == 7)
             {
                 comboBoxSearch.Visible = true;
                 comboBoxSearch.Enabled = true;

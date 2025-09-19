@@ -116,11 +116,14 @@ namespace MyChest.Forms
         {
             IData<Product> productDao = new ProductDAO();
 
-            lbLeftProductCode.Text = productDao.GetById(code).Code.ToString();
-            lbLeftProductName.Text = productDao.GetById(code).Name;
-            lbLeftProductBrand.Text = productDao.GetById(code).Brand;
-            lbLeftProductAmount.Text = productDao.GetById(code).Amount.ToString();
-            lbLeftProductMeasure.Text = productDao.GetById(code).Measure;
+            Product product = productDao.GetById(code);
+
+            lbLeftProductCode.Text = product.Code.ToString();
+            lbLeftProductName.Text = product.Name;
+            lbLeftProductBrand.Text = product.Brand;
+            lbLeftProductAmount.Text = product.Amount.ToString();
+            lbLeftProductMeasure.Text = product.Measure;
+            lbLeftProductValidity.Text = product.Validity.HasValue ? product.Validity.ToString() : "Indefinida";
         }
 
         /// <summary>
@@ -131,11 +134,14 @@ namespace MyChest.Forms
         {
             IData<Product> productDao = new ProductDAO();
 
-            lbRightProductCode.Text = productDao.GetById(code).Code.ToString();
-            lbRightProductName.Text = productDao.GetById(code).Name;
-            lbRightProductBrand.Text = productDao.GetById(code).Brand;
-            lbRightProductAmount.Text = productDao.GetById(code).Amount.ToString();
-            lbRightProductMeasure.Text = productDao.GetById(code).Measure;
+            Product product = productDao.GetById(code);
+
+            lbRightProductCode.Text = product.Code.ToString();
+            lbRightProductName.Text = product.Name;
+            lbRightProductBrand.Text = product.Brand;
+            lbRightProductAmount.Text = product.Amount.ToString();
+            lbRightProductMeasure.Text = product.Measure;
+            lbRightProductValidity.Text = product.Validity.HasValue ? product.Validity.ToString() : "Indefinida";
         }
 
         /// <summary>
@@ -203,6 +209,7 @@ namespace MyChest.Forms
             lbRightProductAmount.Enabled = true;
             lbRightProductMeasure.Enabled = true;
             txtBoxRightProduct.Enabled = true;
+            lbRightProductValidity.Enabled = true;
             lbRightProductCodeInfo.Show();
             lbRightProductCode.Show();
             lbRightProductName.Show();
@@ -210,6 +217,7 @@ namespace MyChest.Forms
             lbRightProductAmount.Show();
             lbRightProductMeasure.Show();
             txtBoxRightProduct.Show();
+            lbRightProductValidity.Show();
         }
 
         /// <summary>
@@ -239,6 +247,7 @@ namespace MyChest.Forms
             lbRightProductAmount.Enabled = false;
             lbRightProductMeasure.Enabled = false;
             txtBoxRightProduct.Enabled = false;
+            lbRightProductValidity.Enabled = false;
             lbRightProductCodeInfo.Hide();
             lbRightProductCode.Hide();
             lbRightProductName.Hide();
@@ -246,6 +255,7 @@ namespace MyChest.Forms
             lbRightProductAmount.Hide();
             lbRightProductMeasure.Hide();
             txtBoxRightProduct.Hide();
+            lbRightProductValidity.Hide();
         }
         #region Windows Form Designer generated code
 
@@ -280,16 +290,18 @@ namespace MyChest.Forms
             picBoxSearch = new PictureBox();
             maskTxtBoxSearchAddress = new MaskedTextBox();
             btnMoveConfirm = new Button();
+            lbLeftProductValidity = new Label();
+            lbRightProductValidity = new Label();
             toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picBoxArrows).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picBoxSearch).BeginInit();
             SuspendLayout();
             // 
-            // txtBoxProduct
+            // txtBoxLeftProduct
             // 
             txtBoxLeftProduct.Location = new Point(12, 56);
-            txtBoxLeftProduct.Name = "txtBoxProduct";
+            txtBoxLeftProduct.Name = "txtBoxLeftProduct";
             txtBoxLeftProduct.Size = new Size(109, 23);
             txtBoxLeftProduct.TabIndex = 0;
             txtBoxLeftProduct.TextChanged += textBoxLeft_TextChanged;
@@ -303,129 +315,129 @@ namespace MyChest.Forms
             lbInfoProductCode.TabIndex = 1;
             lbInfoProductCode.Text = "Código do produto";
             // 
-            // lbProductCode
+            // lbLeftProductCode
             // 
             lbLeftProductCode.AutoSize = true;
             lbLeftProductCode.BorderStyle = BorderStyle.Fixed3D;
-            lbLeftProductCode.Location = new Point(12, 91);
-            lbLeftProductCode.Name = "lbProductCode";
+            lbLeftProductCode.Location = new Point(12, 82);
+            lbLeftProductCode.Name = "lbLeftProductCode";
             lbLeftProductCode.Size = new Size(33, 17);
             lbLeftProductCode.TabIndex = 2;
             lbLeftProductCode.Text = "0000";
             // 
-            // lbProductName
+            // lbLeftProductName
             // 
             lbLeftProductName.AutoSize = true;
             lbLeftProductName.BorderStyle = BorderStyle.Fixed3D;
-            lbLeftProductName.Location = new Point(12, 108);
-            lbLeftProductName.Name = "lbProductName";
+            lbLeftProductName.Location = new Point(12, 99);
+            lbLeftProductName.Name = "lbLeftProductName";
             lbLeftProductName.Size = new Size(105, 17);
             lbLeftProductName.TabIndex = 3;
             lbLeftProductName.Text = "Nome do produto";
             // 
-            // lbProdBrand
+            // lbLeftProductBrand
             // 
             lbLeftProductBrand.AutoSize = true;
             lbLeftProductBrand.BorderStyle = BorderStyle.Fixed3D;
-            lbLeftProductBrand.Location = new Point(12, 125);
-            lbLeftProductBrand.Name = "lbProdBrand";
+            lbLeftProductBrand.Location = new Point(12, 116);
+            lbLeftProductBrand.Name = "lbLeftProductBrand";
             lbLeftProductBrand.Size = new Size(42, 17);
             lbLeftProductBrand.TabIndex = 4;
             lbLeftProductBrand.Text = "Marca";
             // 
-            // lbProdAmount
+            // lbLeftProductAmount
             // 
             lbLeftProductAmount.AutoSize = true;
             lbLeftProductAmount.BorderStyle = BorderStyle.Fixed3D;
-            lbLeftProductAmount.Location = new Point(12, 142);
-            lbLeftProductAmount.Name = "lbProdAmount";
+            lbLeftProductAmount.Location = new Point(12, 133);
+            lbLeftProductAmount.Name = "lbLeftProductAmount";
             lbLeftProductAmount.Size = new Size(27, 17);
             lbLeftProductAmount.TabIndex = 5;
             lbLeftProductAmount.Text = "000";
             // 
-            // lbProdMeasure
+            // lbLeftProductMeasure
             // 
             lbLeftProductMeasure.AutoSize = true;
             lbLeftProductMeasure.BorderStyle = BorderStyle.Fixed3D;
-            lbLeftProductMeasure.Location = new Point(12, 159);
-            lbLeftProductMeasure.Name = "lbProdMeasure";
+            lbLeftProductMeasure.Location = new Point(12, 150);
+            lbLeftProductMeasure.Name = "lbLeftProductMeasure";
             lbLeftProductMeasure.Size = new Size(49, 17);
             lbLeftProductMeasure.TabIndex = 6;
             lbLeftProductMeasure.Text = "Medida";
             // 
-            // lbProdMeasure2
+            // lbRightProductMeasure
             // 
             lbRightProductMeasure.AutoSize = true;
             lbRightProductMeasure.BorderStyle = BorderStyle.Fixed3D;
-            lbRightProductMeasure.Location = new Point(312, 159);
-            lbRightProductMeasure.Name = "lbProdMeasure2";
+            lbRightProductMeasure.Location = new Point(312, 150);
+            lbRightProductMeasure.Name = "lbRightProductMeasure";
             lbRightProductMeasure.Size = new Size(49, 17);
             lbRightProductMeasure.TabIndex = 13;
             lbRightProductMeasure.Text = "Medida";
             // 
-            // lbProdAmount2
+            // lbRightProductAmount
             // 
             lbRightProductAmount.AutoSize = true;
             lbRightProductAmount.BorderStyle = BorderStyle.Fixed3D;
-            lbRightProductAmount.Location = new Point(312, 142);
-            lbRightProductAmount.Name = "lbProdAmount2";
+            lbRightProductAmount.Location = new Point(312, 133);
+            lbRightProductAmount.Name = "lbRightProductAmount";
             lbRightProductAmount.Size = new Size(27, 17);
             lbRightProductAmount.TabIndex = 12;
             lbRightProductAmount.Text = "000";
             // 
-            // lbProdBrand2
+            // lbRightProductBrand
             // 
             lbRightProductBrand.AutoSize = true;
             lbRightProductBrand.BorderStyle = BorderStyle.Fixed3D;
-            lbRightProductBrand.Location = new Point(312, 125);
-            lbRightProductBrand.Name = "lbProdBrand2";
+            lbRightProductBrand.Location = new Point(312, 116);
+            lbRightProductBrand.Name = "lbRightProductBrand";
             lbRightProductBrand.Size = new Size(42, 17);
             lbRightProductBrand.TabIndex = 11;
             lbRightProductBrand.Text = "Marca";
             // 
-            // lbProdName2
+            // lbRightProductName
             // 
             lbRightProductName.AutoSize = true;
             lbRightProductName.BorderStyle = BorderStyle.Fixed3D;
-            lbRightProductName.Location = new Point(312, 108);
-            lbRightProductName.Name = "lbProdName2";
+            lbRightProductName.Location = new Point(312, 99);
+            lbRightProductName.Name = "lbRightProductName";
             lbRightProductName.Size = new Size(42, 17);
             lbRightProductName.TabIndex = 10;
             lbRightProductName.Text = "Nome";
             // 
-            // lbProdCode2
+            // lbRightProductCode
             // 
             lbRightProductCode.AutoSize = true;
             lbRightProductCode.BorderStyle = BorderStyle.Fixed3D;
-            lbRightProductCode.Location = new Point(312, 91);
-            lbRightProductCode.Name = "lbProdCode2";
+            lbRightProductCode.Location = new Point(312, 82);
+            lbRightProductCode.Name = "lbRightProductCode";
             lbRightProductCode.Size = new Size(33, 17);
             lbRightProductCode.TabIndex = 9;
             lbRightProductCode.Text = "0000";
             // 
-            // lbInfoProdCode2
+            // lbRightProductCodeInfo
             // 
             lbRightProductCodeInfo.AutoSize = true;
             lbRightProductCodeInfo.Location = new Point(312, 38);
-            lbRightProductCodeInfo.Name = "lbInfoProdCode2";
+            lbRightProductCodeInfo.Name = "lbRightProductCodeInfo";
             lbRightProductCodeInfo.Size = new Size(109, 15);
             lbRightProductCodeInfo.TabIndex = 8;
             lbRightProductCodeInfo.Text = "Código do produto";
             // 
-            // txtBoxProd2
+            // txtBoxRightProduct
             // 
             txtBoxRightProduct.Location = new Point(312, 56);
-            txtBoxRightProduct.Name = "txtBoxProd2";
+            txtBoxRightProduct.Name = "txtBoxRightProduct";
             txtBoxRightProduct.Size = new Size(109, 23);
             txtBoxRightProduct.TabIndex = 7;
             txtBoxRightProduct.TextChanged += txtBoxProdRight_TextChanged;
             // 
-            // toolStrip1
+            // toolStrip
             // 
             toolStrip.GripStyle = ToolStripGripStyle.Hidden;
             toolStrip.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1 });
             toolStrip.Location = new Point(0, 0);
-            toolStrip.Name = "toolStrip1";
+            toolStrip.Name = "toolStrip";
             toolStrip.Size = new Size(704, 25);
             toolStrip.TabIndex = 14;
             toolStrip.Text = "tooStrip";
@@ -525,12 +537,34 @@ namespace MyChest.Forms
             btnMoveConfirm.UseVisualStyleBackColor = true;
             btnMoveConfirm.Click += btnMoveConfirm_Click;
             // 
+            // lbLeftProductValidity
+            // 
+            lbLeftProductValidity.AutoSize = true;
+            lbLeftProductValidity.BorderStyle = BorderStyle.Fixed3D;
+            lbLeftProductValidity.Location = new Point(12, 167);
+            lbLeftProductValidity.Name = "lbLeftProductValidity";
+            lbLeftProductValidity.Size = new Size(53, 17);
+            lbLeftProductValidity.TabIndex = 21;
+            lbLeftProductValidity.Text = "Validade";
+            // 
+            // lbRightProductValidity
+            // 
+            lbRightProductValidity.AutoSize = true;
+            lbRightProductValidity.BorderStyle = BorderStyle.Fixed3D;
+            lbRightProductValidity.Location = new Point(312, 167);
+            lbRightProductValidity.Name = "lbRightProductValidity";
+            lbRightProductValidity.Size = new Size(53, 17);
+            lbRightProductValidity.TabIndex = 14;
+            lbRightProductValidity.Text = "Validade";
+            // 
             // MoveProdForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(704, 231);
+            Controls.Add(lbRightProductValidity);
+            Controls.Add(lbLeftProductValidity);
             Controls.Add(btnMoveConfirm);
             Controls.Add(maskTxtBoxSearchAddress);
             Controls.Add(picBoxSearch);
@@ -592,5 +626,7 @@ namespace MyChest.Forms
         private PictureBox picBoxSearch;
         private MaskedTextBox maskTxtBoxSearchAddress;
         private Button btnMoveConfirm;
+        private Label lbLeftProductValidity;
+        private Label lbRightProductValidity;
     }
 }
