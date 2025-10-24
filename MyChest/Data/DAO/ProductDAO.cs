@@ -1,7 +1,6 @@
 ﻿using MyChest.Interfaces;
 using MyChest.Models;
 using MySql.Data.MySqlClient;
-using System.Data;
 
 namespace MyChest.Data.DAO
 {
@@ -496,7 +495,7 @@ namespace MyChest.Data.DAO
                 {
                     connection.Open();
                     string query = "INSERT INTO products (code, name, brand, amount, validity, Measures_idMeasures) " +
-                        "VALUES (@code, @name, @brand, @amount, @validity ,@measure);";
+                        $"VALUES (@code, @name, @brand, @amount, '{DateOnly.ParseExact(product.Validity.ToString()!, "dd/MM/yyyy").ToString("yyyy-MM-dd")}' ,@measure);";
                     using (var command = new MySql.Data.MySqlClient.MySqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@code", product.Code);
@@ -504,10 +503,10 @@ namespace MyChest.Data.DAO
                         command.Parameters.AddWithValue("@brand", product.Brand);
                         command.Parameters.AddWithValue("@amount", product.Amount);
                         command.Parameters.AddWithValue("@measure", product.Measure);
-                        command.Parameters.AddWithValue("@validity", product.Validity);
                         command.ExecuteNonQuery();
                     }
                 }
+                ProductsUpdated?.Invoke();
             }
             catch (Exception e)
             {
@@ -604,5 +603,10 @@ namespace MyChest.Data.DAO
                 MessageBox.Show($"Erro ao movimentar os produtos: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        /// <summary>
+        /// Evento disparado quando os produtos são atualizados.
+        /// </summary>
+        public static event Action? ProductsUpdated;
     }
 }

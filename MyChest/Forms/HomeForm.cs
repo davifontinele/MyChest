@@ -32,8 +32,13 @@ namespace MyChest
                 HideAndDisableButtons();
                 ConfigureUIByUserPermissions();
             }
+
             DataGridProductLoad();
+
             comboBoxSearch.SelectedIndex = 0;
+
+            ProductDAO.ProductsUpdated += WarningsLoad;
+            WarningsLoad();
         }
 
         private void HomeForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -52,7 +57,6 @@ namespace MyChest
             userForm.ShowDialog();
         }
 
-        // OBS: Precisamos fazer um sistema de verificação dos dados no DB para implementarem com essa funcionalidade de avisos
         private void listBoxWarning_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
@@ -69,6 +73,20 @@ namespace MyChest
                         }
                     }
                 }
+            }
+        }
+
+        private void listBoxWarning_DoubleClick(object sender, EventArgs e)
+        {
+            if (listBoxWarning.SelectedItem != null)
+            {
+                ProductDAO productDAO = new ProductDAO();
+                Product selectedProduct = ((IData<Product>)productDAO).GetById(GetStringBetweenCharacter(listBoxWarning.SelectedItem.ToString(), '|').ConvertToInt32());
+
+                ProductInfoForm newForm = new ProductInfoForm(selectedProduct);
+
+                newForm.Show();
+                newForm.Owner = this;
             }
         }
 

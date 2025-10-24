@@ -39,7 +39,7 @@ namespace MyChest.Forms
                         txtBoxProductAmount.Text.ConvertToInt32(),
                         "",
                         comboBoxProductMeasure.SelectedValue.ToString(),
-                        DateOnly.Parse(dateTimeProductValidityPicker.Text)));
+                        DateOnly.ParseExact(dateTimeProductValidityPicker.Text, "dd/MM/yyyy")));
                     productDAO.InsertProductTags(txtBoxProductId.Text.ConvertToInt32(), checkBoxProductTags.CheckedItems.Cast<Tag>().ToList());
                 }
                 catch (Exception e)

@@ -1,4 +1,6 @@
-﻿namespace MyChest.Extensions
+﻿using Google.Protobuf.WellKnownTypes;
+
+namespace MyChest.Extensions
 {
     public static class StringExtensions
     {

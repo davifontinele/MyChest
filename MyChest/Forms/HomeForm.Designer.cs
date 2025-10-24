@@ -24,6 +24,49 @@ namespace MyChest
             base.Dispose(disposing);
         }
 
+        private void WarningsLoad()
+        {
+            ProductDAO prod = new ProductDAO();
+            List<Product> products = ((IData<Product>)prod).GetAllData();
+
+            foreach (var item in products)
+            {
+                if (item.Validity <= DateOnly.FromDateTime(DateTime.Now))
+                {
+                    if (!listBoxWarning.Items.Cast<string>().Any(i => i.Contains($"|{item.Code}|")))
+                    {
+                        listBoxWarning.Items.Add($"PRODUTO VENCIDO: |{item.Code}| Nome: {item.Name}, Validade: {item.Validity} ");
+                    }
+                }
+
+                if (item.Amount <= 10)
+                {
+                    if (!listBoxWarning.Items.Cast<string>().Any(i => i.Contains($"|{item.Code}|")))
+                    {
+                        listBoxWarning.Items.Add($"PRODUTO EM BAIXA: |{item.Code}| Nome: {item.Name}, Validade: {item.Validity}, Volume: {item.Amount}, {item.Tags} ");
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Retorna a string contida entre 2 do caractere especificado.
+        /// </summary>
+        /// <param name="text">String que será feita a procura</param>
+        /// <param name="character">caracter selecioando para procurar entre</param>
+        /// <returns>Retorna o valor que foi encontrado</returns>
+        private string GetStringBetweenCharacter(string text, char character)
+        {
+            int startIndex = text.IndexOf(character) + 1;
+            int finalIndex = text.LastIndexOf(character);
+
+            if (startIndex > 0 && finalIndex > startIndex)
+            {
+                return text.Substring(startIndex, finalIndex - startIndex);
+            }
+            return string.Empty;
+        }
+
         /// <summary>
         /// Desativa e esconde funcionalidades que o nivel de acesso do usuário nao permite acessar
         /// </summary> 
@@ -160,7 +203,6 @@ namespace MyChest
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeForm));
             toolStripBtns = new ToolStrip();
             lbLogoTeste = new ToolStripLabel();
@@ -298,6 +340,7 @@ namespace MyChest
             listBoxWarning.SelectionMode = SelectionMode.MultiExtended;
             listBoxWarning.Size = new Size(1114, 204);
             listBoxWarning.TabIndex = 1;
+            listBoxWarning.DoubleClick += listBoxWarning_DoubleClick;
             listBoxWarning.KeyDown += listBoxWarning_KeyDown;
             // 
             // dataGrid

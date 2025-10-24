@@ -17,7 +17,5 @@
             LoadMeasureUnits();
             LoadProductTags();
         }
-
-        // Adicionar inserção de validade
     }
 }
