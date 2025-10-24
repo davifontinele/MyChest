@@ -24,6 +24,9 @@ namespace MyChest
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// Atualiza a lista de avisos de produtos vencidos ou em baixa quantidade
+        /// </summary>
         private void WarningsLoad()
         {
             ProductDAO prod = new ProductDAO();
@@ -47,24 +50,6 @@ namespace MyChest
                     }
                 }
             }
-        }
-
-        /// <summary>
-        /// Retorna a string contida entre 2 do caractere especificado.
-        /// </summary>
-        /// <param name="text">String que será feita a procura</param>
-        /// <param name="character">caracter selecioando para procurar entre</param>
-        /// <returns>Retorna o valor que foi encontrado</returns>
-        private string GetStringBetweenCharacter(string text, char character)
-        {
-            int startIndex = text.IndexOf(character) + 1;
-            int finalIndex = text.LastIndexOf(character);
-
-            if (startIndex > 0 && finalIndex > startIndex)
-            {
-                return text.Substring(startIndex, finalIndex - startIndex);
-            }
-            return string.Empty;
         }
 
         /// <summary>
@@ -96,6 +81,9 @@ namespace MyChest
             }
         }
 
+        /// <summary>
+        /// Desativa e esconde todas as funcionalidades restritas por permissão
+        /// </summary>
         public void HideAndDisableButtons()
         {
             btnMoveProduct.Enabled = false;
@@ -111,10 +99,9 @@ namespace MyChest
         /// </summary>
         private void DataGridProductLoad()
         {
-            maskTextSearch.Mask = "";
+            ClearMaskTextBox();
 
-            picBoxAdd.Visible = false;
-            picBoxAdd.Enabled = false;
+            HideAndDisableAddButton();
 
             dataGrid.Columns.Clear();
 
@@ -134,17 +121,41 @@ namespace MyChest
         }
 
         /// <summary>
+        /// Limpa a máscara de pesquisa do MaskedTextBox
+        /// </summary>
+        private void ClearMaskTextBox()
+        {
+            maskTextSearch.Mask = "";
+        }
+
+        /// <summary>
+        /// Esconde e desativa o botão de adicionar novo usuário/endereço
+        /// </summary>
+        private void HideAndDisableAddButton()
+        {
+            picBoxAdd.Visible = false;
+            picBoxAdd.Enabled = false;
+        }
+
+        /// <summary>
+        /// Mostra e ativa o botão de adicionar novo usuário/endereço
+        /// </summary>
+        private void ShowAndEnableAddButton()
+        {
+            picBoxAdd.Visible = true;
+            picBoxAdd.Enabled = true;
+        }
+
+        /// <summary>
         /// Preenche o DataGridView com os dados dos usuários
         /// </summary>
         private void DataGridUserLoad()
         {
-            maskTextSearch.Mask = "";
+            ClearMaskTextBox();
 
-            picBoxAdd.Visible = true;
-            picBoxAdd.Enabled = true;
+            ShowAndEnableAddButton();
 
-            comboBoxSearch.Visible = false;
-            comboBoxSearch.Enabled = false;
+            HideAndDisableSearchComboBox();
 
             dataGrid.Columns.Clear();
 
@@ -168,17 +179,24 @@ namespace MyChest
         }
 
         /// <summary>
+        /// Esconde e desativa o ComboBox de pesquisa
+        /// </summary>
+        private void HideAndDisableSearchComboBox()
+        {
+            comboBoxSearch.Visible = false;
+            comboBoxSearch.Enabled = false;
+        }
+
+        /// <summary>
         /// Preence o DataGridView com os dados dos endereços
         /// </summary>
         private void DataGridAddressLoad()
         {
-            maskTextSearch.Mask = "000-000-00-000";
+            SetMaskedTextBoxForAddressSearch();
 
-            picBoxAdd.Visible = true;
-            picBoxAdd.Enabled = true;
+            ShowAndEnableAddButton();
 
-            comboBoxSearch.Visible = false;
-            comboBoxSearch.Enabled = false;
+            HideAndDisableSearchComboBox();
 
             dataGrid.Columns.Clear();
 
@@ -193,6 +211,15 @@ namespace MyChest
             {
                 dataGrid.Rows.Add(item.Corridor, item.Column, item.Level, item.Hall, item.ProductCode);
             }
+        }
+
+        /// <summary>
+        /// Seta a máscara do MaskedTextBox para pesquisa de endereços
+        /// </summary>
+        private void SetMaskedTextBoxForAddressSearch()
+        {
+            maskTextSearch.Mask = "000-000-00-000";
+            maskTextSearch.Text = "";
         }
 
         #region Windows Form Designer generated code

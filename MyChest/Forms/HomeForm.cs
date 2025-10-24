@@ -81,7 +81,7 @@ namespace MyChest
             if (listBoxWarning.SelectedItem != null)
             {
                 ProductDAO productDAO = new ProductDAO();
-                Product selectedProduct = ((IData<Product>)productDAO).GetById(GetStringBetweenCharacter(listBoxWarning.SelectedItem.ToString(), '|').ConvertToInt32());
+                Product selectedProduct = ((IData<Product>)productDAO).GetById(listBoxWarning.SelectedItem.ToString()!.GetStringBetweenCharacter('|').ConvertToInt32());
 
                 ProductInfoForm newForm = new ProductInfoForm(selectedProduct);
 

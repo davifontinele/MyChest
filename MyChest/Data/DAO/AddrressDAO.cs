@@ -36,9 +36,14 @@ namespace MyChest.Data.DAO
                 }
                 return addresses;
             }
+            catch (IndexOutOfRangeException ex)
+            {
+                MessageBox.Show($"Elemento de pesquisa fora do alcançe ou não existe. | {ex.GetType().Name} - {ex.Message}", "ERROR [GetAllData]", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return addresses;
+            }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao buscar endereços: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar todos os endereços. | {ex.GetType().Name} - {ex.Message}", "ERROR [GetAllData]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return addresses;
             }
         }
@@ -76,7 +81,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao buscar endereços: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar endereço pelo Id. | {ex.GetType().Name} - {ex.Message}", "ERROR [GetById]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return address;
             }
         }
@@ -106,7 +111,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Erro ao inserir novo endereço: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao inserir um novo endereço. | {e.GetType().Name} - {e.Message}", "ERROR [InsertNewAddress]", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -148,7 +153,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao buscar endereços vazios: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar todos os enderços vazios. | {ex.GetType().Name} - {ex.Message}", "ERROR [GetAllAddressesEmpty]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return addresses;
             }
         }
@@ -198,7 +203,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao buscar endereços: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao pesquisar endereço especificado. | {ex.GetType().Name} - {ex.Message}", "ERROR [GetAddressByNumbers]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return address;
             }
         }
@@ -234,7 +239,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao buscar o ID do endereço: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar o Id do endereço especificado. | {ex.GetType().Name} - {ex.Message}", "ERROR [GetAddressId]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return 0;
             }
         }
@@ -270,7 +275,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao buscar o código do produto: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar código do produto no endereço especificado. | {ex.GetType().Name} - {ex.Message}", "ERROR [GetProductIdOnAddress]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return 0;
             }
         }
@@ -305,7 +310,7 @@ namespace MyChest.Data.DAO
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Erro movimentar o produto {codeProd}: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Não foi possível movimentar o produto {codeProd} | {ex.GetType().Name} - {ex.Message}", "ERROR [MoveProductForAddress]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
@@ -348,7 +353,7 @@ namespace MyChest.Data.DAO
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Erro movimentar o produto {codeProd}: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"Não foi possível movimentar os produtos {codeProd} | {ex.GetType().Name} - {ex.Message}", "ERROR [MoveProductForAddress]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 return;

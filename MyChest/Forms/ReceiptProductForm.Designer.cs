@@ -33,25 +33,26 @@ namespace MyChest.Forms
                 {
                     ProductDAO productDAO = new ProductDAO();
                     productDAO.InsertProduct(new Models.Product(
-                        txtBoxProductId.Text.ConvertToInt32(),
-                        txtBoxProductName.Text.ToUpper(),
-                        txtBoxProductBrand.Text.ToUpper(),
-                        txtBoxProductAmount.Text.ConvertToInt32(),
-                        "",
-                        comboBoxProductMeasure.SelectedValue.ToString(),
-                        DateOnly.ParseExact(dateTimeProductValidityPicker.Text, "dd/MM/yyyy")));
+                            txtBoxProductId.Text.ConvertToInt32(),
+                            txtBoxProductName.Text.ToUpper(),
+                            txtBoxProductBrand.Text.ToUpper(),
+                            txtBoxProductAmount.Text.ConvertToInt32(),
+                            "",
+                            comboBoxProductMeasure.SelectedValue.ToString(),
+                            DateOnly.ParseExact(dateTimeProductValidityPicker.Text, "dd/MM/yyyy")));
                     productDAO.InsertProductTags(txtBoxProductId.Text.ConvertToInt32(), checkBoxProductTags.CheckedItems.Cast<Tag>().ToList());
+
+                    MessageBox.Show("Produto recebido com sucesso", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
-                catch (Exception e)
+                catch
                 {
-                    MessageBox.Show($"Erro ao inserir produto: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Ocorreu um erro inesperado.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
                 MessageBox.Show("Nome do produto ou marca inválido. Use apenas letras.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void LoadProductTags()

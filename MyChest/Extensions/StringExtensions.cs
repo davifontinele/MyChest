@@ -1,6 +1,4 @@
-﻿using Google.Protobuf.WellKnownTypes;
-
-namespace MyChest.Extensions
+﻿namespace MyChest.Extensions
 {
     public static class StringExtensions
     {
@@ -34,6 +32,12 @@ namespace MyChest.Extensions
             }
             return false;
         }
+
+        /// <summary>
+        /// Verifica se a string passada pode ser convertida para DateOnly
+        /// </summary>
+        /// <param name="date">Valor string passado como parâmetro de verificação</param>
+        /// <returns>Retorna true caso a string puder ser convertida caso contrario retorna false</returns>
         public static bool TestConvertToDateOnly(this string date)
         {
             if (DateOnly.TryParse(date, out var s))
@@ -41,6 +45,24 @@ namespace MyChest.Extensions
                 return true;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Retorna a string contida entre 2 do caractere especificado.
+        /// </summary>
+        /// <param name="text">String que será feita a procura</param>
+        /// <param name="character">caracter selecioando para procurar entre</param>
+        /// <returns>Retorna o valor que foi encontrado</returns>
+        public static string GetStringBetweenCharacter(this string text, char character)
+        {
+            int startIndex = text.IndexOf(character) + 1;
+            int finalIndex = text.LastIndexOf(character);
+
+            if (startIndex > 0 && finalIndex > startIndex)
+            {
+                return text.Substring(startIndex, finalIndex - startIndex);
+            }
+            return string.Empty;
         }
     }
 }

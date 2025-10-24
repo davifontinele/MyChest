@@ -40,7 +40,7 @@ namespace MyChest.Data.DAO
                                 product.Brand = reader.GetString("brand");
                                 product.Amount = reader.GetInt32("amount");
                                 product.Measure = reader.GetString("nome_medida");
-                                product.Tags = reader.IsDBNull(reader.GetOrdinal("tag_name")) ? null : reader.GetString("tag_name");
+                                product.Tags = reader.IsDBNull(reader.GetOrdinal("tag_name")) ? "Indefinido" : reader.GetString("tag_name");
                                 product.Validity = reader.IsDBNull(reader.GetOrdinal("validity")) ? null : DateOnly.FromDateTime(reader.GetDateTime("validity"));
                             }
                         }
@@ -50,7 +50,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao buscar produto: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar produto pelo código especificado. | {ex.GetType().Name} - {ex.Message}", "ERROR [GetById]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null!;
             }
         }
@@ -88,10 +88,10 @@ namespace MyChest.Data.DAO
                                 string name = reader.GetString("name");
                                 string brand = reader.GetString("brand");
                                 int amount = reader.GetInt32("amount");
-                                string tagsId = reader.IsDBNull(reader.GetOrdinal("nomes_tags")) ? string.Empty : reader.GetString("nomes_tags");
+                                string tags = reader.IsDBNull(reader.GetOrdinal("nomes_tags")) ? "Indefinido" : reader.GetString("nomes_tags");
                                 string measure = reader.GetString("nome_medida");
                                 DateOnly? validity = reader.IsDBNull(reader.GetOrdinal("validity")) ? null : DateOnly.FromDateTime(reader.GetDateTime("validity"));
-                                Product product = new Product(code, name, brand, amount, tagsId, measure, validity);
+                                Product product = new Product(code, name, brand, amount, tags, measure, validity);
                                 products.Add(product);
                             }
                         }
@@ -101,7 +101,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao buscar produtos: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar todos os produtos. | {ex.GetType().Name} - {ex.Message}", "ERROR [GetAllData]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return products;
             }
         }
@@ -137,11 +137,11 @@ namespace MyChest.Data.DAO
                                 int code = reader.GetInt32("code");
                                 string name = reader.GetString("name");
                                 string brandName = reader.GetString("brand");
-                                string tagsId = reader.IsDBNull(reader.GetOrdinal("tag_name")) ? string.Empty : reader.GetString("tag_name");
+                                string tags = reader.IsDBNull(reader.GetOrdinal("tag_name")) ? "Indefinido" : reader.GetString("tag_name");
                                 int amount = reader.GetInt32("amount");
                                 string measure = reader.GetString("measure_name");
                                 DateOnly? validity = reader.IsDBNull(reader.GetOrdinal("validity")) ? null : DateOnly.FromDateTime(reader.GetDateTime("validity"));
-                                Product prod = new Product(code, name, brandName, amount, null, measure, validity);
+                                Product prod = new Product(code, name, brandName, amount, tags, measure, validity);
                                 product.Add(prod);
                             }
                         }
@@ -151,7 +151,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao buscar produto: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar produtos pela marca. | {ex.GetType().Name} - {ex.Message}", "ERROR [GetByBrand]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return product;
             }
         }
@@ -188,7 +188,7 @@ namespace MyChest.Data.DAO
                                 product.Brand = reader.GetString("brand");
                                 product.Amount = reader.GetInt32("amount");
                                 product.Measure = reader.GetString("measure_name");
-                                product.Tags = reader.IsDBNull(reader.GetOrdinal("tag_name")) ? null : reader.GetString("tag_name");
+                                product.Tags = reader.IsDBNull(reader.GetOrdinal("tag_name")) ? "Indefinido" : reader.GetString("tag_name");
                                 product.Validity = reader.IsDBNull(reader.GetOrdinal("validity")) ? null : DateOnly.FromDateTime(reader.GetDateTime("validity"));
                             }
                         }
@@ -198,7 +198,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao buscar produto: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar produto pelo nome especificado. | {ex.GetType().Name} - {ex.Message}", "ERROR [GetByName]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return product;
             }
         }
@@ -230,7 +230,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao buscar tags do produto: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar tags do produto especificado. | {ex.GetType().Name} - {ex.Message}", "ERROR [GetProductTags]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return tags;
             }
         }
@@ -267,10 +267,10 @@ namespace MyChest.Data.DAO
                                 string name = reader.GetString("product_name");
                                 string brand = reader.GetString("brand");
                                 int amount = reader.GetInt32("amount");
-                                string tagsId = reader.GetString("tag_name");
+                                string tags = reader.IsDBNull(reader.GetOrdinal("tag_name")) ? "Indefinido" : reader.GetString("tag_name");
                                 string measure = reader.GetString("measure_name");
-                                string validity = reader.IsDBNull(reader.GetOrdinal("validity")) ? string.Empty : reader.GetDateTime("validity").ToString();
-                                Product product = new Product(code, name, brand, amount, tagsId, measure, DateOnly.Parse(validity));
+                                string validity = reader.IsDBNull(reader.GetOrdinal("validity")) ? "Indefinido" : reader.GetDateTime("validity").ToString();
+                                Product product = new Product(code, name, brand, amount, tags, measure, DateOnly.Parse(validity));
                                 products.Add(product);
                             }
                         }
@@ -280,7 +280,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Erro ao buscar produtos sem endereço: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar produto pelo endereço. | {e.GetType().Name} - {e.Message}", "ERROR [GetProductsWithoutAddress]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return products;
             }
         }
@@ -309,7 +309,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao buscar tags: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar todas as tags. | {ex.GetType().Name} - {ex.Message}", "ERROR [GetTags]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return tags;
             }
         }
@@ -360,7 +360,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Erro ao buscar produtos pela tag especificada: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar produto pela tag especificada. | {e.GetType().Name} - {e.Message}", "ERROR [GetProductByTag]", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return products;
         }
@@ -409,7 +409,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Erro ao buscar produtos pela medida especificada: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar produtos pela medida especificada | {e.GetType().Name} - {e.Message}", "ERROR [GetProductByMeasureType]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return products;
             }
         }
@@ -450,7 +450,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao buscar endereço: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar endereço do produto especifiado. | {ex.GetType().Name} - {ex.Message}", "ERROR [GetAddressByProductId]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null!;
             }
         }
@@ -482,7 +482,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao buscar ID do endereço: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar Id do endereço do produto especificado. | {ex.GetType().Name} - {ex.Message}", "ERROR [GetAddressIdByProductId]", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return 0;
         }
@@ -510,7 +510,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Erro ao inserir produto: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao inserir produto. | {e.GetType().Name} - {e.Message}", "ERROR [InsertProduct]", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -536,7 +536,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Erro ao inserir tags do produto: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao inserir tags do produto especificado. | {e.GetType().Name} - {e.Message}", "ERROR [InsertProductTags]", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -564,7 +564,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao buscar medidas: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar todas as medidas. | {ex.GetType().Name} - {ex.Message}", "ERROR [GetMeasures]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return measures;
             }
         }
@@ -600,7 +600,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao movimentar os produtos: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao trocar produtos entre endereços. | {ex.GetType().Name} - {ex.Message}", "ERROR [SwapAddressesBetweenProducts]", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

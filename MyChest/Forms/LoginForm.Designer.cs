@@ -42,7 +42,7 @@ namespace MyChest.Forms
             }
             else
             {
-                MessageBox.Show("Usuário ou senha inválidos","Erro de login",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show("Usuário ou senha inválidos.","Erro de login",MessageBoxButtons.OK,MessageBoxIcon.Warning);
                 ClearFields();
             }
         }

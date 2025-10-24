@@ -257,6 +257,7 @@ namespace MyChest.Forms
             txtBoxRightProduct.Hide();
             lbRightProductValidity.Hide();
         }
+
         #region Windows Form Designer generated code
 
         /// <summary>

@@ -1,7 +1,6 @@
 ﻿using MyChest.Interfaces;
 using MyChest.Models;
 using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Asn1.BC;
 
 namespace MyChest.Data.DAO
 {
@@ -62,7 +61,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao buscar usuários: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar todos os usuários. | {ex.GetType().Name} - {ex.Message}", "ERROR [GetAllData]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return users;
             }
         }
@@ -111,7 +110,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao buscar usuário: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar usuário pelo Id especificado. | {ex.GetType().Name} - {ex.Message}", "ERROR [GetById]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return new Models.User();
             }
         }
@@ -133,7 +132,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Erro ao cadastrar usuário: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao cadastrar novo usuário. | {e.GetType().Name} - {e.Message}", "ERROR [InsertUser]", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -157,7 +156,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Erro ao cadastrar permissões do usuário: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao cadastrar permissões do usuário. | {e.GetType().Name} - {e.Message}", "ERROR [InsertUserPermissions]", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -185,7 +184,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Erro ao buscar ID do usuário: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar Id do usuário. | {e.GetType().Name} - {e.Message}", "ERROR [GetUserId]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return 0;
             }
         }
@@ -220,7 +219,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao verificar login: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao verificar login. | {ex.GetType().Name} - {ex.Message}", "ERROR [VerifyLogin]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }
@@ -274,7 +273,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao verificar login: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar usuário pelo nome especificado. | {ex.GetType().Name} - {ex.Message}", "ERROR [GetByUserName]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return new Models.User();
             }
         }
@@ -316,7 +315,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao buscar permissões do usuário: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar permissões do usuário especificado. | {ex.GetType().Name} - {ex.Message}", "ERROR [GetUserPermissionsByUserName]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return new List<Permissions>();
             }
         }
@@ -352,7 +351,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao buscar permissões: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar permissões. | {ex.GetType().Name} - {ex.Message}", "ERROR [GetAllPermissions]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return new Dictionary<int, Permissions>();
             }
         }
@@ -378,7 +377,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Erro ao buscar ID da permissão: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao buscar Id da permissão. | {e.GetType().Name} - {e.Message}", "ERROR [GetPermissionId]", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return 0;
             }
         }
@@ -404,7 +403,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Erro ao atualizar usuário: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao atualizar usuário especificado. | {e.GetType().Name} - {e.Message}", "ERROR [UpdateUser]", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -425,7 +424,7 @@ namespace MyChest.Data.DAO
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Erro ao deletar usuário: {e.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao deletar o usuário especificado. | {e.GetType().Name} - {e.Message}", "ERROR [DeleteUser]", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
