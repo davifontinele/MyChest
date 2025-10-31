@@ -270,7 +270,8 @@ namespace MyChest.Data.DAO
                                 string tags = reader.IsDBNull(reader.GetOrdinal("tag_name")) ? "Indefinido" : reader.GetString("tag_name");
                                 string measure = reader.GetString("measure_name");
                                 string validity = reader.IsDBNull(reader.GetOrdinal("validity")) ? "Indefinido" : reader.GetDateTime("validity").ToString();
-                                Product product = new Product(code, name, brand, amount, tags, measure, DateOnly.Parse(validity));
+                                DateOnly validityDate = DateOnly.FromDateTime(DateTime.Parse(validity).Date);
+                                Product product = new Product(code, name, brand, amount, tags, measure, validityDate);
                                 products.Add(product);
                             }
                         }
